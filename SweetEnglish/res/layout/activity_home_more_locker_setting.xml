@@ -1,0 +1,326 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home_more_help"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9ED"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="112"
+        android:background="@drawable/faq_bg_navybar" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="onClickBack"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_btn_back"
+                android:duplicateParentState="true"
+                android:onClick="onClickBack" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/screenlock_text_screenlocktitle" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1168"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="62" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="925"
+            android:background="@drawable/lock_setting_shape_bg"
+            android:orientation="vertical" >
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="93"
+                android:background="@drawable/lock_setting_btn_set_bg"
+                android:onClick="onClickSetBackground" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:background="@drawable/screenlock_img_line" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="29" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="768"
+                android:orientation="horizontal" >
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="52" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="432" >
+
+                    <ImageView
+                        android:id="@+id/locker_setting_preview"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_preview_seethru"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#000000" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp"
+                        android:background="#000000"
+                        android:gravity="right|center_vertical"
+                        android:paddingRight="3dp" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="오전 1:18"
+                            android:textColor="#DBDBDB"
+                            android:textSize="8.5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="12.5dp"
+                        android:layout_marginTop="27.5dp"
+                        android:orientation="vertical" >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1:18"
+                                android:textColor="#ffffff"
+                                android:textSize="24dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="am"
+                                android:textColor="#ffffff"
+                                android:textSize="3.5dp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="7월9일 수요일"
+                            android:textColor="#ffffff"
+                            android:textSize="8.5dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="English"
+                            android:textColor="#ffffff"
+                            android:textSize="24dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:text="영어, 영문학"
+                            android:textColor="#ffffff"
+                            android:textSize="10dp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="8.5dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="14dp"
+                        android:src="@drawable/screenlock_3_img_arrow" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="26dp"
+                        android:gravity="center"
+                        android:orientation="horizontal" >
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="74" />
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="102"
+                            android:src="@drawable/screenlock_3_btn_goapp_normal" />
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="368" >
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/screenlock_3_img_line" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/screenlock_3_btn_circle_normal" />
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="102"
+                            android:src="@drawable/screenlock_3_btn_unlock_normal" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="74" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="58" />
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="72"
+                    android:paddingBottom="14dp"
+                    android:paddingTop="15dp" >
+
+                    <ImageView
+                        android:id="@+id/locker_setting_img_opacity_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/screenlock_text_opacity" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_img_opacity_100"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/locker_setting_img_opacity_text"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="11.5dp"
+                        android:src="@drawable/screenlock_img_opacity_100" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_img_opacity_0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/screenlock_img_opacity_0" />
+
+                    <com.todpop.api.VerticalSeekBar
+                        android:id="@+id/locker_setting_seekbar_transparent"
+                        style="@style/VerticalSeekBarStyel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_above="@id/locker_setting_img_opacity_0"
+                        android:layout_below="@id/locker_setting_img_opacity_100"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center"
+                        android:max="191"
+                        android:maxHeight="3.5dp"
+                        android:minHeight="3.5dp"
+                        android:paddingLeft="17dp"
+                        android:paddingRight="17dp"
+                        android:progress="95"
+                        android:progressDrawable="@drawable/vertical_seek_bar"
+                        android:thumb="@drawable/screenlock_img_opacity_circle"
+                        android:thumbOffset="17dp" />
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="46" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="33" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="32" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="95"
+            android:background="@drawable/lock_setting_btn_set_word"
+            android:onClick="onClickSetWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="54" />
+    </LinearLayout>
+
+</LinearLayout>

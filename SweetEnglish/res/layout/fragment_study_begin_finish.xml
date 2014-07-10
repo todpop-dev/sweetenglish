@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/rl_study_begin_finish_actionbar"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/iv_study_begin_finish_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/rl_study_begin_finish_actionbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/study_2_text_message" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/iv_study_begin_finish_msg" >
+
+        <Button
+            android:id="@+id/btn_study_begin_finish_go_test"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/study_2_btn_gotest_normal"
+            android:gravity="center_vertical"
+            android:onClick="showTestActivity" />
+
+        <ListView
+            android:id="@+id/lv_study_begin_finish_words"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="15dp"
+            android:layout_above="@id/btn_study_begin_finish_go_test"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/study_2_img_beigebox"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:gravity="center_vertical" />
+    </RelativeLayout>
+
+</RelativeLayout>

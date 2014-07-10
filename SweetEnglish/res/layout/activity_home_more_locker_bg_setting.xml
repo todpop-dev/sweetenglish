@@ -1,0 +1,207 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home_more_help"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9ED"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="112"
+        android:background="@drawable/faq_bg_navybar" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="onClickBack"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_btn_back"
+                android:duplicateParentState="true"
+                android:onClick="onClickBack" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/screenlock_1_text_backgroundtitle" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1168" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="29dp"
+                android:layout_marginTop="28.5dp"
+                android:src="@drawable/screenlock_1_text_simplebg" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="256dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:paddingBottom="17dp"
+                android:paddingTop="17dp"
+                android:scrollbars="none" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="15dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_1" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_2" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_3" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_4" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_5" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_6" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_7"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_7" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:layout_marginRight="15dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_8" />
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="28.5dp"
+                android:layout_marginTop="17.5dp"
+                android:src="@drawable/screenlock_1_text_photo" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:onClick="onClickCameraRoll"
+                android:padding="15dp" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/locker_bg_setting_latest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="32.5dp"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="사진"
+                            android:textColor="@color/sweet_black"
+                            android:textSize="15dp" />
+
+                        <TextView
+                            android:id="@+id/locker_bg_setting_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/sweet_black"
+                            android:textSize="15dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="19dp"
+                    android:src="@drawable/screenlock_img_arrow" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

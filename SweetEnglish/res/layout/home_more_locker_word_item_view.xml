@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="50dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="14.5dp" >
+
+    <CheckBox
+        android:id="@+id/locker_setting_word_list_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/wordbook_3_btn_checkbox_normal"
+        android:button="@drawable/popup_view_home_word_list_chegebox" />
+
+    <TextView
+        android:id="@+id/locker_setting_word_list_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:textColor="@color/sweet_black"
+        android:textSize="14dp" />
+
+</LinearLayout>

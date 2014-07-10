@@ -1,0 +1,110 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home_more_help"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9ED"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="112"
+        android:background="@drawable/faq_bg_navybar" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="onClickBack"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_btn_back"
+                android:duplicateParentState="true"
+                android:onClick="onClickBack" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/screenlock_1_text_selectwordtitle" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1168"
+        android:orientation="vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="63" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="19dp"
+            android:layout_weight="64"
+            android:src="@drawable/screenlock_2_text_selectword" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="22" />
+
+        <ListView
+            android:id="@+id/locker_setting_listview_category"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="500"
+            android:background="#EEF1E7"
+            android:divider="#CCCFC5"
+            android:dividerHeight="0.5dp"
+            android:padding="5dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="44" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginLeft="19dp"
+            android:layout_weight="28"
+            android:src="@drawable/screenlock_2_text_wordbook" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="18" />
+
+        <ListView
+            android:id="@+id/locker_setting_listview_wordlist"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="400"
+            android:background="#EEF1E7"
+            android:divider="#CCCFC5"
+            android:dividerHeight="0.5dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="29" />
+    </LinearLayout>
+
+</LinearLayout>

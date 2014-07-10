@@ -1,0 +1,127 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sweet_blue"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="28" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="21"
+        android:orientation="horizontal"
+        android:paddingLeft="15.5dp" >
+
+        <ImageView
+            android:id="@+id/wordlist_test_result_star1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@drawable/study_5_img_white_star" />
+
+        <ImageView
+            android:id="@+id/wordlist_test_result_star2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3.5dp"
+            android:src="@drawable/study_5_img_white_star" />
+
+        <ImageView
+            android:id="@+id/wordlist_test_result_star3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="3.5dp"
+            android:src="@drawable/study_5_img_white_star" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="121"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/wordlist_test_result_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sweet_white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개 중 "
+            android:textColor="@color/sweet_white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/wordlist_test_result_correct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/sweet_yellow"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="개를 맞았어요!"
+            android:textColor="@color/sweet_white"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="15.5dp"
+        android:layout_weight="22"
+        android:src="@drawable/study_5_text_guide" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12" />
+
+    <ListView
+        android:id="@+id/wordlist_test_result_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="891"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="2.5dp"
+        android:paddingLeft="12dp"
+        android:paddingRight="12dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="48" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="83"
+        android:background="@null"
+        android:onClick="continueActivity"
+        android:src="@drawable/testresult_drawable_continue_btn" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="47" />
+
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="61dp"
+    android:background="@drawable/study_5_img_box"
+    android:orientation="horizontal" >
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="34" />
+
+    <TextView
+        android:id="@+id/lv_test_english"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="169"
+        android:gravity="center_vertical"
+        android:textColor="@color/sweet_black"
+        android:textSize="14dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/lv_test_kr"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="160"
+        android:gravity="center_vertical"
+        android:textColor="@color/sweet_black"
+        android:textSize="14dp" />
+
+    <ImageView
+        android:id="@+id/lv_test_check_correct"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="190"
+        android:src="@drawable/study_5_img_o" />
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="80" >
+
+        <CheckBox
+            android:id="@+id/lv_test_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:button="@drawable/testresult_saving_word_btn" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="40" />
+
+</LinearLayout>
