@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <!-- bg color, word, count number layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/study_test_10_bg_left"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#19b3e8"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="735" />
+
+            <RelativeLayout
+                android:id="@+id/study_test_10_touch_left"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="455" >
+
+                <ImageView
+                    android:id="@+id/study_test_10_img_left_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="9dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/test_2_text_8" />
+
+                <View
+                    android:id="@+id/study_test_10_left_center"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:id="@+id/study_test_10_text_left_english"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/study_test_10_left_center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="Salty english"
+                    android:textColor="#ffffff"
+                    android:textSize="22.5dp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="90" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/study_test_10_bg_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#20a1d3"
+            android:orientation="vertical" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="735" />
+
+            <RelativeLayout
+                android:id="@+id/study_test_10_touch_right"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="455" >
+
+                <ImageView
+                    android:id="@+id/study_test_10_img_right_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/test_2_text_8" />
+
+                <View
+                    android:id="@+id/study_test_10_right_center"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_centerInParent="true" />
+
+                <TextView
+                    android:id="@+id/study_test_10_text_right_english"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/study_test_10_right_center"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:gravity="center"
+                    android:text="Salty english"
+                    android:textColor="#ffffff"
+                    android:textSize="22.5dp" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="90" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- timer shadow layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="195" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="905" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/test_2_img_shadow" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="180" />
+    </LinearLayout>
+
+    <!-- timer layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="75" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="660" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/test_2_img_second" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="45" />
+
+                <ImageView
+                    android:id="@+id/study_test_10_img_timer"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="570"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/test_2_img_timer" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="45" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/study_test_10_text_korean"
+                android:layout_width="142dp"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:text="짭짤한영어"
+                android:textColor="#ffffff"
+                android:textSize="25dp" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="545" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/study_test_10_tutorial"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:onClick="closeTutorial"
+        android:visibility="gone" />
+
+</RelativeLayout>

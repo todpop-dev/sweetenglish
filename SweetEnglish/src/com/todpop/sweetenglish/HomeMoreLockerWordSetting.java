@@ -17,6 +17,8 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -48,15 +50,17 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 		settingEditor = setting.edit();
 		
 		setList();
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 	
 	private void setList(){
 		category = new ArrayList<String>();
 		myWordGroup = new ArrayList<String>();
 		
-		int selectedCategory = setting.getInt("lockerWordCategory", 0); //5 for myWordList
+		int selectedCategory = setting.getInt("lockerWordCategory", 0); //6 for myWordList
 		
 		String allWord = getResources().getString(R.string.home_more_locker_word_setting_list_category_all);
+		category.add(getResources().getString(R.string.home_more_locker_word_setting_list_category_recent));
 		category.add(allWord);
 		category.add(getResources().getString(R.string.home_more_locker_word_setting_list_category_basic));
 		category.add(getResources().getString(R.string.home_more_locker_word_setting_list_category_middle));
@@ -69,7 +73,7 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 		
 		myWordGroup.add(allWord);
 
-		if(selectedCategory < 5){		//if selected word list is category
+		if(selectedCategory < 6){		//if selected word list is category
 			selected = selectedCategory;
 			
 			Cursor groupCursor = db.rawQuery("SELECT name FROM word_groups", null);
@@ -83,11 +87,10 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 			if(!selectedMyList.equals(allWord)){	//if not all word
 				Cursor groupCursor = db.rawQuery("SELECT name FROM word_groups", null);
 				while(groupCursor.moveToNext()){
+					selectedCategory++;
+					
 					if(selectedMyList.equals(groupCursor.getString(0))){
 						selected = selectedCategory;
-					}
-					else{
-						selectedCategory++;
 					}
 					myWordGroup.add(groupCursor.getString(0));
 				}
@@ -111,7 +114,20 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 		categoryList.setAdapter(categoryAdapter);
 		myWordList.setAdapter(myWordAdapter);	
 	}
-	
+
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home More Locker Word Setting");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	class LockerWordSettingListAdapter extends BaseAdapter{
 
 		class ViewHolder{
@@ -183,7 +199,7 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 				});
 			}
 			else if(!mIsCategory){		//if my word list
-				if(position == selected - 5){
+				if(position == selected - 6){
 					holder.chk.setChecked(true);
 				}
 				else{
@@ -193,8 +209,8 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 
 					@Override
 					public void onClick(View v) {
-						selected = position + 5;
-						settingEditor.putInt("lockerWordCategory", 5);
+						selected = position + 6;
+						settingEditor.putInt("lockerWordCategory", 6);
 						settingEditor.putString("lockerWordMyList", item);
 						settingEditor.apply();
 						categoryAdapter.notifyDataSetChanged();

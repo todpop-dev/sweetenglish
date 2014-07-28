@@ -2,6 +2,8 @@ package com.todpop.sweetenglish;
 
 import java.util.ArrayList;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -85,6 +87,8 @@ public class WordListTestResult extends TypefaceActivity {
 		ListView MyList;
 		MyList = (ListView) findViewById(R.id.wordlist_test_result_list);
 		MyList.setAdapter(MyAdapter);
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
 	private void getTestWords() {
@@ -298,17 +302,18 @@ public class WordListTestResult extends TypefaceActivity {
 		mHelper.close();
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		//FlurryAgent.onStartSession(this, "ZKWGFP6HKJ33Y69SP5QY");
-	    //EasyTracker.getInstance(this).activityStart(this);
-	}
 
 	@Override
-	protected void onStop() {
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Word List Test Result");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
 		super.onStop();
-		//FlurryAgent.onEndSession(this);
-//	    EasyTracker.getInstance(this).activityStop(this);
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
 	}
 }

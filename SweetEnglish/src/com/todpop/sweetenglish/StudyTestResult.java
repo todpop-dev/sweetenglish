@@ -2,9 +2,9 @@ package com.todpop.sweetenglish;
 
 import java.util.ArrayList;
 
-
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
@@ -23,15 +23,20 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.LoadingDialog;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
 public class StudyTestResult extends TypefaceActivity {
-
+	ArrayList<String> reviewList;
+	
 	ArrayList<MyItem> arItem;
 	int count = 0;
 
+	int totalScore = 0;
+	int avgScore = 0;
 	// Database
 	WordDBHelper mHelper;
 
@@ -50,6 +55,9 @@ public class StudyTestResult extends TypefaceActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_study_test_result);
+		
+		Intent i = getIntent();
+		reviewList = i.getStringArrayListExtra("reviewWords");
 
 		studyInfo = getSharedPreferences("studyInfo",0);
 		studyInfoEdit = studyInfo.edit();
@@ -71,14 +79,14 @@ public class StudyTestResult extends TypefaceActivity {
 
 
 		// Get Test result from database
-		SharedPreferences studyInfo = getSharedPreferences("studyInfo", 0);
 		tmpStageAccumulated = studyInfo.getInt("tmpStageAccumulated", 1);
+		Log.i("STEVEN", "tmpStageAccumulated : " + tmpStageAccumulated);
 		getTestWords();
 
 		// ----------- Request Result -------------
 		//SharedPreferences pref = getSharedPreferences("rgInfo",0);
 		// levelCount could be 1, 16, 61, 121 etc... 
-		int category = studyInfo.getInt("tmpCategory", 1);
+		int category = studyInfo.getInt("lastCategory", 1);
 
 		// ------- cys added -----------
 		studyInfoEdit.putInt("currentCategory", category);
@@ -96,6 +104,8 @@ public class StudyTestResult extends TypefaceActivity {
 		ListView MyList;
 		MyList=(ListView)findViewById(R.id.study_test_result_list);
 		MyList.setAdapter(MyAdapter);
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
 
@@ -104,70 +114,97 @@ public class StudyTestResult extends TypefaceActivity {
 
 		try {
 			SQLiteDatabase db = mHelper.getReadableDatabase();
-			int totalScore = 0;
-			int avgScore = 0;
+			
+			int stage = tmpStageAccumulated % 10;
 
-			if (tmpStageAccumulated%10 == 0) {
-				Cursor cursor = db.rawQuery("SELECT name, mean, xo FROM flip;", null);
+			int cnt = 0;
 
-				Log.e("cursor.getCount()", "cursor.getCount() : "+cursor.getCount());
-				if (cursor.getCount() > 0) {
-					while(cursor.moveToNext()) {
-						if(cursor.getString(2).equals("O")){
-							totalScore += 1;
-						}
-						Log.d("D E F ------", cursor.getString(0) + "  " + cursor.getString(1) + "   " + cursor.getString(2));
-						mi = new MyItem(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-						arItem.add(mi);
-					}
-					avgScore = Math.round(((float)totalScore / 36) * 36);
-					db.delete("flip", null, null);
-				}
-			} else {
-				Cursor cursor = db.rawQuery("SELECT name, mean, xo FROM dic WHERE stage=" + tmpStageAccumulated + ";", null);
-
-				Log.e("cursor.getCount()", "cursor.getCount() : "+cursor.getCount());
-				if (cursor.getCount() > 0) {
-					while(cursor.moveToNext()) {
-						if(cursor.getString(2).equals("O")){
-							totalScore += 1;
-						}
-						Log.e("A B C ------", cursor.getString(0) + "  " + cursor.getString(1) + "   " + cursor.getString(2));
-						mi = new MyItem(cursor.getString(0), cursor.getString(1), cursor.getString(2));
-						arItem.add(mi);
-					}
-					avgScore = Math.round(((float)totalScore / 10) * 100);
-				}
+			if (stage == 0) {
+				Cursor cursor = db.rawQuery("SELECT name,  mean, xo FROM dic WHERE stage > " + (((tmpStageAccumulated - 1) / 10) * 10) + " AND stage <= " + (tmpStageAccumulated - 1), null);
+				
+				addToList(cursor);
+				
+				cnt += cursor.getCount();
+				
+				avgScore = Math.round(((float)totalScore / cnt) * 100);
+			} else if(stage == 3 || stage == 6 || stage == 9){
+				Cursor cursor = db.rawQuery("SELECT name,  mean, xo FROM dic WHERE stage >= " + (tmpStageAccumulated - 2) + " AND stage <= " + tmpStageAccumulated, null);
+				
+				addToList(cursor);
+				
+				cnt += cursor.getCount();
+				
+				avgScore = Math.round(((float)totalScore / cnt) * 100);
 			}
-			SharedPreferences stdInfo = getSharedPreferences("studyInfo", 0);
-			Editor stdInfoEdit = stdInfo.edit();
+			else{
+				Cursor cursor = db.rawQuery("SELECT name, mean, xo FROM dic WHERE stage=" + tmpStageAccumulated + ";", null);
+				
+				addToList(cursor);
+				
+				cnt += cursor.getCount();
+				
+				for(int i = 0; i < reviewList.size(); i++){
+					Cursor reviewCursor = db.rawQuery("SELECT name, mean, xo FROM dic WHERE stage >= " + ((tmpStageAccumulated / 10) * 10) + 
+											" AND stage <= " + (tmpStageAccumulated - 1) + " AND name = '" + reviewList.get(i) + "'", null);
+					addToList(reviewCursor);
+					
+					cnt += reviewCursor.getCount();
+				}
+				
+				avgScore = Math.round(((float)totalScore / cnt) * 100);
+				
+			}
 			
 			int selectedLevelNo = (tmpStageAccumulated - 1) / 10 + 1;
 			int selectedStageNo = (tmpStageAccumulated - 1) % 10 + 1; 
 			
 			Log.i("STEVEN", "level is " + selectedLevelNo + "   stage is " + selectedStageNo);
 			
-			StringBuffer stageInfo = new StringBuffer(stdInfo.getString("level" + selectedLevelNo, "xxxxxxxxxx"));
+			StringBuffer stageInfo = new StringBuffer(studyInfo.getString("level" + selectedLevelNo, "xxxxxxxxxx"));
 			int nMedals = avgScore >= 80 ? 2: (avgScore >= 40 ? 1 : 0);
 			
 			char curStageInfo= stageInfo.charAt(selectedStageNo-1);
 			int curStageMedals = (curStageInfo == '2' ? 2 : (curStageInfo == '1' ? 1 : 0));
-			
-			char nextStageInfo= stageInfo.charAt(selectedStageNo);
 			
 			// set medals num
 			if(curStageMedals < nMedals){
 				stageInfo.deleteCharAt(selectedStageNo-1);
 				stageInfo.insert(selectedStageNo-1, nMedals+"");
 			}
-
-			if(nMedals >= 1 && nextStageInfo == 'x'){ // open next stage
-				stageInfo.deleteCharAt(selectedStageNo);
-				stageInfo.insert(selectedStageNo, "Y");
+			
+			if(selectedStageNo < 10){
+				char nextStageInfo= stageInfo.charAt(selectedStageNo);
+	
+				if(nMedals >= 1 && nextStageInfo == 'x'){ // open next stage
+					stageInfo.deleteCharAt(selectedStageNo);
+					stageInfo.insert(selectedStageNo, "Y");
+				}
 			}
-
-			stdInfoEdit.putString("level" + selectedLevelNo, stageInfo.toString());
-			stdInfoEdit.apply();
+			else{
+				StringBuffer nextLvStageInfo = new StringBuffer(studyInfo.getString("level" + (selectedLevelNo + 1), "xxxxxxxxxx"));
+				
+				char nextStageInfo = nextLvStageInfo.charAt(0);
+				
+				if(nMedals >= 1 && nextStageInfo == 'x'){
+					nextLvStageInfo.deleteCharAt(0);
+					nextLvStageInfo.insert(0, "Y");
+					
+					SharedPreferences userInfo = getSharedPreferences("userInfo", 0);
+					Editor userInfoEdit = userInfo.edit();
+					
+					if(userInfo.getInt("userLevel", 1) < (selectedLevelNo + 1)){
+						userInfoEdit.putInt("userLevel", (selectedLevelNo + 1));
+						userInfoEdit.apply();
+					}
+				}
+				
+				studyInfoEdit.putString("level" + (selectedLevelNo + 1), nextLvStageInfo.toString());
+				
+			}
+			
+			studyInfoEdit.putString("level" + selectedLevelNo, stageInfo.toString());
+			
+			studyInfoEdit.apply();
 
 			scoreView.setText(String.valueOf(avgScore));
 		} catch (Exception e) {
@@ -177,6 +214,19 @@ public class StudyTestResult extends TypefaceActivity {
 
 
 
+	}
+	
+	private void addToList(Cursor cursor){
+		if (cursor.getCount() > 0) {
+			while(cursor.moveToNext()) {
+				if(cursor.getString(2).equals("O")){
+					totalScore += 1;
+				}
+
+				mi = new MyItem(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+				arItem.add(mi);
+			}
+		}
 	}
 
 	class MyItem{
@@ -322,19 +372,18 @@ public class StudyTestResult extends TypefaceActivity {
 		super.onDestroy();
 		mHelper.close();
 	}
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-		//FlurryAgent.onStartSession(this, "ZKWGFP6HKJ33Y69SP5QY");
-		//EasyTracker.getInstance(this).activityStart(this);
-	}
 
 	@Override
-	protected void onStop()
-	{
-		super.onStop();		
-		//FlurryAgent.onEndSession(this);
-		//EasyTracker.getInstance(this).activityStop(this);
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Study Test Result");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
 	}
 }

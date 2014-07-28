@@ -2,6 +2,8 @@ package com.todpop.sweetenglish;
 
 import java.util.ArrayList;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 
 import android.app.Activity;
@@ -36,8 +38,23 @@ public class HomeMoreGoal extends TypefaceActivity {
 		ibBackNum= (ImageButton)findViewById(R.id.ib_goal_back_num);
 
 		initGoalNumber();
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home More Goal");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	private void initGoalNumber() {
 		int frontNum = goalDailyWords / 10;
 		int backNum = goalDailyWords % 10;

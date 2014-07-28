@@ -136,12 +136,12 @@ public class FileManager {
 		String userImgPath = userInfo.getString("userImgPath", null);
 		//in = new FileInputStream(userImgPath);
 		
-		BitmapFactory.Options options = new BitmapFactory.Options();
+		/*BitmapFactory.Options options = new BitmapFactory.Options();
 		options.inSampleSize = 4;
 		options.inPurgeable = true;
-		options.inDither = true;
+		options.inDither = true;*/
 		
-		return BitmapFactory.decodeFile(userImgPath, options);
+		return BitmapFactory.decodeFile(userImgPath);
 	}
 	public String getUserImgPath(){
 		String path = Environment.getExternalStorageDirectory().getAbsolutePath() 

@@ -8,6 +8,8 @@ import android.support.v4.view.ViewPager;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 
 public class StudyCategory extends TypefaceActivity {
@@ -30,10 +32,24 @@ public class StudyCategory extends TypefaceActivity {
 		studyInfo = getSharedPreferences("studyInfo", 0);
 		
 		categoryPager.setCurrentItem(studyInfo.getInt("lastCategory", 1) - 1);
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
-	public void onClickWeeklyTest(View v){
-		//Intent intent = new Intent(getApplicationContext(), StudyTestWeekly.class);
-		//startActivity(intent);
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Study Category");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
+	public void onClickInfiniteTest(View v){
+		Intent intent = new Intent(getApplicationContext(), StudyTestInfinite.class);
+		startActivity(intent);
 	}
 	public void onClickStart(View v){
 		saveInfoAndStudy(categoryPager.getCurrentItem() + 1);

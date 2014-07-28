@@ -20,6 +20,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceFragmentActivity;
 
 public class StudyLevel extends TypefaceFragmentActivity {
@@ -138,9 +140,23 @@ public class StudyLevel extends TypefaceFragmentActivity {
 			pointView[i].setPadding(5, 5, 5, 5);
 			pointViewLayout.addView(pointView[i]);
 		}
-		
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
-	
+
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Study Level");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	private void changePointerViewIndicator(int position) {
 		for(int i = 0; i < pageViewPointIndexCount; i++) {
 			if (i == position) {
@@ -222,8 +238,8 @@ public class StudyLevel extends TypefaceFragmentActivity {
 				firstStageInfo = studyInfo.getString("level" + firstLevel, "xxxxxxxxxx");
 			}
 			final String stageInfoFirst = firstStageInfo;
-			final String stageInfoSecond = studyInfo.getString("level" + firstLevel + 1, "xxxxxxxxxx");
-			final String stageInfoThird = studyInfo.getString("level" + firstLevel + 2, "xxxxxxxxxx");
+			final String stageInfoSecond = studyInfo.getString("level" + (firstLevel + 1), "xxxxxxxxxx");
+			final String stageInfoThird = studyInfo.getString("level" + (firstLevel + 2), "xxxxxxxxxx");
 			
 			if (!stageInfoFirst.equals("xxxxxxxxxx")) {
 				
@@ -279,28 +295,6 @@ public class StudyLevel extends TypefaceFragmentActivity {
 				if(stageInfoFirst.charAt(9)=='1')		{button10.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_10_s);}
 				else if(stageInfoFirst.charAt(9)=='2')	{button10.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_10_g);}
 
-				
-				
-				OnClickListener clickListener = new OnClickListener() {
-					public void onClick(View v) {
-
-						int currentBtnClickStage = (Integer)(v.getTag());
-						
-						studyInfoEdit.putInt("tmpStageAccumulated", currentBtnClickStage);
-						studyInfoEdit.apply();
-
-						try
-						{
-							Intent myIntent = new Intent(getActivity(), StudyBegin.class);
-							getActivity().startActivity(myIntent);
-						}
-						catch(Exception e)
-						{
-						}
-
-					}
-
-				};
 
 				button1.setOnClickListener(clickListener);
 				button2.setOnClickListener(clickListener);
@@ -366,7 +360,7 @@ public class StudyLevel extends TypefaceFragmentActivity {
 				button7.setTag((firstLevel)*10+7);
 				button8.setTag((firstLevel)*10+8);
 				button9.setTag((firstLevel)*10+9);
-				button10.setTag((firstLevel)*10);
+				button10.setTag((firstLevel + 1)*10);
 				
 				if(stageInfoSecond.charAt(0)=='1')		{button1.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_1_s);}
 				else if(stageInfoSecond.charAt(0)=='2')	{button1.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_1_g);}
@@ -397,28 +391,6 @@ public class StudyLevel extends TypefaceFragmentActivity {
 
 				if(stageInfoSecond.charAt(9)=='1')		{button10.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_10_s);}
 				else if(stageInfoSecond.charAt(9)=='2')	{button10.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_10_g);}
-
-				
-				OnClickListener clickListener = new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						
-						int currentBtnClickStage = (Integer)(v.getTag());
-
-						studyInfoEdit.putInt("tmpStageAccumulated", currentBtnClickStage);
-						studyInfoEdit.apply();
-
-						try
-						{
-							Intent myIntent = new Intent(getActivity(), StudyBegin.class);
-							getActivity().startActivity(myIntent);
-						}
-						catch(Exception e)
-						{
-						}
-
-					}
-				};
 
 				button1.setOnClickListener(clickListener);
 				button2.setOnClickListener(clickListener);
@@ -519,31 +491,6 @@ public class StudyLevel extends TypefaceFragmentActivity {
 				if(stageInfoThird.charAt(9)=='1')		{button10.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_10_s);}
 				else if(stageInfoThird.charAt(9)=='2')	{button10.setBackgroundResource(R.drawable.studylearn_drawable_btn_level_10_g);}
 
-				
-				
-				
-
-				
-				OnClickListener clickListener = new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						
-						int currentBtnClickStage = (Integer)(v.getTag());
-						
-						studyInfoEdit.putInt("tmpStageAccumulated", currentBtnClickStage);
-						studyInfoEdit.apply();
-						
-						try
-						{
-							Intent myIntent = new Intent(getActivity(), StudyBegin.class);
-							getActivity().startActivity(myIntent);
-						}
-						catch(Exception e)
-						{
-						}
-						
-					}
-				};
 
 				button1.setOnClickListener(clickListener);
 				button2.setOnClickListener(clickListener);
@@ -585,7 +532,30 @@ public class StudyLevel extends TypefaceFragmentActivity {
 				if (s10!='x')	{	button10.setEnabled(true);}
 
 			}
+			
 		}
+		
+		OnClickListener clickListener = new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				
+				int currentBtnClickStage = (Integer)(v.getTag());
+				int selectedStageNo = (currentBtnClickStage - 1) % 10 + 1;
+				
+				studyInfoEdit.putInt("tmpStageAccumulated", currentBtnClickStage);
+				studyInfoEdit.apply();
+				
+				if(selectedStageNo != 10){
+					Intent myIntent = new Intent(getActivity(), StudyBegin.class);
+					getActivity().startActivity(myIntent);
+				}
+				else{
+					Intent myIntent = new Intent(getActivity(), StudyTest10.class);
+					getActivity().startActivity(myIntent);
+				}
+				
+			}
+		};
 		
 	}
 	
@@ -641,22 +611,6 @@ public class StudyLevel extends TypefaceFragmentActivity {
 		Log.d("On Restart", "---------------");
 		startActivity(new Intent(this, StudyLevel.class));
 		finish();
-	}
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-		/*FlurryAgent.onStartSession(this, "ZKWGFP6HKJ33Y69SP5QY");
-		FlurryAgent.logEvent("Study Stage Select");
-	    EasyTracker.getInstance(this).activityStart(this);*/
-	}
-	 
-	@Override
-	protected void onStop()
-	{
-		super.onStop();		
-		/*FlurryAgent.onEndSession(this);
-	    EasyTracker.getInstance(this).activityStop(this);*/
 	}
 
 }

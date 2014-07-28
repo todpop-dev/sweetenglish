@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -64,6 +65,17 @@ public class HomeWordListGroup extends TypefaceActivity {
 
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home Word List Group");
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+	}
 	private void initPopupView() {
 		vPopupNewGroup = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_wordlist_group_new, null);
 		etPopupNewGroupTitle = (EditText)vPopupNewGroup.findViewById(R.id.et_wordlist_group_new_title);

@@ -3,6 +3,7 @@ package com.todpop.sweetenglish;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
 import java.util.Random;
 
@@ -27,16 +28,17 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
 
 public class StudyTestRenewal extends TypefaceActivity {
-
+	ArrayList<String> reviewList;
+	
 	View redBack;
-
-	TextView bestScore;
-
+	
 	TextView english;
 
 	//answer Buttons
@@ -131,10 +133,11 @@ public class StudyTestRenewal extends TypefaceActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_study_test_renewal);
+		
+		Intent i = getIntent();
+		reviewList = i.getStringArrayListExtra("reviewWords");
 
 		redBack = (View)findViewById(R.id.v_test_renewal_light_box);
-
-		bestScore = (TextView)findViewById(R.id.tv_test_renewal_best);
 
 		english = (TextView)findViewById(R.id.tv_test_renewal_eng);
 
@@ -202,42 +205,65 @@ public class StudyTestRenewal extends TypefaceActivity {
 		tmpStageAccumulated = studyInfo.getInt("tmpStageAccumulated", 1);
 		Log.i("STEVEN", "tempStage is " + tmpStageAccumulated);
 		getTestWords();
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Study Test Renewal");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	private void getTestWords()
 	{ 
 		SQLiteDatabase db = mHelper.getReadableDatabase();
 		try {
-			Cursor cursor = db.rawQuery("SELECT name,  mean, memorized_date FROM dic WHERE stage=" + tmpStageAccumulated + " ORDER BY RANDOM();", null);
-			qTotal = cursor.getCount();
-			if (cursor.getCount()>0) {
-				while(cursor.moveToNext()) {
-					String word = cursor.getString(0);
-					String mean = cursor.getString(1);
-					String history = cursor.getString(2);
-					Log.i("STEVEN 218", cursor.toString());
-					
-					Boolean hasHistory = false;
-					if(history != null)
-						hasHistory = true;
-					
-					Cursor otherCursor = db.rawQuery("SELECT DISTINCT mean FROM dic WHERE mean <> '" + cursor.getString(1) + "' ORDER BY RANDOM() LIMIT 3", null);
-					otherCursor.moveToNext();
-					String incor1 = otherCursor.getString(0);
-					otherCursor.moveToNext();
-					String incor2 = otherCursor.getString(0);
-					otherCursor.moveToNext();
-					String incor3 = otherCursor.getString(0);
-
-					Log.i("SETVEN", "word is : " + word + "     history is " + hasHistory + "history date is " + history);
-					wordList.add(new Word(word, mean, incor1, incor2, incor3, hasHistory));
-				}
+			Cursor cursor = db.rawQuery("SELECT name,  mean, memorized_date FROM dic WHERE stage=" + tmpStageAccumulated, null);
+			qTotal = cursor.getCount() + reviewList.size();
+			
+			addToWordList(cursor, db);
+			
+			for(int i = 0; i < reviewList.size(); i++){
+				Cursor reviewCursor = db.rawQuery("SELECT name, mean, memorized_date FROM dic WHERE stage > " + ((tmpStageAccumulated / 10) * 10) + 
+											" AND stage <= " + (tmpStageAccumulated - 1) + " AND name = '" + reviewList.get(i) + "'", null);
+				addToWordList(reviewCursor, db);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		db.close();
+		
+		Collections.shuffle(wordList);
 	}
+	private void addToWordList(Cursor cursor, SQLiteDatabase db){
+		while(cursor.moveToNext()){
+			String word = cursor.getString(0);
+			String mean = cursor.getString(1);
+			String history = cursor.getString(2);
+			
+			Boolean hasHistory = false;
+			if(history != null)
+				hasHistory = true;
+			
+			Cursor otherCursor = db.rawQuery("SELECT DISTINCT mean FROM dic WHERE mean <> '" + cursor.getString(1) + "' ORDER BY RANDOM() LIMIT 3", null);
+			otherCursor.moveToNext();
+			String incor1 = otherCursor.getString(0);
+			otherCursor.moveToNext();
+			String incor2 = otherCursor.getString(0);
+			otherCursor.moveToNext();
+			String incor3 = otherCursor.getString(0);
 
+			wordList.add(new Word(word, mean, incor1, incor2, incor3, hasHistory));
+		}
+	}
 
 	@Override
 	public void onResume(){
@@ -351,7 +377,6 @@ public class StudyTestRenewal extends TypefaceActivity {
 	private void correct() {
 		comboCount++;
 		cntCorrect++;
-		bestScore.setText(cntCorrect+""); 
 
 		correctImg.setVisibility(View.VISIBLE);
 		try{
@@ -361,15 +386,23 @@ public class StudyTestRenewal extends TypefaceActivity {
 			if(!wordList.get(qCount).getHasHistory()){ //no memorized History (it's first correct)
 				row.put("memorized_date", todayDate);
 			}
-			db.update("dic", row, "name='" + wordList.get(qCount).getWord()+"'", null);
+
+			db.update("dic", row, "name = ? AND stage > ? AND stage <= ?", new String[]{wordList.get(qCount).getWord(), String.valueOf((tmpStageAccumulated / 10) * 10), String.valueOf(tmpStageAccumulated)});
+			
 			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
 		new Handler().postDelayed(resetWord, 500);
-		comboImg.setImageResource(R.drawable.weekly_1_img_combo);
-		comboAni.start();
-
+		
+		if(comboCount == 10){ //10combo
+			comboImg.setImageResource(R.drawable.weekly_1_img_10combo);
+			comboAni.start();
+		}
+		else if(comboCount > 0){
+			comboImg.setImageResource(R.drawable.weekly_1_img_combo);
+			comboAni.start();
+		}
 		finalAnswerForRequest+="1";
 	}
 
@@ -383,7 +416,8 @@ public class StudyTestRenewal extends TypefaceActivity {
 		try{
 			ContentValues row = new ContentValues();
 			row.put("xo", "X");
-			db.update("dic", row, "name='" + wordList.get(qCount).getWord()+"'", null);
+			db.update("dic", row, "name = ? AND stage > ? AND stage <= ?", new String[]{wordList.get(qCount).getWord(), String.valueOf((tmpStageAccumulated / 10) * 10), String.valueOf(tmpStageAccumulated)});
+			
 		} catch(Exception e){
 			e.printStackTrace();
 		}
@@ -396,14 +430,10 @@ public class StudyTestRenewal extends TypefaceActivity {
 			comboList = comboList + "-" + comboCount;
 		}
 
-		SharedPreferences sp = getSharedPreferences("StudyLevelInfo", 0);
-		SharedPreferences.Editor editor = sp.edit();
-		editor.putString("testResult", finalAnswerForRequest);
-		editor.apply();
-
 		Intent intent = new Intent(getApplicationContext(), StudyTestResult.class);
 		intent.putExtra("combo", comboList);
 		intent.putExtra("lastHigh", lastHigh);
+		intent.putExtra("reviewWords", reviewList);
 		startActivity(intent);
 		finish();
 	}
@@ -497,17 +527,4 @@ public class StudyTestRenewal extends TypefaceActivity {
 		mHelper.close();
 	}
 
-	@Override
-	protected void onStart(){
-		super.onStart();
-		//FlurryAgent.onStartSession(this, "ZKWGFP6HKJ33Y69SP5QY");
-		//EasyTracker.getInstance(this).activityStart(this);
-	}
-
-	@Override
-	protected void onStop(){
-		super.onStop();		
-		//FlurryAgent.onEndSession(this);
-		//EasyTracker.getInstance(this).activityStop(this);
-	}
 }

@@ -1,17 +1,29 @@
 package com.todpop.sweetenglish;
 
 import java.io.File;
+import java.util.Calendar;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.app.AlertDialog.Builder;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -21,20 +33,21 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.FileManager;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.sweetenglish.db.WordDBHelper;
 
 public class HomeMoreSetting extends TypefaceActivity {
-
-	//private static final int REQUEST_CODE_IMAGE = 0;
-
+	
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
     private static final int CROP_FROM_CAMERA = 2;
-    
 
 	private Uri mImageCaptureUri;
 	
@@ -43,6 +56,9 @@ public class HomeMoreSetting extends TypefaceActivity {
 
 	SharedPreferences userInfo;
 	SharedPreferences.Editor userInfoEdit;
+	
+	SharedPreferences studyInfo;
+	SharedPreferences.Editor studyInfoEdit;
 
 	private String nickname;
 	private boolean isPopupEnabled;
@@ -58,11 +74,17 @@ public class HomeMoreSetting extends TypefaceActivity {
 
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			setAlarm(hourOfDay, minute);
+			
 			String strHour = hourOfDay < 10 ? "0" + hourOfDay : "" + hourOfDay;
 			String strMin = minute < 10 ?  "0" + minute : "" + minute; 
+			
 			alarmTime = strHour + ":" + strMin;
 			tvFrontTime.setText(strHour);
 			tvBackTime.setText(strMin);
+			
+			settingEdit.putString("alarmTime", alarmTime);
+			settingEdit.apply();
 		}
 	};
 	private CheckBox swAlarmOnOff;
@@ -73,8 +95,13 @@ public class HomeMoreSetting extends TypefaceActivity {
 	private Bitmap bmpMyPicture;
 	private FileManager fm;
 	
+	NotificationManager notificationManager;
+	AlarmManager alarmManager;
+	
 	Animation fadeOut;
 	Animation fadeIn;
+	
+	PopupWindow popupWindow;
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -86,10 +113,13 @@ public class HomeMoreSetting extends TypefaceActivity {
 
 		userInfo = getSharedPreferences("userInfo", 0);
 		userInfoEdit = userInfo.edit();
+		
+		studyInfo = getSharedPreferences("studyInfo", 0);
+		studyInfoEdit = studyInfo.edit();
 
 		nickname = userInfo.getString("userNick", "No_Nickname");
-		isPopupEnabled = setting.getBoolean("isPopupEnabled", true);
-		isAlarmEnabled = setting.getBoolean("isAlarmEnabled", true);
+		isPopupEnabled = setting.getBoolean("isPopupEnabled", false);
+		isAlarmEnabled = setting.getBoolean("isAlarmEnabled", false);
 		alarmTime = setting.getString("alarmTime","00:00");
 		
 		llSettingAlarm = (LinearLayout)findViewById(R.id.ll_setting_alarm); 
@@ -109,17 +139,33 @@ public class HomeMoreSetting extends TypefaceActivity {
 			ivMyPicture.setImageBitmap(bmpMyPicture);
 		}
 
+		notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+		alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+		
 		fadeOut = AnimationUtils.loadAnimation(this, R.anim.setting_fade_out);
 		fadeIn = AnimationUtils.loadAnimation(this, R.anim.setting_fade_in);
+		
+		initSettingViews();
+		
 		swAlarmOnOff.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				isAlarmEnabled = isChecked;
 				if(!isChecked){
 					llSettingAlarm.startAnimation(fadeOut);
+					llSettingAlarm.setClickable(false);
+					swPopupOnOff.startAnimation(fadeOut);
+					swPopupOnOff.setClickable(false);
 				}else{
 					llSettingAlarm.startAnimation(fadeIn);
+					llSettingAlarm.setClickable(true);
+					swPopupOnOff.startAnimation(fadeIn);
+					swPopupOnOff.setClickable(true);
 				}
+				setAlarm(Integer.valueOf(tvFrontTime.getText().toString()), Integer.valueOf(tvBackTime.getText().toString()));
+
+				settingEdit.putBoolean("isAlarmEnabled", isAlarmEnabled);
+				settingEdit.apply();
 			}
 		});
 
@@ -127,22 +173,36 @@ public class HomeMoreSetting extends TypefaceActivity {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				isPopupEnabled = isChecked;
+				
+				setAlarm(Integer.valueOf(tvFrontTime.getText().toString()), Integer.valueOf(tvBackTime.getText().toString()));
+
+				settingEdit.putBoolean("isPopupEnabled", isPopupEnabled);
+				settingEdit.apply();
 			}
 		});
 
-		initSettingViews();
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home More Setting");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	@Override
 	protected void onPause(){
 		super.onPause();
 
 		userInfoEdit.putString("userNick", etNickName.getText().toString());
-		settingEdit.putBoolean("isPopupEnabled", isPopupEnabled);
-		settingEdit.putBoolean("isAlarmEnabled", isAlarmEnabled);
-		settingEdit.putString("alarmTime", alarmTime);
 		userInfoEdit.apply();
-		settingEdit.apply();
 	}
 	private void initSettingViews() {
 		etNickName.setText(nickname);
@@ -153,9 +213,39 @@ public class HomeMoreSetting extends TypefaceActivity {
 		swAlarmOnOff.setChecked(isAlarmEnabled);
 		if(!isAlarmEnabled){
 			llSettingAlarm.startAnimation(fadeOut);
+			llSettingAlarm.setClickable(false);
+			swPopupOnOff.startAnimation(fadeOut);
+			swPopupOnOff.setClickable(false);
 		}
 	}
 
+	private void setAlarm(int targetHour, int targetMinute){	
+		Intent intentReceiver = new Intent(getApplicationContext(), AlamReceiver.class);
+		PendingIntent pendingIntentReceiver = PendingIntent.getBroadcast(getApplicationContext(), 0, intentReceiver, 0);
+		
+		Intent intentActivity = new Intent("com.todpop.sweetenglish.alarmactivity");
+		PendingIntent pendingIntentActivity = PendingIntent.getActivity(getApplicationContext(), 0, intentActivity, Intent.FLAG_ACTIVITY_NEW_TASK);
+		
+		//cancel all
+		notificationManager.cancelAll();
+		alarmManager.cancel(pendingIntentReceiver);
+		alarmManager.cancel(pendingIntentActivity);
+
+		if(isAlarmEnabled){			// Setup Alarm
+			Calendar calendar =  Calendar.getInstance();
+			calendar.set(Calendar.HOUR_OF_DAY, targetHour);
+			calendar.set(Calendar.MINUTE, targetMinute);
+			long when = calendar.getTimeInMillis();         // notification time
+			
+			if(isPopupEnabled){
+				alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, when, AlarmManager.INTERVAL_DAY, pendingIntentActivity);
+			}
+			else{
+				alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, when, AlarmManager.INTERVAL_DAY, pendingIntentReceiver);		
+			}
+		}
+	}
+	
 	public void setMyPicture(View v){
 		userPicDialog = createDialog();
 		userPicDialog.show();
@@ -226,6 +316,8 @@ public class HomeMoreSetting extends TypefaceActivity {
 			Intent intentCamera = new Intent("com.android.camera.action.CROP");
 			intentCamera.setDataAndType(mImageCaptureUri, "image/*");
 			
+			intentCamera.putExtra("outputX", 250);
+			intentCamera.putExtra("outputY", 250);
 			intentCamera.putExtra("aspectX", 1);
 			intentCamera.putExtra("aspectY", 1);
 			intentCamera.putExtra("output", mImageCaptureUri);
@@ -239,7 +331,9 @@ public class HomeMoreSetting extends TypefaceActivity {
 			intentAlbum.setDataAndType(mImageCaptureUri, "image/*");
 			
 			mImageCaptureUri = createSaveCropFile();
-			
+
+			intentAlbum.putExtra("outputX", 250);
+			intentAlbum.putExtra("outputY", 250);
 			intentAlbum.putExtra("aspectX", 1);
 			intentAlbum.putExtra("aspectY", 1);
 			intentAlbum.putExtra("output", mImageCaptureUri);
@@ -251,15 +345,9 @@ public class HomeMoreSetting extends TypefaceActivity {
 			
 			SharedPreferences.Editor userInfoEditor = userInfo.edit();
 			userInfoEditor.putString("userImgPath", full_path);
-			userInfoEditor.apply();			
-
-			BitmapFactory.Options options = new BitmapFactory.Options();
-			options.inSampleSize = 4;
-			options.inPurgeable = true;
-			options.inDither = true;
+			userInfoEditor.apply();
 			
-			bmpMyPicture = BitmapFactory.decodeFile(full_path, options);
-			
+			bmpMyPicture = BitmapFactory.decodeFile(full_path);
 			ivMyPicture.setImageBitmap(bmpMyPicture);
 
 			break;
@@ -267,13 +355,56 @@ public class HomeMoreSetting extends TypefaceActivity {
 	}
 
 	public void setAlarmTime(View v){
-		TimePickerDialog timePicker = new TimePickerDialog(HomeMoreSetting.this, timeSetListener, 0, 0, false);
+		TimePickerDialog timePicker;
+		
+		if(android.os.Build.VERSION.SDK_INT >= 11){
+			timePicker = new TimePickerDialog(HomeMoreSetting.this, TimePickerDialog.THEME_HOLO_LIGHT, timeSetListener, 0, 0, false);
+		}
+		else{
+			timePicker = new TimePickerDialog(HomeMoreSetting.this, timeSetListener, 0, 0, false);
+		}
+		
 		timePicker.setTitle("시간 설정");
 		timePicker.show();
 	}
 
 	public void initStudyInfo(View v){
 		// init all
+		
+		View popupView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_reset, null);
+		ImageView popupCancel = (ImageView)popupView.findViewById(R.id.iv_more_setting_reset_popup_cancel);
+		ImageView popupReset = (ImageView)popupView.findViewById(R.id.iv_more_setting_reset_popup_reset);
+		popupWindow = new PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,true);
+
+		popupCancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				popupWindow.dismiss();
+			}
+		});
+		popupReset.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				popupWindow.dismiss();
+				resetStudyHistory();
+			}
+		});
+
+		popupWindow.showAtLocation(etNickName, Gravity.CENTER, 0, 0);
+	}
+	
+	private void resetStudyHistory(){
+
+		WordDBHelper mHelper = new WordDBHelper(this);
+		SQLiteDatabase db = mHelper.getWritableDatabase();
+		db.delete("dic", null, null);
+		db.delete("mywords", null, null);
+		db.delete("mywordtest", null, null);
+		db.delete("flip", null, null);
+		db.delete("word_groups", null, null);
+		db.close();
+		
+		getSharedPreferences("studyInfo", 0).edit().clear().apply();
 	}
 
 	public void saveSetting(View v){

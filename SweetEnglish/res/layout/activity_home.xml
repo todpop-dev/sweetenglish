@@ -469,24 +469,28 @@
                     android:layout_height="match_parent"
                     android:layout_weight="78" />
 
-                <Button
+                <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="254"
-                    android:background="@drawable/home_btn_wordbook" 
-                    android:onClick="onClickWordBook"/>
+                    android:scaleType="centerInside"
+                    android:background="@android:color/transparent"
+                    android:onClick="onClickWordBook"
+                    android:src="@drawable/home_btn_wordbook" />
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="67" />
 
-                <Button
+                <ImageButton
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="254"
-                    android:background="@drawable/home_btn_study" 
-                    android:onClick="onClickStudy"/>
+                    android:scaleType="fitStart"
+                    android:background="@android:color/transparent"
+                    android:onClick="onClickStudy"
+                    android:src="@drawable/home_btn_study" />
 
                 <View
                     android:layout_width="0dp"

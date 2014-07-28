@@ -2,55 +2,67 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragment_study_begin_id_mainview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingTop="15dp" >
+    android:layout_height="match_parent" >
+
+    <!-- back side -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:orientation="vertical" >
+        android:orientation="vertical"
+        android:visibility="visible" >
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="90" />
+            android:layout_weight="140" />
 
         <LinearLayout
-            android:id="@+id/fragment_study_begin_whole_card"
+            android:id="@+id/fragment_study_begin_whole_card_back"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginLeft="17dp"
             android:layout_marginRight="17dp"
-            android:layout_weight="1043"
+            android:layout_weight="1010"
             android:background="@drawable/study_8_img_engcard"
             android:orientation="vertical" >
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="378" >
+                android:layout_weight="378"
+                android:gravity="center"
+                android:orientation="vertical" >
 
-                <!-- word ON -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="125" >
 
-                <ImageView
-                    android:id="@+id/fragment_study_begin_id_word_on"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="14dp"
-                    android:background="@drawable/study_8_img_number_1" />
+                    <!-- word ON -->
 
+                    <ImageView
+                        android:id="@+id/fragment_study_begin_id_word_on_back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp" />
+                </RelativeLayout>
                 <!-- baby image -->
 
                 <ImageView
-                    android:id="@+id/fragment_study_begin_id_word_img"
+                    android:id="@+id/fragment_study_begin_id_word_img_back"
                     android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="61dp"
-                    android:scaleType="centerInside" />
-            </RelativeLayout>
+                    android:layout_height="0dp"
+                    android:layout_weight="400"
+                    android:scaleType="fitCenter" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="80" />
+            </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -82,7 +94,131 @@
                         android:orientation="vertical" >
 
                         <TextView
-                            android:id="@+id/study_word_tv"
+                            android:id="@+id/study_word_tv_back"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="baby"
+                            android:textColor="#000000"
+                            android:textSize="30dp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="80" />
+
+                    <TextView
+                        android:id="@+id/study_word_ex_tv_back"
+                        android:layout_width="290dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="144"
+                        android:gravity="center_horizontal"
+                        android:text="asdf\nasdf"
+                        android:textColor="#000000"
+                        android:textSize="15dp" />
+                </LinearLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="130" />
+    </LinearLayout>
+
+    <!-- front side -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="140" />
+
+        <LinearLayout
+            android:id="@+id/fragment_study_begin_whole_card_front"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginLeft="17dp"
+            android:layout_marginRight="17dp"
+            android:layout_weight="1010"
+            android:background="@drawable/study_8_img_engcard"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="378"
+                android:gravity="center"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="125" >
+
+                    <!-- word ON -->
+
+                    <ImageView
+                        android:id="@+id/fragment_study_begin_id_word_on_front"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp" />
+                </RelativeLayout>
+                <!-- baby image -->
+
+                <ImageView
+                    android:id="@+id/fragment_study_begin_id_word_img_front"
+                    android:layout_width="200dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="400"
+                    android:src="@color/sweet_white"
+                    android:scaleType="fitCenter" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="80" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="257" >
+
+                <!-- speack btn -->
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="1.8dp"
+                    android:background="@drawable/studybigin_drawable_btn_speaker"
+                    android:onClick="readItForMe" /> <!-- word -->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="175"
+                        android:gravity="center_horizontal|bottom"
+                        android:orientation="vertical" >
+
+                        <TextView
+                            android:id="@+id/study_word_tv_front"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:gravity="center"
@@ -94,7 +230,7 @@
                         <!-- word pronounce -->
 
                         <TextView
-                            android:id="@+id/study_word_pron_tv"
+                            android:id="@+id/study_word_pron_tv_front"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="2dp"
@@ -112,7 +248,7 @@
                         android:layout_weight="80" />
 
                     <TextView
-                        android:id="@+id/study_word_ex_tv"
+                        android:id="@+id/study_word_ex_tv_front"
                         android:layout_width="290dp"
                         android:layout_height="0dp"
                         android:layout_weight="144"
@@ -127,7 +263,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="147" />
+            android:layout_weight="130" />
     </LinearLayout>
 
 </RelativeLayout>

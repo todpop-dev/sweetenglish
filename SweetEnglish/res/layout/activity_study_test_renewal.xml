@@ -40,14 +40,6 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true" />
 
-            <ImageView
-                android:id="@+id/iv_test_renewal_best"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="6dp"
-                android:src="@drawable/weekly_1_img_bestscore" />
-
             <ProgressBar
                 android:id="@+id/pb_test_renewal_progress"
                 style="?android:attr/progressBarStyleHorizontal"
@@ -57,47 +49,6 @@
                 android:indeterminate="false"
                 android:progress="0"
                 android:progressDrawable="@drawable/weekly_shape_ring" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignBottom="@id/iv_test_renewal_best"
-                android:layout_alignLeft="@id/iv_test_renewal_best"
-                android:layout_alignTop="@id/iv_test_renewal_best"
-                android:orientation="horizontal" >
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="135" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="116"
-                    android:gravity="center"
-                    android:orientation="horizontal" >
-
-                    <TextView
-                        android:id="@+id/tv_test_renewal_best"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="0"
-                        android:textColor="#FEEEC3"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:text="개"
-                        android:textColor="#FEEEC3"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_test_renewal_o"
@@ -217,7 +168,6 @@
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
-
 
     <LinearLayout
         android:id="@+id/ll_test_renewal_timesup"

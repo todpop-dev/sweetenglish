@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+    
+    <!-- Percentage of events to include in reports -->
+    <string name="ga_sampleFrequency">100.0</string>
+
+    <!-- Enable automatic Exceptions report -->
+    <bool name="ga_reportUncaughtExceptions">true</bool>
+   
+    <!-- How long a session exists before giving up -->
+    <integer name="ga_sessionTimeout">-1</integer>
+
+    <screenName name="com.todpop.sweetenglish.OpeningActivity">        SaltyEnglish OpeningActivity</screenName>
+    <screenName name="com.todpop.sweetenglish.HomeActivity">         SaltyEnglish HomeActivity</screenName>
+    <!-- The following value should be replaced with correct property id. -->
+    <string name="ga_trackingId">UA-53166975-1</string>
+
+</resources>

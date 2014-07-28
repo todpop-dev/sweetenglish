@@ -3,6 +3,6 @@
     <item android:state_enabled="false"
         android:drawable="@drawable/study_4_btn_stage5_close" /> 
     <item android:state_pressed="true"
-        android:drawable="@drawable/study_4_btn_stage5_pressed_g" /> 
-    <item android:drawable="@drawable/study_4_btn_stage5_normal_g" />  
+        android:drawable="@drawable/study_4_btn_stage5_pressed_n" /> 
+    <item android:drawable="@drawable/study_4_btn_stage5_normal_n" />  
 </selector>

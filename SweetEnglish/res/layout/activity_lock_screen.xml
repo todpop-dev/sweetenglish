@@ -25,7 +25,9 @@
             android:id="@+id/lock_screen_text_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1:18"
+            android:shadowColor="#000000"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
             android:textColor="#ffffff"
             android:textSize="40dp" />
 
@@ -36,7 +38,9 @@
             android:layout_marginLeft="8dp"
             android:layout_marginTop="3dp"
             android:layout_toRightOf="@id/lock_screen_text_time"
-            android:text="am"
+            android:shadowColor="#000000"
+            android:shadowDy="1.0"
+            android:shadowRadius="2.0"
             android:textColor="#ffffff"
             android:textSize="15dp" />
 
@@ -45,7 +49,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/lock_screen_text_time"
-            android:text="7월9일 수요일"
+            android:shadowColor="#000000"
+            android:shadowDy="1.0"
+            android:shadowRadius="2.0"
             android:textColor="#ffffff"
             android:textSize="17dp" />
     </RelativeLayout>
@@ -66,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="23dp"
-                android:src="@drawable/screenlock_3_img_arrow"
+                android:src="@drawable/screenlock_3_img_arrow_left"
                 android:visibility="invisible" />
 
             <android.support.v4.view.ViewPager
@@ -82,13 +88,29 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="23dp"
-                android:src="@drawable/screenlock_3_img_arrow" />
+                android:src="@drawable/screenlock_3_img_arrow_right" />
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="226" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="918" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="226"
+            android:layout_weight="312"
             android:gravity="center_horizontal"
             android:orientation="horizontal" >
 
@@ -99,7 +121,7 @@
 
             <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="572" >
 
                 <SeekBar
@@ -108,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:progress="50"
-                    android:progressDrawable="@drawable/locker_seekbar_background"
+                    android:progressDrawable="@drawable/lock_screen_seekbar_background"
                     android:thumb="@drawable/screenlock_3_btn_circle_normal" />
 
                 <LinearLayout
@@ -143,6 +165,31 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="102"
                         android:src="@drawable/screenlock_3_btn_unlock_normal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="30"
+                        android:clickable="true" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="40" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="30"
+                        android:clickable="true" />
                 </LinearLayout>
             </RelativeLayout>
 

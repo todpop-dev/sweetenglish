@@ -55,7 +55,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:background="@drawable/category_btn_infinite" />
+                    android:background="@drawable/category_btn_infinite"
+                    android:onClick="onClickInfiniteTest" />
             </RelativeLayout>
 
             <View
@@ -81,15 +82,17 @@
                 android:layout_height="0dp"
                 android:layout_weight="830" />
         </LinearLayout>
-        <View 
+
+        <View
             android:layout_width="10dp"
             android:layout_height="match_parent"
-            android:clickable="true"/>
-        <View 
+            android:clickable="true" />
+
+        <View
             android:layout_width="10dp"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_height="match_parent"
-            android:clickable="true"/>
+            android:clickable="true" />
     </RelativeLayout>
 
 </LinearLayout>

@@ -1,43 +1,47 @@
 package com.todpop.sweetenglish;
 
+import java.util.ArrayList;
+
+import com.todpop.api.TypefaceActivity;
+
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 public class LockScreenPagerAdapter extends PagerAdapter{
-
 	private LayoutInflater mInflater;
 	
-	public LockScreenPagerAdapter(Context c){
+	private ArrayList<LockScreenEngKorSet> mWordList;
+	
+	public LockScreenPagerAdapter(Context c, ArrayList<LockScreenEngKorSet> wordList){
 		super();
 		mInflater = LayoutInflater.from(c);
+		mWordList = wordList;
 	}
 	
 	@Override
 	public int getCount() {
-		return 4;
+		return mWordList.size();
 	}
 	
 	@Override
 	public Object instantiateItem(View pager, int position){
-		View v = null;
-		v = mInflater.inflate(R.layout.fragment_study_category, null);
-
-		ImageView page = (ImageView)v.findViewById(R.id.category_pager_img);
-
-		if(position == 0){
-			page.setBackgroundResource(R.drawable.study_3_img_basiccard);
-		} else if(position == 1){
-			page.setBackgroundResource(R.drawable.study_3_img_middlecard);
-		} else if(position == 2){
-			page.setBackgroundResource(R.drawable.study_3_img_highcard);
-		} else if(position == 3){
-			page.setBackgroundResource(R.drawable.study_3_img_toeiccard);
-		}
-
+		View v = pager;
+		
+		v = mInflater.inflate(R.layout.lock_screen_view_pager, null);
+			
+		TextView eng = (TextView)v.findViewById(R.id.lock_screen_pager_eng);
+		TextView kor = (TextView)v.findViewById(R.id.lock_screen_pager_kor);
+		
+		TypefaceActivity.setFont(eng);
+		TypefaceActivity.setFont(kor);
+		
+		eng.setText(mWordList.get(position).english);
+		kor.setText(mWordList.get(position).korean);
+		
 		((ViewPager)pager).addView(v, 0);
 
 		return v;
@@ -51,5 +55,4 @@ public class LockScreenPagerAdapter extends PagerAdapter{
 	public boolean isViewFromObject(View pager, Object obj) {
 		return pager == obj;
 	}
-
 }

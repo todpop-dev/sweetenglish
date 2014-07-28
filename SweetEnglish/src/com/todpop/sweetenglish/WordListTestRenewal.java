@@ -24,6 +24,8 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -31,9 +33,7 @@ import com.todpop.sweetenglish.db.WordDBHelper;
 public class WordListTestRenewal extends TypefaceActivity {
 
 	View redBack;
-
-	TextView bestScore;
-
+	
 	TextView english;
 
 	//answer Buttons
@@ -68,7 +68,6 @@ public class WordListTestRenewal extends TypefaceActivity {
 
 	private int comboCount = -1;
 
-	private String comboList = "0";
 	private String lastHigh;
 
 	private static Runnable resetWord;
@@ -134,8 +133,6 @@ public class WordListTestRenewal extends TypefaceActivity {
 
 		redBack = (View)findViewById(R.id.v_test_renewal_light_box);
 
-		bestScore = (TextView)findViewById(R.id.tv_test_renewal_best);
-
 		english = (TextView)findViewById(R.id.tv_test_renewal_eng);
 
 		option1 = (Button)findViewById(R.id.btn_test_renewal_opt1);
@@ -161,8 +158,6 @@ public class WordListTestRenewal extends TypefaceActivity {
 		comboImg = (ImageView)findViewById(R.id.iv_test_renewal_combo);
 		comboAni = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.weekly_pop_combo_ani);
 		comboImg.setAnimation(comboAni);
-
-		//tutorial = (RelativeLayout)findViewById(R.id.rl_test_renewal_tutorial);
 
 		timesUp = (LinearLayout)findViewById(R.id.ll_test_renewal_timesup);
 		timesUpImg = (ImageView)findViewById(R.id.iv_test_renewal_timseup);
@@ -195,6 +190,8 @@ public class WordListTestRenewal extends TypefaceActivity {
 		};
 
 		getTestWords();
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
 	private void getTestWords()
@@ -202,7 +199,7 @@ public class WordListTestRenewal extends TypefaceActivity {
 		SQLiteDatabase db = mHelper.getReadableDatabase();
 		String query="";
 		if(groupName.equals("전체 단어")){
-			query = "SELECT name, mean FROM mywords ORDER BY RANDOM()";
+			query = "SELECT name, mean FROM mywords ORDER BY RANDOM()  LIMIT "+testSize;
 			
 		}else{
 			query = "SELECT name, mean FROM mywords WHERE group_name='" + groupName + "' ORDER BY RANDOM() LIMIT "+testSize;	
@@ -216,7 +213,7 @@ public class WordListTestRenewal extends TypefaceActivity {
 					String word = cursor.getString(0);
 					String mean = cursor.getString(1);
 
-					Cursor otherCursor = db.rawQuery("SELECT DISTINCT mean FROM mywords WHERE mean <> '" + cursor.getString(1) + "' ORDER BY RANDOM() LIMIT 3", null);
+					Cursor otherCursor = db.rawQuery("SELECT DISTINCT mean FROM dic WHERE mean <> '" + cursor.getString(1) + "' ORDER BY RANDOM() LIMIT 3", null);
 					otherCursor.moveToNext();
 					String incor1 = otherCursor.getString(0);
 					otherCursor.moveToNext();
@@ -230,6 +227,8 @@ public class WordListTestRenewal extends TypefaceActivity {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		Log.i("STEVEN", "wordList size is : " + wordList.size());
 	}
 
 
@@ -245,6 +244,9 @@ public class WordListTestRenewal extends TypefaceActivity {
 		} else{
 			timer = new TotalTimer(TIME, 1000);
 			progressTimer = new ProgressTimer(TIME, 10);
+			setWord();
+			timer.start();
+			progressTimer.start();
 		}
 
 	}
@@ -308,10 +310,8 @@ public class WordListTestRenewal extends TypefaceActivity {
 			option3.setClickable(true);
 			option4.setClickable(true);
 		} else{	//finish test
-			if(cntSolvedAnswer >= 10){
-				timesUp.setVisibility(View.VISIBLE);
-				timesUpAni.start();
-				new Handler().postDelayed(goNext, 2500);
+			if(cntSolvedAnswer >= wordList.size()){
+				goNextActivity();
 			}
 		}
 	}
@@ -342,7 +342,6 @@ public class WordListTestRenewal extends TypefaceActivity {
 	private void correct() {
 		comboCount++;
 		cntCorrect++;
-		bestScore.setText(cntCorrect+""); 
 
 		correctImg.setVisibility(View.VISIBLE);
 		try{
@@ -356,17 +355,30 @@ public class WordListTestRenewal extends TypefaceActivity {
 			e.printStackTrace();
 		}
 		new Handler().postDelayed(resetWord, 500);
-		comboImg.setImageResource(R.drawable.weekly_1_img_combo);
-		comboAni.start();
+		
+		if(comboCount == 10){ //10combo
+			comboImg.setImageResource(R.drawable.weekly_1_img_10combo);
+			comboAni.start();
+		}
+		else if(comboCount == 20){	//20combo
+			comboImg.setImageResource(R.drawable.weekly_1_img_20combo);
+			comboAni.start();
+		}
+		else if(comboCount == 30){  //30combo
+			comboImg.setImageResource(R.drawable.weekly_1_img_30combo);
+			comboAni.start();
+		}
+		else if(comboCount > 0){
+			comboImg.setImageResource(R.drawable.weekly_1_img_combo);
+			comboAni.start();
+		}
 
 		finalAnswerForRequest+="1";
 	}
 
 	private void incorrect(){
 		disableAndStop();
-		if(comboCount > 0){
-			comboList = comboList + "-" + comboCount;
-		}
+		
 		comboCount = -1;
 		incorrectImg.setVisibility(View.VISIBLE);
 		try{
@@ -384,17 +396,8 @@ public class WordListTestRenewal extends TypefaceActivity {
 		finalAnswerForRequest+="0";
 	}
 	private void goNextActivity(){
-		if(comboCount > 0){
-			comboList = comboList + "-" + comboCount;
-		}
-
-		SharedPreferences sp = getSharedPreferences("StudyLevelInfo", 0);
-		SharedPreferences.Editor editor = sp.edit();
-		editor.putString("testResult", finalAnswerForRequest);
-		editor.apply();
-
 		Intent intent = new Intent(getApplicationContext(), WordListTestResult.class);
-		intent.putExtra("combo", comboList);
+
 		intent.putExtra("lastHigh", lastHigh);
 		startActivity(intent);
 		finish();
@@ -496,17 +499,18 @@ public class WordListTestRenewal extends TypefaceActivity {
 		mHelper.close();
 	}
 
+
 	@Override
 	protected void onStart(){
 		super.onStart();
-		//FlurryAgent.onStartSession(this, "ZKWGFP6HKJ33Y69SP5QY");
-		//EasyTracker.getInstance(this).activityStart(this);
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Word List Test Renewal");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
 	}
-
 	@Override
 	protected void onStop(){
-		super.onStop();		
-		//FlurryAgent.onEndSession(this);
-		//EasyTracker.getInstance(this).activityStop(this);
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
 	}
 }

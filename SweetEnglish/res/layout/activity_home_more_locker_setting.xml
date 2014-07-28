@@ -50,16 +50,60 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="62" />
+            android:layout_weight="50" />
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="925"
+            android:layout_weight="95"
+            android:background="@drawable/setting_shape_background"
+            android:paddingLeft="18dp" >
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:src="@drawable/screenlock_text_screenlock" />
+
+            <CheckBox
+                android:id="@+id/locker_setting_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="17.5dp"
+                android:background="@drawable/setting_btn_switch"
+                android:button="@drawable/setting_btn_switch" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30" />
+
+        <Button
+            android:id="@+id/locker_setting_word_setting"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="95"
+            android:background="@drawable/lock_setting_btn_set_word"
+            android:onClick="onClickSetWord" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="30" />
+
+        <LinearLayout
+            android:id="@+id/locker_setting_layout_bg"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="838"
             android:background="@drawable/lock_setting_shape_bg"
             android:orientation="vertical" >
 
             <ImageButton
+                android:id="@+id/locker_setting_bg_setting"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="93"
@@ -80,13 +124,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="768"
+                android:layout_weight="714"
                 android:orientation="horizontal" >
 
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="52" />
+                    android:layout_weight="62" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -113,6 +157,7 @@
                         android:paddingRight="3dp" >
 
                         <TextView
+                            android:id="@+id/locker_setting_preview_bar_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="오전 1:18"
@@ -120,41 +165,49 @@
                             android:textSize="8.5dp" />
                     </LinearLayout>
 
-                    <LinearLayout
+                    <RelativeLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="12.5dp"
-                        android:layout_marginTop="27.5dp"
-                        android:orientation="vertical" >
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:gravity="top"
-                            android:orientation="horizontal" >
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1:18"
-                                android:textColor="#ffffff"
-                                android:textSize="24dp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="am"
-                                android:textColor="#ffffff"
-                                android:textSize="3.5dp" />
-                        </LinearLayout>
+                        android:layout_marginTop="27.5dp" >
 
                         <TextView
+                            android:id="@+id/locker_setting_preview_time"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:shadowColor="#000000"
+                            android:shadowDy="1.0"
+                            android:shadowRadius="1.0"
+                            android:text="1:18"
+                            android:textColor="#ffffff"
+                            android:textSize="24dp" />
+
+                        <TextView
+                            android:id="@+id/locker_setting_preview_apm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="2.5dp"
+                            android:layout_marginTop="1.5dp"
+                            android:layout_toRightOf="@id/locker_setting_preview_time"
+                            android:shadowColor="#000000"
+                            android:shadowDy="1.0"
+                            android:shadowRadius="1.0"
+                            android:text="am"
+                            android:textColor="#ffffff"
+                            android:textSize="3.5dp" />
+
+                        <TextView
+                            android:id="@+id/locker_setting_preview_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/locker_setting_preview_time"
+                            android:shadowColor="#000000"
+                            android:shadowDy="1.0"
+                            android:shadowRadius="1.0"
                             android:text="7월9일 수요일"
                             android:textColor="#ffffff"
                             android:textSize="8.5dp" />
-                    </LinearLayout>
+                    </RelativeLayout>
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -166,6 +219,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:shadowColor="#000000"
+                            android:shadowDy="1.0"
+                            android:shadowRadius="2.0"
                             android:text="English"
                             android:textColor="#ffffff"
                             android:textSize="24dp" />
@@ -174,6 +230,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
+                            android:shadowColor="#000000"
+                            android:shadowDy="1.0"
+                            android:shadowRadius="2.0"
                             android:text="영어, 영문학"
                             android:textColor="#ffffff"
                             android:textSize="10dp" />
@@ -185,7 +244,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="14dp"
-                        android:src="@drawable/screenlock_3_img_arrow" />
+                        android:src="@drawable/screenlock_3_img_arrow_right" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -240,7 +299,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="58" />
+                    android:layout_weight="68" />
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -296,7 +355,7 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="46" />
+                    android:layout_weight="56" />
             </LinearLayout>
 
             <View
@@ -308,19 +367,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="32" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="95"
-            android:background="@drawable/lock_setting_btn_set_word"
-            android:onClick="onClickSetWord" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="54" />
+            android:layout_weight="30" />
     </LinearLayout>
 
 </LinearLayout>

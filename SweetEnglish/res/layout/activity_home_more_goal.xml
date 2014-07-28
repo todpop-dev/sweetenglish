@@ -3,7 +3,7 @@
     android:id="@+id/activity_home_more_help"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/goal_bg"
+    android:background="@color/sweet_black"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -81,14 +81,16 @@
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp" >
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical" >
 
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
-                            android:layout_weight="1" >
+                            android:layout_weight="1"
+                            android:onClick="addGoal"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp" >
 
                             <ImageButton
                                 android:id="@+id/ib_goal_plus"
@@ -96,6 +98,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:background="@android:color/transparent"
+                                android:duplicateParentState="true"
                                 android:onClick="addGoal"
                                 android:src="@drawable/goal_btn_up" />
                         </RelativeLayout>
@@ -103,7 +106,10 @@
                         <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="0dp"
-                            android:layout_weight="1" >
+                            android:layout_weight="1"
+                            android:onClick="subGoal"
+                            android:paddingLeft="20dp"
+                            android:paddingRight="20dp" >
 
                             <ImageButton
                                 android:id="@+id/ib_goal_minus"
@@ -111,6 +117,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_centerInParent="true"
                                 android:background="@android:color/transparent"
+                                android:duplicateParentState="true"
                                 android:onClick="subGoal"
                                 android:src="@drawable/goal_btn_down" />
                         </RelativeLayout>

@@ -2,68 +2,76 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sweet_red" >
+    android:splitMotionEvents="false" >
 
     <RelativeLayout
         android:id="@+id/study_test_369_back"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:background="#ff7864" />
 
-    <TextView
-        android:id="@+id/study_test_369_text_eng"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Irritate"
-        android:textColor="@color/sweet_blue"
-        android:textSize="40dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-    <View
-        android:id="@+id/study_test_369_center"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_centerInParent="true" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="472" />
+
+        <TextView
+            android:id="@+id/study_test_369_text_eng"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="593"
+            android:gravity="center_horizontal"
+            android:shadowColor="#000000"
+            android:shadowDy="1.0"
+            android:shadowRadius="1.0"
+            android:text="Irritate"
+            android:textColor="#ffffff"
+            android:textSize="30dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="215"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:id="@+id/study_test_369_text_left"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="개짜증남"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/study_test_369_text_right"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDy="1.0"
+                android:shadowRadius="1.0"
+                android:text="졸신남"
+                android:textColor="#ffffff"
+                android:textSize="20dp" />
+        </LinearLayout>
+    </LinearLayout>
 
     <ImageView
-        android:id="@+id/study_test_369_left_oval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="60dp"
-        android:src="@drawable/test_369_shape_circle"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:id="@+id/study_test_369_right_oval"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="60dp"
-        android:src="@drawable/test_369_shape_circle"
-        android:visibility="invisible" />
-
-    <TextView
-        android:id="@+id/study_test_369_text_left"
+        android:id="@+id/study_test_369_tutorial"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="50dp"
-        android:layout_toLeftOf="@id/study_test_369_center"
-        android:gravity="center"
-        android:text="개짜증남"
-        android:textSize="20dp" />
-
-    <TextView
-        android:id="@+id/study_test_369_text_right"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="50dp"
-        android:layout_toRightOf="@id/study_test_369_center"
-        android:gravity="center"
-        android:text="졸신남"
-        android:textSize="20dp" />
+        android:layout_height="match_parent"
+        android:onClick="closeTutorial"
+        android:visibility="gone" />
 
 </RelativeLayout>

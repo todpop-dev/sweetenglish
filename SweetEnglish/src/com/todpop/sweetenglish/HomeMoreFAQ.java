@@ -12,6 +12,8 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 
 import android.os.AsyncTask;
@@ -43,9 +45,24 @@ public class HomeMoreFAQ extends TypefaceActivity {
 		
 		title.setImageResource(R.drawable.faq_text_faqtitle);
 		
-		new GetHelp().execute("http://todpop.co.kr/api/app_infos/get_helps.json");
+		new GetHelp().execute("http://todpop.co.kr/api/app_infos/get_helps.json?pro=1");
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home more FAQ");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	//--- request class ---
 	private class GetHelp extends AsyncTask<String, Void, JSONObject> 
 	{
@@ -180,8 +197,6 @@ public class HomeMoreFAQ extends TypefaceActivity {
 						ExpandableListView expandListView = (ExpandableListView)findViewById(R.id.homemorenotice_id_listview_item);
 						expandListView.setAdapter(adapter);
 
-					}else{
-						new GetHelp().execute("http://todpop.co.kr/api/app_infos/get_notices.json?page=1");
 					}
 				}
 
@@ -196,22 +211,7 @@ public class HomeMoreFAQ extends TypefaceActivity {
 	{
 		finish();
 	}
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-		//FlurryAgent.onStartSession(this, "ZKWGFP6HKJ33Y69SP5QY");
-		//FlurryAgent.logEvent("Notice");
-	    //EasyTracker.getInstance(this).activityStart(this);
-	}
-	 
-	@Override
-	protected void onStop()
-	{
-		super.onStop();		
-		//FlurryAgent.onEndSession(this);
-	    //EasyTracker.getInstance(this).activityStop(this);
-	}
+	
 }
 
 

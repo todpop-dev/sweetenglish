@@ -14,13 +14,21 @@
         android:layout_alignParentTop="true"
         android:background="@drawable/common_bg_bluebar" >
 
-        <Button
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="17dp"
-            android:background="@drawable/common_btn_back"
-            android:onClick="onClickBack" />
+            android:layout_height="match_parent"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp"
+            android:onClick="onClickBack" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@drawable/common_btn_back"
+                android:duplicateParentState="true"
+                android:onClick="onClickBack" />
+        </RelativeLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -46,6 +54,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/common_img_bar"
         android:gravity="center_vertical"
+        android:onClick="addNewGroup"
         android:paddingBottom="12dp"
         android:paddingTop="12dp" >
 
@@ -55,6 +64,7 @@
             android:layout_marginLeft="21dp"
             android:layout_marginRight="6dp"
             android:background="@drawable/wordlist_btn_add_group"
+            android:duplicateParentState="true"
             android:onClick="addNewGroup" />
 
         <TextView

@@ -137,10 +137,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="12.5dp"
-                        android:layout_marginRight="15dp"
                         android:adjustViewBounds="true"
                         android:onClick="setSimpleBackground"
                         android:src="@drawable/screenlock_1_img_simplebg_8" />
+
+                    <ImageView
+                        android:id="@+id/locker_setting_bg_simple_9"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="12.5dp"
+                        android:layout_marginRight="15dp"
+                        android:adjustViewBounds="true"
+                        android:onClick="setSimpleBackground"
+                        android:src="@drawable/screenlock_1_img_simplebg_9" />
                 </LinearLayout>
             </HorizontalScrollView>
 

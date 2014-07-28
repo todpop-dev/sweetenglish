@@ -26,7 +26,7 @@ public class GetKakao extends AsyncTask<Void, Void, JSONObject>{
 	{
 		JSONObject result = null;
 		try {
-			String getURL = "http://todpop.co.kr/api/app_infos/get_cacao_msg.json";
+			String getURL = "http://todpop.co.kr/api/app_infos/get_cacao_msg.json?pro=1";
 			HttpGet httpGet = new HttpGet(getURL); 
 			HttpParams httpParameters = new BasicHttpParams(); 
 			httpClient = new DefaultHttpClient(httpParameters); 
@@ -49,9 +49,15 @@ public class GetKakao extends AsyncTask<Void, Void, JSONObject>{
 		if(json == null) {
 		}
 		try {
-			kakaoObj.setMent(json.getJSONObject("data").getString("ment"));
-			//kaokaoAndroidUrl = json.getJSONObject("data").getString("android_url");
-			//iosUrl = json.getJSONObject("data").getString("ios_url");
+			JSONObject jsonObj = json.getJSONObject("data");
+			kakaoObj.setMent(jsonObj.getString("ment"));
+			kakaoObj.setBtnText(jsonObj.getString("btn_text"));
+			String url = jsonObj.getString("img_url");
+			if(!url.equals("")){
+				kakaoObj.setImgSrc(url);
+				kakaoObj.setImgHeight(jsonObj.getInt("img_height"));
+				kakaoObj.setImgWidth(jsonObj.getInt("img_width"));
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -17,7 +17,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.animation.ObjectAnimator;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -25,7 +24,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,11 +34,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -54,18 +50,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
 public class HomeWordListRenewal extends TypefaceActivity {
 	//Point displaySize;
-	private Button btnCardBlind;
-	private Button btnCardNotBlind;
+	private ImageView btnCardBlind;
+	private ImageView btnCardNotBlind;
 	
 	//private ObjectAnimator cardAni;
 	private Animation cardBlindAni;
@@ -85,14 +82,11 @@ public class HomeWordListRenewal extends TypefaceActivity {
 	private LinearLayout mainLayout;
 
 	private GroupPopupItem selectedItem;
-	private int cntSelectedItem;
-	private boolean isTestPopupShown;
 	private View vPopupTest;
 	private PopupWindow popupTest;
 	private PopupWindow popupNewGroup;
 	private View vPopupNewGroup;
 	private EditText etPopupNewGroupTitle;
-	private Object findViewById;
 	private ImageView ivPopupNewGroupCancel;
 	private ImageView ivPopupNewGroupSave;
 	private TextView tvTitle;
@@ -102,8 +96,8 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home_word_list_renewal);
 		
-		btnCardBlind = (Button)findViewById(R.id.btn_wordlist_card_blind);
-		btnCardNotBlind = (Button)findViewById(R.id.btn_wordlist_card_not_blind);
+		btnCardBlind = (ImageView)findViewById(R.id.btn_wordlist_card_blind);
+		btnCardNotBlind = (ImageView)findViewById(R.id.btn_wordlist_card_not_blind);
 		
 		mainLayout = (LinearLayout)findViewById(R.id.ll_home_word_list);
 
@@ -183,8 +177,23 @@ public class HomeWordListRenewal extends TypefaceActivity {
 			studyInfoEditor.putString("lastStudiedDate", today);
 			studyInfoEditor.apply();
 		}
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home Word List Renewal");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	private void initPopupView() {
 		vPopupNewGroup = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_wordlist_group_new, null);
 		etPopupNewGroupTitle = (EditText)vPopupNewGroup.findViewById(R.id.et_wordlist_group_new_title);
@@ -319,7 +328,6 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		popupTest.setOutsideTouchable(true);
 		popupTest.setBackgroundDrawable(new BitmapDrawable()) ;
 		popupTest.showAtLocation(mainLayout, Gravity.CENTER, 0, 0);
-		isTestPopupShown=true;
 	}
 
 	public void editWord(View v){

@@ -5,31 +5,47 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.kakao.KakaoLink;
 import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
 import com.todpop.api.KakaoObject;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.api.request.GetKakao;
+import com.todpop.api.request.GetNotice;
+import com.todpop.sweetenglish.SweetEnglish.TrackerName;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnKeyListener;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 public class HomeActivity extends TypefaceActivity{
-	
+	private static final int IS_MAJOR_UPDATE = 0;
+	private static final int IS_MINOR_UPDATE = 1;
 	private DrawerLayout drawerLayout;
 	private ListView drawerMenu;
 	
@@ -38,7 +54,7 @@ public class HomeActivity extends TypefaceActivity{
 	private int userLevel;
 	
 	private TextView attendanceText;
-	private TextView memorizeText;
+	private static TextView memorizeText;
 	private TextView goalText;
 	
 	private WordDBHelper dbHelper;
@@ -54,6 +70,9 @@ public class HomeActivity extends TypefaceActivity{
 	SharedPreferences userInfo;
 	SharedPreferences studyInfo;
 	
+	private PopupWindow exitPopup;
+	private static PopupWindow updatePopup;
+	private static boolean isMajor = false;
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -73,11 +92,29 @@ public class HomeActivity extends TypefaceActivity{
 		goalText = (TextView)findViewById(R.id.home_text_goal);
         
         dbHelper = new WordDBHelper(this);
-		
+        
+        View exitView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_exit_app, null);
+        ImageView popupCancel = (ImageView)exitView.findViewById(R.id.iv_exit_app_popup_cancel);
+        popupCancel.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View v) {
+				exitPopup.dismiss();
+				finish();
+			}
+        });
+        
+        exitPopup = new PopupWindow(exitView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        exitPopup.setFocusable(false);
+        
+        setUpdatePopup();
+        
         progressList = new ArrayList<Integer>();
         
 		kakaoObj = new KakaoObject();
+		new GetNotice(getApplicationContext(), new NoticeHandler()).execute();
 		new GetKakao(kakaoObj).execute();
+		
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 	@Override
 	protected void onResume(){
@@ -86,6 +123,7 @@ public class HomeActivity extends TypefaceActivity{
 		userNick = userInfo.getString("userNick", "No_Nickname");
 		userLevel = userInfo.getInt("userLevel", 1);
 		
+		Log.i("STEVEN", "level is " + userLevel);
 		drawerMenu.setAdapter(new HomeDrawerAdapter(this, userNick, userLevel));
 
         db = dbHelper.getReadableDatabase();
@@ -94,7 +132,20 @@ public class HomeActivity extends TypefaceActivity{
         setMemorizePercentage();
 		setGoalProgress();
 	}
-	
+
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home Activity");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	@Override
 	protected void onPause(){
 		super.onPause();
@@ -119,8 +170,15 @@ public class HomeActivity extends TypefaceActivity{
 		 startActivity(intent);
 	}
 	public void onClickWordBook(View v){
-		 Intent intent = new Intent(getApplicationContext(), HomeWordListGroup.class);
-		 startActivity(intent);
+		if(!userInfo.getBoolean("wordbookTuto", false)){
+			Intent intent = new Intent(getApplicationContext(), TutorialActivity.class);
+			intent.putExtra("tutoType", 2);
+			startActivity(intent);
+		}
+		else{
+			Intent intent = new Intent(getApplicationContext(), HomeWordListGroup.class);
+			startActivity(intent);
+		}
 	}
 	public void onClickStudy(View v){
 		 Intent intent = new Intent(getApplicationContext(), StudyCategory.class);
@@ -197,6 +255,26 @@ public class HomeActivity extends TypefaceActivity{
 				}
 			}
 		}).start();
+		
+		db.close();
+		dbHelper.close();
+	}
+	private void setUpdatePopup(){
+		 View updateView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_update_app, null);
+	     ImageView popupOk = (ImageView)updateView.findViewById(R.id.iv_update_app_popup_cancel);
+	     popupOk.setOnClickListener(new OnClickListener(){
+	    	 @Override
+	    	 public void onClick(View v) {
+	    		 if(isMajor){
+	    			 finish();
+	    		 }
+	    		 else{
+	    			 updatePopup.dismiss();
+	    		 }
+	    	 }
+	     });
+	        
+	     updatePopup = new PopupWindow(updateView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
 	}
 	Handler progressHandler = new Handler(){
 		public void handleMessage(Message msg){
@@ -239,8 +317,7 @@ public class HomeActivity extends TypefaceActivity{
 				 startActivity(intent);
 				break;
 			case 6:
-				//TODO change it to contact
-				 intent = new Intent(getApplicationContext(), LockScreen.class);
+				 intent = new Intent(getApplicationContext(), HomeMoreContact.class);
 				 startActivity(intent);
 				break;
 			}
@@ -251,15 +328,48 @@ public class HomeActivity extends TypefaceActivity{
 		try {
 			final KakaoLink kakaoLink = KakaoLink.getKakaoLink(getApplicationContext());
 			final KakaoTalkLinkMessageBuilder kaKaoTalkLinkMessageBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
-
-			final String linkContents = kaKaoTalkLinkMessageBuilder.addText(kakaoObj.getMent())
-																	.addAppButton(kakaoObj.getBtnText())
-																	.build();
+			final String linkContents;
+			if(kakaoObj.getImgSrc() != null){
+				linkContents = kaKaoTalkLinkMessageBuilder.addText(kakaoObj.getMent())
+															.addImage(kakaoObj.getImgSrc(), kakaoObj.getImgWidth(), kakaoObj.getImgHeight())
+															.addAppButton(kakaoObj.getBtnText())
+															.build();
+			}
+			else{
+				linkContents = kaKaoTalkLinkMessageBuilder.addText(kakaoObj.getMent())
+															.addAppButton(kakaoObj.getBtnText())
+															.build();
+			}
 			
 			kakaoLink.sendMessage(linkContents, this);
 		} catch (KakaoParameterException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	@Override
+	public void onBackPressed(){
+		if(exitPopup != null && !exitPopup.isShowing()){
+			exitPopup.showAtLocation(memorizeText, Gravity.CENTER, 0, 0);
+		}
+		else if(exitPopup != null && exitPopup.isShowing()){
+			exitPopup.dismiss();
+		}
+	}
+	
+	private static class NoticeHandler extends Handler{
+		@Override
+		public void handleMessage(Message msg){
+			switch(msg.what){
+			case IS_MAJOR_UPDATE:
+				isMajor = true;
+				updatePopup.showAtLocation(memorizeText, Gravity.CENTER, 0, 0);
+				break;
+			case IS_MINOR_UPDATE:
+				isMajor = false;
+				updatePopup.showAtLocation(memorizeText, Gravity.CENTER, 0, 0);
+				break;
+			}
+		}
+	};
 }

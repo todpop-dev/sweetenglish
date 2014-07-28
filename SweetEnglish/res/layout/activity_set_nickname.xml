@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login_bg_all"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="834" />
+
+    <EditText
+        android:id="@+id/set_nickname_edit_text"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="45"
+        android:background="@drawable/login_img_line"
+        android:hint="닉네임"
+        android:singleLine="true"
+        android:paddingLeft="8dp"
+        android:gravity="top"
+        android:textColor="@color/sweet_white"
+        android:textColorHint="@color/sweet_white"
+        android:textSize="15dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="114" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="62"
+        android:onClick="goTutorial"
+        android:background="@android:color/transparent"
+        android:src="@drawable/set_nickname_btn_start" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="225" />
+
+</LinearLayout>

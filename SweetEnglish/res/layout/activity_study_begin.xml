@@ -155,13 +155,14 @@
                 android:paddingRight="17dp" >
 
                 <Button
-                    android:id="@+id/fragment_study_begin_id_backbtn"
+                    android:id="@+id/study_begin_id_backbtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/common_btn_back"
                     android:duplicateParentState="true"
                     android:onClick="onClickBack" />
             </LinearLayout>
+
         </RelativeLayout>
 
         <!-- Place for View Pager -->
@@ -171,13 +172,5 @@
             android:layout_height="0dp"
             android:layout_weight="1168" />
     </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/studybegin_id_intro_button"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/study_7_image_tutorial"
-        android:onClick="hideIntroView"
-        android:visibility="gone" />
 
 </RelativeLayout>

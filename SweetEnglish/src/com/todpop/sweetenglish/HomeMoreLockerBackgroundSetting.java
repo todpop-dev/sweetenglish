@@ -15,6 +15,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.flurry.android.FlurryAgent;
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TypefaceActivity;
 
 public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
@@ -37,8 +39,23 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
 	    settingEditor = setting.edit();
 	    
 		getLastTakenPic();
+
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
-	
+
+	@Override
+	protected void onStart(){
+		super.onStart();
+		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
+		FlurryAgent.logEvent("Home More Locker Bg Setting");
+		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+	}
+	@Override
+	protected void onStop(){
+		super.onStop();
+		FlurryAgent.onEndSession(this);
+		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
@@ -53,7 +70,7 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
 			
 			Cursor cursor = getContentResolver().query(uri, null, null, null, null);
 			if(cursor  == null){
-				settingEditor.putInt("lockerBgSimple", 4);
+				settingEditor.putInt("lockerBgSimple", 9);
 			}
 			else{
 				cursor.moveToFirst();
@@ -99,6 +116,9 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
 		case R.id.locker_setting_bg_simple_8:
 			settingEditor.putInt("lockerBgSimple", 8);
 			break;
+		case R.id.locker_setting_bg_simple_9:
+			settingEditor.putInt("lockerBgSimple", 9);
+			break;
 		}
 		
 		settingEditor.apply();
@@ -129,7 +149,7 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
 			
 			if(imageFile.exists()){
 				BitmapFactory.Options options = new BitmapFactory.Options();
-				options.inSampleSize = 4;
+				options.inSampleSize = 8;
 				options.inPurgeable = true;
 				options.inDither = true;
 				

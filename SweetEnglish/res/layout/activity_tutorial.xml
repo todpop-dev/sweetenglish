@@ -1,0 +1,102 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/studybegin_id_main_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <android.support.v4.view.ViewPager
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/tutorial_id_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout
+        android:id="@+id/tutorial_home_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1082" />
+
+        <LinearLayout
+            android:id="@+id/tutorial_home_indicator_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="14"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="44" />
+
+        <ImageButton
+            android:id="@+id/tutorial_home_btn_gohome"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="83"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:onClick="goHome"
+            android:src="@drawable/home_tutorial_btn_start"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="57" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/tutorial_wordbook_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1228" />
+
+        <ImageButton
+            android:id="@+id/tutorial_wordbook_btn_gowordbook"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="83"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:onClick="goWordBook"
+            android:src="@drawable/home_tutorial_btn_start"
+            android:visibility="invisible" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="80" />
+
+        <LinearLayout
+            android:id="@+id/tutorial_wordbook_indicator_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="14"
+            android:gravity="center"
+            android:orientation="horizontal" >
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="38" />
+    </LinearLayout>
+
+</RelativeLayout>

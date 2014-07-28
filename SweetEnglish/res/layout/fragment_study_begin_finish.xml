@@ -32,7 +32,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="20dp"
-            android:background="@drawable/study_2_btn_gotest_normal"
+            android:background="@drawable/studybegin_btn_gotest"
             android:gravity="center_vertical"
             android:onClick="showTestActivity" />
 
@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="15dp"
+            android:listSelector="@android:color/transparent"
             android:layout_above="@id/btn_study_begin_finish_go_test"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="20dp"

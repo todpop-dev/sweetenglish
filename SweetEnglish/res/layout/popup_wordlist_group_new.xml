@@ -28,14 +28,17 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:src="@drawable/wordbook_4_text_makegroup" />
-            <EditText 
+
+            <EditText
                 android:id="@+id/et_wordlist_group_new_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="15dp"
                 android:background="@drawable/wordbook_4_img_popup_textbox"
-                />
+                android:hint="그룹명을 입력해주세요"
+                android:paddingLeft="15dp"
+                android:textColor="#000000" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -47,16 +50,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="5dp"
-                    android:background="@drawable/wordlist_btn_cancel"
-                    android:onClick="closePopup" />
+                    android:background="@drawable/wordlist_btn_cancel" />
 
                 <ImageView
                     android:id="@+id/iv_wordlist_group_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
-                    android:background="@drawable/wordlist_btn_save"
-                    android:onClick="savePopup" />
+                    android:background="@drawable/wordlist_btn_save" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

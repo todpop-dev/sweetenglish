@@ -24,7 +24,7 @@ public class WordDBHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE dailygoal ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
 				+ "date TEXT NOT NULL UNIQUE, count INTEGER);");
 		db.execSQL("CREATE TABLE mywords ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ "group_name int NOT NULL, name TEXT NOT NULL UNIQUE, mean TEXT);");
+				+ "group_name TEXT NOT NULL, name TEXT NOT NULL UNIQUE, mean TEXT);");
 		db.execSQL("CREATE TABLE flip ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
 				+ "name TEXT, mean TEXT, xo TEXT);");
 		db.execSQL("CREATE TABLE mywordtest ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
