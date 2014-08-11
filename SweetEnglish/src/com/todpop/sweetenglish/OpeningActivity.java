@@ -6,20 +6,14 @@ import java.util.Locale;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Logger.LogLevel;
-import com.google.android.gms.analytics.Tracker;
+import com.todpop.api.StudyHistoryAnalysis;
 import com.todpop.api.TypefaceActivity;
-import com.todpop.sweetenglish.SweetEnglish.TrackerName;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -35,20 +29,7 @@ public class OpeningActivity extends TypefaceActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_opening);
 		
-		SharedPreferences studyInfo = getSharedPreferences("studyInfo", 0);
-		Editor studyInfoEditor = studyInfo.edit();
-		
-		SharedPreferences userInfo = getSharedPreferences("userInfo", 0);
-		didSawHomeTuto = userInfo.getBoolean("homeTuto", false);
-		
-		String lastStudiedDate = studyInfo.getString("lastStudiedDate", "");
-		String yesterday = getDate(1);
-		String today = getDate(0);
 
-		if(!lastStudiedDate.equals(yesterday) && !lastStudiedDate.equals(today)){	//if last studied date is neither yesterday nor today
-			studyInfoEditor.putInt("continuousStudy", 0);
-			studyInfoEditor.apply();
-		}
 
 		final ImageView todpop = (ImageView) findViewById(R.id.opening_img_todpop);
 
@@ -84,29 +65,38 @@ public class OpeningActivity extends TypefaceActivity {
 		
 		todpop.startAnimation(fadeOut);
 		
-		startLockService();
+		checkAndStartLockService();
 		
-		dbHelper = new WordDBHelper(this);
 		new Thread(new Runnable(){
 			public void run(){
-				SQLiteDatabase db = dbHelper.getWritableDatabase();
-				try{
-					db.execSQL("CREATE TABLE word_groups ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-							"name TEXT NOT NULL UNIQUE);");
-					db.execSQL("CREATE TABLE dic ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-							"name TEXT, mean TEXT, example_en TEXT, example_ko TEXT, phonetics TEXT, picture INTEGER, image_url TEXT, stage INTEGER, xo TEXT);");
-					db.execSQL("CREATE TABLE dailygoal ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-							"date TEXT NOT NULL UNIQUE, count INTEGER);");
-					db.execSQL("CREATE TABLE mywords ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-							"group_name TEXT NOT NULL, name TEXT NOT NULL UNIQUE, mean TEXT);");
-					db.execSQL("CREATE TABLE flip ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-							"name TEXT, mean TEXT, xo TEXT);");
-					db.execSQL("CREATE TABLE mywordtest ( _id INTEGER PRIMARY KEY AUTOINCREMENT, " + 
-							"name TEXT, mean TEXT, xo TEXT);");		
-				}catch(Exception e){
-					
-				}
+				SharedPreferences studyInfo = getSharedPreferences("studyInfo", 0);
+				Editor studyInfoEditor = studyInfo.edit();
 				
+				SharedPreferences userInfo = getSharedPreferences("userInfo", 0);
+				didSawHomeTuto = userInfo.getBoolean("homeTuto", false);
+				
+				String lastStudiedDate = studyInfo.getString("lastStudiedDate", "");
+				String yesterday = getDate(1);
+				String today = getDate(0);
+
+				if(lastStudiedDate.equals("")){
+					studyInfoEditor.putString("lastStudiedDate", today);
+					studyInfoEditor.apply();
+				}
+				else if(!lastStudiedDate.equals(today)){
+					if(!lastStudiedDate.equals(yesterday)){					//if last studied date is not yesterday
+						studyInfoEditor.putInt("continuousStudy", 0);
+					}
+					else{
+						int lastContinuousStudy = studyInfo.getInt("continuousStudy", 0);
+						studyInfoEditor.putInt("continuousStudy", lastContinuousStudy + 1);
+					}
+
+					studyInfoEditor.putString("lastStudiedDate", today);
+					studyInfoEditor.apply();
+					
+					new StudyHistoryAnalysis(OpeningActivity.this).saveAchieveRate(studyInfo.getInt("userGoal", 30), lastStudiedDate);
+				}
 			}
 		}).start();
 
@@ -126,7 +116,7 @@ public class OpeningActivity extends TypefaceActivity {
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
 	}
-	private void startLockService(){
+	private void checkAndStartLockService(){
 		if(!LockScreenService.isRunning){	//if service is not running
 			SharedPreferences setting = getSharedPreferences("setting", 0);
 			if(setting.getBoolean("lockerEnabled", true)){

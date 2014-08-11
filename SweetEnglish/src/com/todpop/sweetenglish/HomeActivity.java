@@ -13,12 +13,16 @@ import com.kakao.KakaoLink;
 import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
 import com.todpop.api.KakaoObject;
+import com.todpop.api.StudyHistoryAnalysis;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.api.request.GetKakao;
 import com.todpop.api.request.GetNotice;
 import com.todpop.sweetenglish.SweetEnglish.TrackerName;
+import com.todpop.sweetenglish.db.AnalysisDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -27,12 +31,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
@@ -43,7 +50,7 @@ import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class HomeActivity extends TypefaceActivity{
+public class HomeActivity extends TypefaceFragmentActivity{
 	private static final int IS_MAJOR_UPDATE = 0;
 	private static final int IS_MINOR_UPDATE = 1;
 	private DrawerLayout drawerLayout;
@@ -59,20 +66,24 @@ public class HomeActivity extends TypefaceActivity{
 	
 	private WordDBHelper dbHelper;
 	private SQLiteDatabase db;
+	private AnalysisDBHelper aHelper;
+	private SQLiteDatabase aDB;
+
+	private ViewPager analysisViewPager;
 	
-	private static ArrayList<Integer> progressList;
-	private int weekMemorized;
-	
-	private static int handlerCnt = 0;
+	private Integer userGoal;
 	
 	private KakaoObject kakaoObj;
 	
-	SharedPreferences userInfo;
-	SharedPreferences studyInfo;
+	private SharedPreferences userInfo;
+	private SharedPreferences studyInfo;
 	
 	private PopupWindow exitPopup;
 	private static PopupWindow updatePopup;
 	private static boolean isMajor = false;
+	
+	private DialogFragment analysisDialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -93,6 +104,9 @@ public class HomeActivity extends TypefaceActivity{
         
         dbHelper = new WordDBHelper(this);
         
+        analysisViewPager = (ViewPager)findViewById(R.id.home_analysis_pager);
+        analysisViewPager.setOffscreenPageLimit(3);
+        
         View exitView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_exit_app, null);
         ImageView popupCancel = (ImageView)exitView.findViewById(R.id.iv_exit_app_popup_cancel);
         popupCancel.setOnClickListener(new OnClickListener(){
@@ -105,16 +119,17 @@ public class HomeActivity extends TypefaceActivity{
         
         exitPopup = new PopupWindow(exitView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
         exitPopup.setFocusable(false);
-        
+
+        setAnalysisDialog();
         setUpdatePopup();
-        
-        progressList = new ArrayList<Integer>();
         
 		kakaoObj = new KakaoObject();
 		new GetNotice(getApplicationContext(), new NoticeHandler()).execute();
 		new GetKakao(kakaoObj).execute();
 		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+
+        analysisViewPager.setAdapter(new HomeDailyFragmentPagerAdapter(getSupportFragmentManager()));
 	}
 	@Override
 	protected void onResume(){
@@ -123,14 +138,22 @@ public class HomeActivity extends TypefaceActivity{
 		userNick = userInfo.getString("userNick", "No_Nickname");
 		userLevel = userInfo.getInt("userLevel", 1);
 		
-		Log.i("STEVEN", "level is " + userLevel);
 		drawerMenu.setAdapter(new HomeDrawerAdapter(this, userNick, userLevel));
 
+		userGoal = userInfo.getInt("userGoal", 30);	
+    	new StudyHistoryAnalysis(this).saveTodayAchieveRate(userGoal); //update AnalysisDB
+    	
         db = dbHelper.getReadableDatabase();
         
         setContinuousStudyPercentage();
         setMemorizePercentage();
+        
 		setGoalProgress();
+
+        analysisViewPager.getAdapter().notifyDataSetChanged();
+        
+		db.close();
+		dbHelper.close();
 	}
 
 	@Override
@@ -151,13 +174,6 @@ public class HomeActivity extends TypefaceActivity{
 		super.onPause();
 	}
 	
-	private String getDate(int minusDate){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-		Calendar cal = Calendar.getInstance();
-		if(minusDate > 0)
-			cal.add(Calendar.DATE, -minusDate);
-		return dateFormat.format(cal.getTime());
-	}
 	public void onClickDrawer(View v){
 		drawerLayout.openDrawer(drawerMenu);
 	}
@@ -184,7 +200,15 @@ public class HomeActivity extends TypefaceActivity{
 		 Intent intent = new Intent(getApplicationContext(), StudyCategory.class);
 		 startActivity(intent);
 	}
-    
+    public void onClickAttendance(View v){
+    }
+    public void onClickMemorizeRate(View v){
+    	
+    }
+    public void onClickAchieveRate(View v){
+    	analysisDialog = HomeAnalysisDialogFragment.newInstance(1);
+		analysisDialog.show(getSupportFragmentManager(), "achieve");
+    }
 	private void setContinuousStudyPercentage(){
 		int continuousStudy = studyInfo.getInt("continuousStudy", 0);
 		
@@ -201,63 +225,37 @@ public class HomeActivity extends TypefaceActivity{
 		
 		memorizeText.setText(String.valueOf(memorized));
 	}
-	private void setGoalProgress(){
-		int dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
-        int userGoal = userInfo.getInt("userGoal", 30);
-        progressList.clear();
-        weekMemorized = 0;
-        handlerCnt = 0;
-        
-		String currentDate;
-        
-        for(int i = 0; i < 7; i++){    	        
-			ProgressBar pBar = (ProgressBar)findViewById(R.id.home_progress_mon + i);
-			pBar.setProgress(0);
-			
-    		if(dayOfWeek == 1){	//if today is sunday
-    			currentDate = getDate(6 - i);
+	private void setGoalProgress(){    	
+    	aHelper = new AnalysisDBHelper(this);
+    	aDB = aHelper.getReadableDatabase();    	
+    	
+		SimpleDateFormat form = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+		Calendar calendar = Calendar.getInstance();
+		
+		String today = form.format(calendar.getTime());
+		int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+		
+		int progressSum = 0;
+		
+		if(dayOfWeek == Calendar.MONDAY){
+			progressSum = addTodayData(today);
+		}
+		else{
+			calendar.setFirstDayOfWeek(Calendar.MONDAY);
+			calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+			String weekStart = form.format(calendar.getTime());
+				
+			progressSum = addPeriodData(weekStart, today);
+		}
 
-	    		Cursor cursor = db.rawQuery("SELECT count(DISTINCT name) FROM dic WHERE memorized_date = " + Integer.valueOf(currentDate), null);
-	       		cursor.moveToFirst();
-	       		
-	       		weekMemorized += cursor.getInt(0);
-	       		progressList.add((int)((double)cursor.getInt(0) / (double)userGoal * 100.0));
-    		}
-    		else{				//if today is not sunday
-    			if(i <= dayOfWeek - 2){
-    				currentDate = getDate(dayOfWeek - 2 - i);
-    				
-    	    		Cursor cursor = db.rawQuery("SELECT count(DISTINCT name) FROM dic WHERE memorized_date = " + Integer.valueOf(currentDate), null);
-    	       		cursor.moveToFirst();
-
-    	       		weekMemorized += cursor.getInt(0);
-    	       		progressList.add((int)((double)cursor.getInt(0) / (double)userGoal * 100.0));
-    			}
-    			else{
-    				progressList.add(0);
-    			}
-    		}
-        }
-
-		int weeklyGoal = (int)((double)weekMemorized / ((double)userGoal * 7.0) * 100.0);
+		aHelper.close();
+		
+		int weeklyGoal = progressSum / 7;
+		
 		goalText.setText(String.valueOf(weeklyGoal));
-		
-		new Thread(new Runnable(){
-			public void run(){
-				for(int i = 0; i < 100; i++){
-					try {
-						handlerCnt++;
-						Thread.sleep(20);
-						progressHandler.sendEmptyMessage(0);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-			}
-		}).start();
-		
-		db.close();
-		dbHelper.close();
+	}	
+	private void setAnalysisDialog(){
+		//analysisDialog = HomeAnalysisDialogFragment.newInstance();
 	}
 	private void setUpdatePopup(){
 		 View updateView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_update_app, null);
@@ -276,25 +274,34 @@ public class HomeActivity extends TypefaceActivity{
 	        
 	     updatePopup = new PopupWindow(updateView, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, true);
 	}
-	Handler progressHandler = new Handler(){
-		public void handleMessage(Message msg){
-			for(int i = 0; i < 7; i++){
-				int progress = progressList.get(i);
-				
-				if(handlerCnt < progress){
-					ProgressBar pBar = (ProgressBar)findViewById(R.id.home_progress_mon + i);
-	    		
-					pBar.incrementProgressBy(1);
-				}
-			}
+	private int addTodayData(String today){
+		int result = 0;
+		
+		Cursor cursor = aDB.rawQuery("SELECT achieve FROM daily_achieve WHERE date = " + today,  null);
+		
+		if(cursor.moveToFirst()){
+			result = cursor.getInt(0);
 		}
-	};
+		
+		return result;
+	}
+	
+	private int addPeriodData(String start, String end){
+		int result = 0;
+		
+		Cursor cursor = aDB.rawQuery("SELECT SUM(achieve) FROM daily_achieve WHERE date >= " + start + " AND date <= " + end, null);
+		
+		if(cursor.moveToFirst()){
+			result += cursor.getInt(0);
+		}
+		
+		return result;
+	}
 	
 	class HomeDrawerItemClickListener implements ListView.OnItemClickListener{
 
 		@Override
 		public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
-			drawerLayout.closeDrawer(drawerMenu);
 			Intent intent = null;
 			switch(position){
 			case 1:
@@ -349,11 +356,16 @@ public class HomeActivity extends TypefaceActivity{
 	
 	@Override
 	public void onBackPressed(){
-		if(exitPopup != null && !exitPopup.isShowing()){
-			exitPopup.showAtLocation(memorizeText, Gravity.CENTER, 0, 0);
+		if(drawerLayout.isDrawerOpen(drawerMenu)){
+			drawerLayout.closeDrawer(drawerMenu);
 		}
-		else if(exitPopup != null && exitPopup.isShowing()){
-			exitPopup.dismiss();
+		else{
+			if(exitPopup != null && !exitPopup.isShowing()){
+				exitPopup.showAtLocation(memorizeText, Gravity.CENTER, 0, 0);
+			}
+			else if(exitPopup != null && exitPopup.isShowing()){
+				exitPopup.dismiss();
+			}
 		}
 	}
 	

@@ -20,6 +20,14 @@
         <item name="android:maxWidth">12dip</item>
     </style>
 
+    <style name="Widget.ProgressBar.Vertical.Blue">
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:progressDrawable">@drawable/vertical_progress_bar_blue</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+        <item name="android:minWidth">1dip</item>
+        <item name="android:maxWidth">10dip</item>
+    </style>
+
     <style name="VerticalSeekBarStyel" parent="@android:style/Widget.ProgressBar.Horizontal">
         <item name="android:indeterminateOnly">false</item>
         <item name="android:progressDrawable">@drawable/vertical_seek_bar</item>
@@ -32,6 +40,7 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     -->
+
 
     <!-- Application theme. -->
 

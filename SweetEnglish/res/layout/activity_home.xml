@@ -36,15 +36,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="55dp"
-                android:layout_marginRight="49dp"
                 android:gravity="center_horizontal"
                 android:orientation="vertical" >
 
                 <View
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="122" />
+                    android:layout_weight="60" />
 
                 <ImageView
                     android:id="@+id/home_title_img"
@@ -53,206 +51,39 @@
                     android:layout_weight="43"
                     android:src="@drawable/home_text_graphtitle" />
 
-                <View
-                    android:layout_width="wrap_content"
+                <android.support.v4.view.ViewPager
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:id="@+id/home_analysis_pager"
+                    android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="90" />
+                    android:layout_weight="550" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="300"
-                    android:orientation="horizontal" >
+                    android:layout_weight="40"
+                    android:gravity="center_horizontal" >
 
-                    <RelativeLayout
-                        android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/home_indicator_1"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
+                        android:src="@drawable/tutorial_img_indicator_white_on" />
 
-                        <ProgressBar
-                            android:id="@+id/home_progress_mon"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/home_indicator_2"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
+                        android:layout_marginLeft="15.5dp"
+                        android:src="@drawable/tutorial_img_indicator_navy_off" />
 
-                        <ProgressBar
-                            android:id="@+id/home_progress_tue"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
+                    <ImageView
+                        android:id="@+id/home_indicator_3"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
-
-                        <ProgressBar
-                            android:id="@+id/home_progress_wed"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
-
-                        <ProgressBar
-                            android:id="@+id/home_progress_thu"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
-
-                        <ProgressBar
-                            android:id="@+id/home_progress_fri"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
-
-                        <ProgressBar
-                            android:id="@+id/home_progress_sat"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingLeft="8dp"
-                        android:paddingRight="8dp" >
-
-                        <ProgressBar
-                            android:id="@+id/home_progress_sun"
-                            style="@style/Widget.ProgressBar.Vertical"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerHorizontal="true"
-                            android:progress="0"
-                            android:progressDrawable="@drawable/vertical_progress_bar" />
-                    </RelativeLayout>
+                        android:layout_marginLeft="15.5dp"
+                        android:src="@drawable/tutorial_img_indicator_navy_off" />
                 </LinearLayout>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="15" />
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="4"
-                    android:background="@drawable/home_img_graphbar" />
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="10" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="20"
-                    android:orientation="horizontal" >
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_mon" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_tue" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_wed" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_thu" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_fri" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_sat" />
-
-                    <ImageView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:src="@drawable/home_img_day_sun" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="88" />
             </LinearLayout>
         </RelativeLayout>
 
@@ -279,7 +110,8 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:onClick="onClickAttendance" >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -337,7 +169,8 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:onClick="onClickMemorizeRate" >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -395,7 +228,8 @@
                 <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1" >
+                    android:layout_weight="1"
+                    android:onClick="onClickAchieveRate" >
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -473,9 +307,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="254"
-                    android:scaleType="centerInside"
                     android:background="@android:color/transparent"
                     android:onClick="onClickWordBook"
+                    android:scaleType="centerInside"
                     android:src="@drawable/home_btn_wordbook" />
 
                 <View
@@ -487,9 +321,9 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="254"
-                    android:scaleType="fitStart"
                     android:background="@android:color/transparent"
                     android:onClick="onClickStudy"
+                    android:scaleType="fitStart"
                     android:src="@drawable/home_btn_study" />
 
                 <View

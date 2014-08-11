@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="27.5dp" 
+    android:minHeight="27.5dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="59" />
+
+    <TextView
+        android:id="@+id/list_home_history_eng"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="177"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/sweet_black"
+        android:textSize="17dp" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="25" />
+
+    <TextView
+        android:id="@+id/list_home_history_kor"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="190"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical"
+        android:singleLine="true"
+        android:textColor="@color/sweet_black"
+        android:textSize="17dp" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="25" />
+
+    <ImageView
+        android:id="@+id/list_home_history_ox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="27" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="56" />
+
+</LinearLayout>

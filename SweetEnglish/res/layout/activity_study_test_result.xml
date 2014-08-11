@@ -55,8 +55,8 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:drawableRight="@drawable/study_5_text_score"
-            android:textColor="@color/sweet_white"
             android:text="100"
+            android:textColor="@color/sweet_white"
             android:textSize="35dp" />
     </RelativeLayout>
 
@@ -85,6 +85,7 @@
         android:layout_weight="891"
         android:divider="@android:color/transparent"
         android:dividerHeight="2.5dp"
+        android:listSelector="@android:color/transparent"
         android:paddingLeft="12dp"
         android:paddingRight="12dp" />
 

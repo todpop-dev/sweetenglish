@@ -5,7 +5,12 @@
     <string name="popup_progress_loading">Loading...</string>
     
     <string name="com_score">점</string>
+    <string name="com_month">월</string>
+    <string name="com_year">년</string>
     
+    <string name="analysis_month_achieve">월간 목표도달률</string>
+    <string name="analysis_year_achieve">년간 목표도달률</string>
+        
     <string name="popup_view_download_progressbar_error">이 단어는 현재 발음이 지원되지 않습니다.\n조금만 기다려 주세요 ^^</string>
     <string name="popup_view_download_progressbar_real_error">발음 다운로드 중 문제가 발생하였습니다!\n 해당 단어를 알려주세요! smile@todpop.co.kr\n</string>
     

@@ -23,18 +23,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.todpop.api.LoadingDialog;
 import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.api.request.DownloadAndPlayPronounce;
-import com.todpop.sweetenglish.SweetEnglish.TrackerName;
 import com.todpop.sweetenglish.db.PronounceDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -177,9 +173,7 @@ public class StudyBegin extends TypefaceFragmentActivity{
 					
 					for(int i = 0; i < jsonWords.length(); i++){
 						jsonObj = jsonWords.getJSONObject(i);
-						Log.i("STEVEN", "159");
 						if(!rowExistCheck(jsonObj.getString("name"))){
-							Log.i("STEVEN", "161");
 							ContentValues row = new ContentValues();
 							
 							row.put("name", jsonObj.getString("name"));

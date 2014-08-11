@@ -15,7 +15,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -25,7 +24,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
@@ -203,7 +201,7 @@ public class StudyTestRenewal extends TypefaceActivity {
 		
 		SharedPreferences studyInfo = getSharedPreferences("studyInfo", 0);
 		tmpStageAccumulated = studyInfo.getInt("tmpStageAccumulated", 1);
-		Log.i("STEVEN", "tempStage is " + tmpStageAccumulated);
+
 		getTestWords();
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);

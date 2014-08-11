@@ -1,8 +1,10 @@
+# view res/layout/activity_home.xml #generated:54
 # view res/layout/activity_lock_screen.xml #generated:78
 # view res/layout/activity_study_begin.xml #generated:130
 # view res/layout/activity_study_category.xml #generated:78
 # view res/layout/activity_study_level.xml #generated:46
 # view res/layout/activity_tutorial.xml #generated:7
+# view res/layout/dialog_analysis.xml #generated:38
 -keep class android.support.v4.view.ViewPager { <init>(...); }
 
 # view res/layout/activity_home.xml #generated:2
@@ -163,6 +165,12 @@
 # onClick res/layout/activity_home_more_setting.xml #generated:266
 -keepclassmembers class * { *** initStudyInfo(...); }
 
+# onClick res/layout/activity_home.xml #generated:228
+-keepclassmembers class * { *** onClickAchieveRate(...); }
+
+# onClick res/layout/activity_home.xml #generated:110
+-keepclassmembers class * { *** onClickAttendance(...); }
+
 # onClick res/layout/activity_home_more_contact.xml #generated:18
 # onClick res/layout/activity_home_more_contact.xml #generated:26
 # onClick res/layout/activity_home_more_goal.xml #generated:139
@@ -195,7 +203,7 @@
 # onClick res/layout/activity_alarm.xml #generated:7
 -keepclassmembers class * { *** onClickClose(...); }
 
-# onClick res/layout/activity_study_test_result.xml #generated:96
+# onClick res/layout/activity_study_test_result.xml #generated:97
 -keepclassmembers class * { *** onClickContinue(...); }
 
 # onClick res/layout/activity_home.xml #generated:18
@@ -209,6 +217,9 @@
 # onClick res/layout/activity_study_category.xml #generated:54
 -keepclassmembers class * { *** onClickInfiniteTest(...); }
 
+# onClick res/layout/activity_home.xml #generated:169
+-keepclassmembers class * { *** onClickMemorizeRate(...); }
+
 # onClick res/layout/activity_home_more_locker_setting.xml #generated:105
 -keepclassmembers class * { *** onClickSetBackground(...); }
 
@@ -219,13 +230,13 @@
 # onClick res/layout/fragment_study_category.xml #generated:16
 -keepclassmembers class * { *** onClickStart(...); }
 
-# onClick res/layout/activity_home.xml #generated:486
+# onClick res/layout/activity_home.xml #generated:320
 -keepclassmembers class * { *** onClickStudy(...); }
 
 # onClick res/layout/list_home_drawer_user.xml #generated:34
 -keepclassmembers class * { *** onClickUserImg(...); }
 
-# onClick res/layout/activity_home.xml #generated:472
+# onClick res/layout/activity_home.xml #generated:306
 -keepclassmembers class * { *** onClickWordBook(...); }
 
 # onClick res/layout/fragment_study_begin.xml #generated:198

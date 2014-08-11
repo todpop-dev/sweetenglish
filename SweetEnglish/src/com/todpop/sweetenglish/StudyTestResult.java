@@ -1,6 +1,7 @@
 package com.todpop.sweetenglish;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -25,14 +26,16 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.EngKorOX;
 import com.todpop.api.LoadingDialog;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.sweetenglish.db.DailyHistoryDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
 public class StudyTestResult extends TypefaceActivity {
 	ArrayList<String> reviewList;
 	
-	ArrayList<MyItem> arItem;
+	ArrayList<EngKorOX> arItem;
 	int count = 0;
 
 	int totalScore = 0;
@@ -42,7 +45,7 @@ public class StudyTestResult extends TypefaceActivity {
 
 	int tmpStageAccumulated;
 
-	MyItem mi;
+	EngKorOX mi;
 
 	TextView scoreView;
 
@@ -64,7 +67,7 @@ public class StudyTestResult extends TypefaceActivity {
 
 		mHelper = new WordDBHelper(this);
 
-		arItem = new ArrayList<MyItem>();
+		arItem = new ArrayList<EngKorOX>();
 
 		scoreView = (TextView)findViewById(R.id.study_test_result_score);
 
@@ -105,9 +108,17 @@ public class StudyTestResult extends TypefaceActivity {
 		MyList=(ListView)findViewById(R.id.study_test_result_list);
 		MyList.setAdapter(MyAdapter);
 
+		
+		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 
+	@Override
+	public void onResume(){
+		super.onResume();
+		
+		saveToDailyHistoryDB();
+	}
 
 	private void getTestWords()
 	{
@@ -223,32 +234,50 @@ public class StudyTestResult extends TypefaceActivity {
 					totalScore += 1;
 				}
 
-				mi = new MyItem(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+				mi = new EngKorOX(cursor.getString(0), cursor.getString(1), cursor.getString(2));
 				arItem.add(mi);
 			}
 		}
 	}
 
-	class MyItem{
-		MyItem(String aEn,String aKr,String Check)
-		{
-			en = aEn;
-			kr = aKr;
-			check =Check;
-		}
-		String en;
-		String kr;
-		String check;
+	private void saveToDailyHistoryDB(){
+		new Thread(new Runnable(){
+			@Override
+			public void run() {
+				Calendar cal = Calendar.getInstance();
+				int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+				
+				DailyHistoryDBHelper dHelper = new DailyHistoryDBHelper(StudyTestResult.this);
+				SQLiteDatabase db = dHelper.getWritableDatabase();
+				
+				ContentValues values = new ContentValues();
+				EngKorOX myItem;
+				
+				for(int i = 0; i < arItem.size(); i++){
+					myItem  = arItem.get(i);
+					
+					values.clear();
+					
+					values.put("name", myItem.getEn());
+					values.put("mean", myItem.getKr());
+					values.put("xo", myItem.getCheck());
+					values.put("day_of_week", dayOfWeek);
+					db.insert("history", null, values);
+				}
+				
+				dHelper.close();
+			}
+		}).start();
 	}
 
 	class MyListAdapter extends BaseAdapter
 	{
 		Context maincon;
 		LayoutInflater Inflater;
-		ArrayList<MyItem> arSrc;
+		ArrayList<EngKorOX> arSrc;
 		int layout;
 
-		public MyListAdapter(Context context,int alayout,ArrayList<MyItem> aarSrc)
+		public MyListAdapter(Context context,int alayout,ArrayList<EngKorOX> aarSrc)
 		{
 			maincon = context;
 			Inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -257,13 +286,12 @@ public class StudyTestResult extends TypefaceActivity {
 		}
 		public int getCount()
 		{
-
 			return arSrc.size();
 		}
 
 		public String getItem(int position)
 		{
-			return arSrc.get(position).en;
+			return arSrc.get(position).getEn();
 		}
 
 		public long getItemId(int position)
@@ -279,10 +307,10 @@ public class StudyTestResult extends TypefaceActivity {
 			}
 
 			TextView textEn = (TextView)convertView.findViewById(R.id.lv_test_english);
-			textEn.setText(arSrc.get(position).en);
+			textEn.setText(arSrc.get(position).getEn());
 
 			TextView textKr = (TextView)convertView.findViewById(R.id.lv_test_kr);
-			textKr.setText(arSrc.get(position).kr);
+			textKr.setText(arSrc.get(position).getKr());
 
 			setFont(textEn);
 			setFont(textKr);
@@ -290,7 +318,7 @@ public class StudyTestResult extends TypefaceActivity {
 			ImageView checkView = (ImageView)convertView.findViewById(R.id.lv_test_check_correct);
 			//Button itemBtn = (Button)convertView.findViewById(R.id.lv_test_btn);
 
-			if(arSrc.get(position).check.equals("O")) {
+			if(arSrc.get(position).getCheck().equals("O")) {
 				checkView.setImageResource(R.drawable.study_5_img_o);
 				//itemBtn.setBackgroundResource(R.drawable.lvtest_10_btn_pencil_on);
 			} else {
@@ -304,7 +332,7 @@ public class StudyTestResult extends TypefaceActivity {
 			// Check if word is in word list
 			try {
 				SQLiteDatabase db = mHelper.getWritableDatabase();
-				Cursor c = db.rawQuery("SELECT * FROM mywords WHERE name='" + arSrc.get(position).en + "'" , null);
+				Cursor c = db.rawQuery("SELECT * FROM mywords WHERE name='" + arSrc.get(position).getEn() + "'" , null);
 				if (c.getCount() > 0) {
 					wordListCB.setChecked(true);
 				} else {
@@ -326,14 +354,14 @@ public class StudyTestResult extends TypefaceActivity {
 
 							ContentValues cv = new ContentValues();
 							cv.put("group_name", "전체 단어");
-							cv.put("name", arSrc.get((Integer)(buttonView.getTag())).en);
-							cv.put("mean", arSrc.get((Integer)(buttonView.getTag())).kr);
+							cv.put("name", arSrc.get((Integer)(buttonView.getTag())).getEn());
+							cv.put("mean", arSrc.get((Integer)(buttonView.getTag())).getKr());
 							db.replace("mywords", null, cv);
 						} else {
 							// Delete word to DB
 							SQLiteDatabase db = mHelper.getWritableDatabase();       
 							try {
-								db.delete("mywords", "name='" + arSrc.get((Integer)(buttonView.getTag())).en+"'", null);
+								db.delete("mywords", "name='" + arSrc.get((Integer)(buttonView.getTag())).getEn()+"'", null);
 							} catch(Exception e) {
 								e.printStackTrace();
 							}

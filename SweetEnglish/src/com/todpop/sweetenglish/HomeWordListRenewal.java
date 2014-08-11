@@ -165,19 +165,6 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		
 		tvTitle.setText(groupName);
 		
-		SharedPreferences studyInfo = getSharedPreferences("studyInfo",0);
-		
-		String lastStudiedDate = studyInfo.getString("lastStudiedDate", "");
-		String today = getDate(0);
-		
-		if(!lastStudiedDate.equals(today)){
-			Editor studyInfoEditor = studyInfo.edit();
-			int lastContinuousStudy = studyInfo.getInt("continuousStudy", 0);
-			studyInfoEditor.putInt("continuousStudy", lastContinuousStudy + 1);
-			studyInfoEditor.putString("lastStudiedDate", today);
-			studyInfoEditor.apply();
-		}
-
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 	}
 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_id_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/common_popup_img_whitebox"
+        android:paddingBottom="12.5dp"
+        android:paddingTop="10.5dp" >
+
+        <ImageButton
+            android:id="@+id/dialog_anal_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="11dp"
+            android:background="@drawable/analysis_btn_close" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical" >
+
+            <TextSwitcher
+                android:id="@+id/dialog_anal_title"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:background="@color/sweet_blue"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp" />
+
+            <android.support.v4.view.ViewPager
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/dialog_analysis_pager"
+                android:layout_width="match_parent"
+                android:layout_height="245dp" />
+
+            <LinearLayout
+                android:id="@+id/dialog_anal_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:orientation="horizontal" >
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

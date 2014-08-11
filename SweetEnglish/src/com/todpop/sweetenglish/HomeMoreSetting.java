@@ -400,7 +400,6 @@ public class HomeMoreSetting extends TypefaceActivity {
 		db.delete("dic", null, null);
 		db.delete("mywords", null, null);
 		db.delete("mywordtest", null, null);
-		db.delete("flip", null, null);
 		db.delete("word_groups", null, null);
 		db.close();
 		

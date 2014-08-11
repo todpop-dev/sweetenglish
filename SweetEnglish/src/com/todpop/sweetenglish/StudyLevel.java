@@ -55,12 +55,6 @@ public class StudyLevel extends TypefaceFragmentActivity {
 	
 	static String userId = "0";
 	static int category = 0;
-	
-	/*// Stage Open Popup
-	static PopupWindow popupWindow;
-	static View popupview;
-	static RelativeLayout relative;
-	static TextView popupText;*/
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -557,36 +551,15 @@ public class StudyLevel extends TypefaceFragmentActivity {
 			}
 		};
 		
-	}
-	
-	/*public static void showPopup()
-	{
-		popupText.setText(R.string.check_new_stage_popup_string);
-		popupWindow.showAtLocation(relative, Gravity.CENTER, 0, 0);
-	}
-	
-	public void closePopup(View v)
-	{
-		popupWindow.dismiss();
-	}
-*/
-
-	
+	}	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		//getMenuInflater().inflate(R.menu.study_learn, menu);
 		return false;
 	}
 
-	//--- on click---
-
-
 	public void onClickBack(View view)
 	{
-//		Intent intent = new Intent(getApplicationContext(), StudyCategory.class);
-//		startActivity(intent);
 		finish();
 	}
 	
@@ -608,7 +581,6 @@ public class StudyLevel extends TypefaceFragmentActivity {
 	public void onRestart()
 	{
 		super.onRestart();
-		Log.d("On Restart", "---------------");
 		startActivity(new Intent(this, StudyLevel.class));
 		finish();
 	}
