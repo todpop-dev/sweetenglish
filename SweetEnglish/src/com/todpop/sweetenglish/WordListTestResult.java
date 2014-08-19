@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -51,6 +52,8 @@ public class WordListTestResult extends TypefaceActivity {
 
 	SharedPreferences studyInfo;
 	SharedPreferences.Editor studyInfoEdit;
+	
+	private TrackUsageTime tTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +92,7 @@ public class WordListTestResult extends TypefaceActivity {
 		MyList.setAdapter(MyAdapter);
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	private void getTestWords() {
@@ -309,11 +313,13 @@ public class WordListTestResult extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Word List Test Result");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 }

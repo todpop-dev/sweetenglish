@@ -1,3 +1,6 @@
+android.support.v13.app.FragmentTabHost: void setOnTabChangedListener(android.widget.TabHost$OnTabChangeListener)
+android.support.v13.app.FragmentTabHost$SavedState
+android.support.v13.app.FragmentTabHost$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.app.BackStackState
 android.support.v4.app.BackStackState: android.os.Parcelable$Creator CREATOR
 android.support.v4.app.Fragment$SavedState
@@ -67,7 +70,11 @@ android.support.v4.widget.SlidingPaneLayout: void setCoveredFadeColor(int)
 android.support.v4.widget.SlidingPaneLayout: int getCoveredFadeColor()
 android.support.v4.widget.SlidingPaneLayout: void setPanelSlideListener(android.support.v4.widget.SlidingPaneLayout$PanelSlideListener)
 android.support.v4.widget.SlidingPaneLayout: void setShadowDrawable(android.graphics.drawable.Drawable)
+android.support.v4.widget.SlidingPaneLayout: void setShadowDrawableLeft(android.graphics.drawable.Drawable)
+android.support.v4.widget.SlidingPaneLayout: void setShadowDrawableRight(android.graphics.drawable.Drawable)
 android.support.v4.widget.SlidingPaneLayout: void setShadowResource(int)
+android.support.v4.widget.SlidingPaneLayout: void setShadowResourceLeft(int)
+android.support.v4.widget.SlidingPaneLayout: void setShadowResourceRight(int)
 android.support.v4.widget.SlidingPaneLayout$SavedState
 android.support.v4.widget.SlidingPaneLayout$SavedState: android.os.Parcelable$Creator CREATOR
 android.support.v4.widget.SwipeRefreshLayout: void setOnRefreshListener(android.support.v4.widget.SwipeRefreshLayout$OnRefreshListener)
@@ -1986,6 +1993,10 @@ com.kakao.sdk.R$string: int com_kakao_alert_appKey
 com.kakao.sdk.R$string: int com_kakao_alert_install_kakaotalk
 com.todpop.api.BootReceiver
 com.todpop.api.BootReceiver: BootReceiver()
+com.todpop.api.LineGraphCanvas: void setMaxY(int)
+com.todpop.api.LineGraphCanvas: void setYDivideTimes(int)
+com.todpop.api.LineGraphCanvas: void setXAxisString(java.util.ArrayList)
+com.todpop.api.LineGraphCanvas: void setValues(java.util.ArrayList)
 com.todpop.api.SquareImageView
 com.todpop.api.SquareImageView: SquareImageView(android.content.Context)
 com.todpop.api.SquareImageView: SquareImageView(android.content.Context,android.util.AttributeSet)
@@ -2016,6 +2027,9 @@ com.todpop.sweetenglish.HomeActivity: void onClickFAQ(android.view.View)
 com.todpop.sweetenglish.HomeActivity: void onClickUserImg(android.view.View)
 com.todpop.sweetenglish.HomeActivity: void onClickWordBook(android.view.View)
 com.todpop.sweetenglish.HomeActivity: void onClickStudy(android.view.View)
+com.todpop.sweetenglish.HomeActivity: void onClickAttendance(android.view.View)
+com.todpop.sweetenglish.HomeActivity: void onClickMemorizeRate(android.view.View)
+com.todpop.sweetenglish.HomeActivity: void onClickAchieveRate(android.view.View)
 com.todpop.sweetenglish.HomeMoreContact
 com.todpop.sweetenglish.HomeMoreContact: HomeMoreContact()
 com.todpop.sweetenglish.HomeMoreContact: void onClickBack(android.view.View)
@@ -2167,6 +2181,9 @@ com.todpop.sweetenglish.R$color: int wallet_primary_text_holo_light
 com.todpop.sweetenglish.R$color: int wallet_secondary_text_holo_dark
 com.todpop.sweetenglish.R$drawable: int alarm_btn_close
 com.todpop.sweetenglish.R$drawable: int alarm_btn_start
+com.todpop.sweetenglish.R$drawable: int analysis_btn_close
+com.todpop.sweetenglish.R$drawable: int attend_shape_circle
+com.todpop.sweetenglish.R$drawable: int attend_shape_dash
 com.todpop.sweetenglish.R$drawable: int category_btn_infinite
 com.todpop.sweetenglish.R$drawable: int category_btn_start
 com.todpop.sweetenglish.R$drawable: int common_bg_bluebar
@@ -2177,6 +2194,11 @@ com.todpop.sweetenglish.R$drawable: int common_btn_edit_normal
 com.todpop.sweetenglish.R$drawable: int common_btn_edit_pressed
 com.todpop.sweetenglish.R$drawable: int common_img_bar
 com.todpop.sweetenglish.R$drawable: int common_loading_progress
+com.todpop.sweetenglish.R$drawable: int common_popup_btn_close_normal
+com.todpop.sweetenglish.R$drawable: int common_popup_btn_close_pressed
+com.todpop.sweetenglish.R$drawable: int common_popup_img_indicator_blue
+com.todpop.sweetenglish.R$drawable: int common_popup_img_indicator_gray
+com.todpop.sweetenglish.R$drawable: int common_popup_img_whitebox
 com.todpop.sweetenglish.R$drawable: int common_signin_btn_icon_dark
 com.todpop.sweetenglish.R$drawable: int common_signin_btn_icon_disabled_dark
 com.todpop.sweetenglish.R$drawable: int common_signin_btn_icon_disabled_focus_dark
@@ -2248,6 +2270,33 @@ com.todpop.sweetenglish.R$drawable: int goal_img_number_9
 com.todpop.sweetenglish.R$drawable: int goal_img_numberbox
 com.todpop.sweetenglish.R$drawable: int goal_img_pencil
 com.todpop.sweetenglish.R$drawable: int goal_img_text
+com.todpop.sweetenglish.R$drawable: int graph_12_text_minute
+com.todpop.sweetenglish.R$drawable: int graph_12_text_number
+com.todpop.sweetenglish.R$drawable: int graph_1_btn_menu_normal
+com.todpop.sweetenglish.R$drawable: int graph_1_btn_menu_pressed
+com.todpop.sweetenglish.R$drawable: int graph_2_img_balloon_navy
+com.todpop.sweetenglish.R$drawable: int graph_2_img_balloon_white
+com.todpop.sweetenglish.R$drawable: int graph_2_img_line_left
+com.todpop.sweetenglish.R$drawable: int graph_2_img_line_right
+com.todpop.sweetenglish.R$drawable: int graph_2_text_explain
+com.todpop.sweetenglish.R$drawable: int graph_2_text_fri
+com.todpop.sweetenglish.R$drawable: int graph_2_text_goal
+com.todpop.sweetenglish.R$drawable: int graph_2_text_mon
+com.todpop.sweetenglish.R$drawable: int graph_2_text_sat
+com.todpop.sweetenglish.R$drawable: int graph_2_text_sun
+com.todpop.sweetenglish.R$drawable: int graph_2_text_thu
+com.todpop.sweetenglish.R$drawable: int graph_2_text_tue
+com.todpop.sweetenglish.R$drawable: int graph_2_text_wed
+com.todpop.sweetenglish.R$drawable: int graph_4_img_box
+com.todpop.sweetenglish.R$drawable: int graph_4_img_new
+com.todpop.sweetenglish.R$drawable: int graph_4_img_o
+com.todpop.sweetenglish.R$drawable: int graph_4_img_x
+com.todpop.sweetenglish.R$drawable: int graph_5_img_topline
+com.todpop.sweetenglish.R$drawable: int graph_5_img_underline
+com.todpop.sweetenglish.R$drawable: int graph_5_text_month
+com.todpop.sweetenglish.R$drawable: int graph_7_img_circle
+com.todpop.sweetenglish.R$drawable: int graph_8_text_memory
+com.todpop.sweetenglish.R$drawable: int graph_9_img_graphline
 com.todpop.sweetenglish.R$drawable: int home_bg
 com.todpop.sweetenglish.R$drawable: int home_btn_drawer_faq
 com.todpop.sweetenglish.R$drawable: int home_btn_drawer_item
@@ -2274,6 +2323,7 @@ com.todpop.sweetenglish.R$drawable: int home_img_logo
 com.todpop.sweetenglish.R$drawable: int home_popup_btn_ok_normal
 com.todpop.sweetenglish.R$drawable: int home_popup_btn_ok_pressed
 com.todpop.sweetenglish.R$drawable: int home_popup_text_update
+com.todpop.sweetenglish.R$drawable: int home_shape_analysis_bar
 com.todpop.sweetenglish.R$drawable: int home_text_attendance
 com.todpop.sweetenglish.R$drawable: int home_text_day
 com.todpop.sweetenglish.R$drawable: int home_text_goal
@@ -2295,6 +2345,7 @@ com.todpop.sweetenglish.R$drawable: int login_bg_all
 com.todpop.sweetenglish.R$drawable: int login_btn_start_normal
 com.todpop.sweetenglish.R$drawable: int login_btn_start_pressed
 com.todpop.sweetenglish.R$drawable: int login_img_line
+com.todpop.sweetenglish.R$drawable: int memorized_shape_ring
 com.todpop.sweetenglish.R$drawable: int notice_text_noticetitle
 com.todpop.sweetenglish.R$drawable: int null_shape
 com.todpop.sweetenglish.R$drawable: int popup_export_list_selector
@@ -2566,6 +2617,7 @@ com.todpop.sweetenglish.R$drawable: int tutorial_img_indicator_navy_off
 com.todpop.sweetenglish.R$drawable: int tutorial_img_indicator_white_on
 com.todpop.sweetenglish.R$drawable: int update_app_btn_ok
 com.todpop.sweetenglish.R$drawable: int vertical_progress_bar
+com.todpop.sweetenglish.R$drawable: int vertical_progress_bar_blue
 com.todpop.sweetenglish.R$drawable: int vertical_seek_bar
 com.todpop.sweetenglish.R$drawable: int weekly_1_bg_blue
 com.todpop.sweetenglish.R$drawable: int weekly_1_btn_answer_normal
@@ -2648,6 +2700,76 @@ com.todpop.sweetenglish.R$drawable: int wordlist_btn_test_all
 com.todpop.sweetenglish.R$id: int activity_home_more_help
 com.todpop.sweetenglish.R$id: int alert_user_img_camera
 com.todpop.sweetenglish.R$id: int alert_user_img_gallery
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_1
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_10
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_11
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_12
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_2
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_3
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_4
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_5
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_6
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_7
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_8
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_month_9
+com.todpop.sweetenglish.R$id: int anal_goal_monthly_year
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_month
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_1_bar
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_1_period
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_1_text
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_2_bar
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_2_period
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_2_text
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_3_bar
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_3_period
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_3_text
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_4_bar
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_4_period
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_4_text
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_5_bar
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_5_empty
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_5_layout
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_5_period
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_5_text
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_6_bar
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_6_empty
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_6_layout
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_6_period
+com.todpop.sweetenglish.R$id: int anal_goal_weekly_week_6_text
+com.todpop.sweetenglish.R$id: int attend_daily_bottom_img
+com.todpop.sweetenglish.R$id: int attend_daily_date_1
+com.todpop.sweetenglish.R$id: int attend_daily_date_2
+com.todpop.sweetenglish.R$id: int attend_daily_date_3
+com.todpop.sweetenglish.R$id: int attend_daily_date_4
+com.todpop.sweetenglish.R$id: int attend_daily_date_5
+com.todpop.sweetenglish.R$id: int attend_daily_date_6
+com.todpop.sweetenglish.R$id: int attend_daily_date_7
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_1
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_2
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_3
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_4
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_5
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_6
+com.todpop.sweetenglish.R$id: int attend_daily_graph_bottom_7
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_1
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_2
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_3
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_4
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_5
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_6
+com.todpop.sweetenglish.R$id: int attend_daily_graph_top_7
+com.todpop.sweetenglish.R$id: int attend_daily_times_1
+com.todpop.sweetenglish.R$id: int attend_daily_times_2
+com.todpop.sweetenglish.R$id: int attend_daily_times_3
+com.todpop.sweetenglish.R$id: int attend_daily_times_4
+com.todpop.sweetenglish.R$id: int attend_daily_times_5
+com.todpop.sweetenglish.R$id: int attend_daily_times_6
+com.todpop.sweetenglish.R$id: int attend_daily_times_7
+com.todpop.sweetenglish.R$id: int attend_daily_top_img
+com.todpop.sweetenglish.R$id: int attendance_continue_current_graph
+com.todpop.sweetenglish.R$id: int attendance_continue_current_text
+com.todpop.sweetenglish.R$id: int attendance_continue_highest_graph
+com.todpop.sweetenglish.R$id: int attendance_continue_highest_text
 com.todpop.sweetenglish.R$id: int book_now
 com.todpop.sweetenglish.R$id: int btn_study_begin_finish_go_test
 com.todpop.sweetenglish.R$id: int btn_test_renewal_opt1
@@ -2667,9 +2789,22 @@ com.todpop.sweetenglish.R$id: int category_pager_img
 com.todpop.sweetenglish.R$id: int category_viewpager
 com.todpop.sweetenglish.R$id: int cb_wordlist_group_item_del
 com.todpop.sweetenglish.R$id: int classic
+com.todpop.sweetenglish.R$id: int dialog_anal_close
+com.todpop.sweetenglish.R$id: int dialog_anal_indicator
+com.todpop.sweetenglish.R$id: int dialog_anal_title
+com.todpop.sweetenglish.R$id: int dialog_analysis_pager
+com.todpop.sweetenglish.R$id: int dialog_history_list
 com.todpop.sweetenglish.R$id: int et_setting_name
 com.todpop.sweetenglish.R$id: int et_wordlist_group_new_title
 com.todpop.sweetenglish.R$id: int et_wordlist_search
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_fri
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_goal
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_mon
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_sat
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_sun
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_thu
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_tue
+com.todpop.sweetenglish.R$id: int fragment_circle_left_text_wed
 com.todpop.sweetenglish.R$id: int fragment_study_begin_id_mainview
 com.todpop.sweetenglish.R$id: int fragment_study_begin_id_word_img_back
 com.todpop.sweetenglish.R$id: int fragment_study_begin_id_word_img_front
@@ -2681,6 +2816,8 @@ com.todpop.sweetenglish.R$id: int fragment_tutorial_img
 com.todpop.sweetenglish.R$id: int grayscale
 com.todpop.sweetenglish.R$id: int holo_dark
 com.todpop.sweetenglish.R$id: int holo_light
+com.todpop.sweetenglish.R$id: int home_analysis_pager
+com.todpop.sweetenglish.R$id: int home_analysis_text_explain
 com.todpop.sweetenglish.R$id: int home_drawer_layout
 com.todpop.sweetenglish.R$id: int home_drawer_menu
 com.todpop.sweetenglish.R$id: int home_drawer_menu_img
@@ -2688,6 +2825,9 @@ com.todpop.sweetenglish.R$id: int home_drawer_toggle
 com.todpop.sweetenglish.R$id: int home_drawer_user_id
 com.todpop.sweetenglish.R$id: int home_drawer_user_img
 com.todpop.sweetenglish.R$id: int home_drawer_user_level
+com.todpop.sweetenglish.R$id: int home_indicator_1
+com.todpop.sweetenglish.R$id: int home_indicator_2
+com.todpop.sweetenglish.R$id: int home_indicator_3
 com.todpop.sweetenglish.R$id: int home_layout_bottom_btn
 com.todpop.sweetenglish.R$id: int home_progress_fri
 com.todpop.sweetenglish.R$id: int home_progress_mon
@@ -2735,6 +2875,10 @@ com.todpop.sweetenglish.R$id: int iv_wordlist_group_save
 com.todpop.sweetenglish.R$id: int iv_wordlist_test_15
 com.todpop.sweetenglish.R$id: int iv_wordlist_test_30
 com.todpop.sweetenglish.R$id: int iv_wordlist_test_all
+com.todpop.sweetenglish.R$id: int list_home_history_eng
+com.todpop.sweetenglish.R$id: int list_home_history_kor
+com.todpop.sweetenglish.R$id: int list_home_history_new
+com.todpop.sweetenglish.R$id: int list_home_history_ox
 com.todpop.sweetenglish.R$id: int ll_home_word_list
 com.todpop.sweetenglish.R$id: int ll_home_word_list_group
 com.todpop.sweetenglish.R$id: int ll_setting_alarm
@@ -2793,6 +2937,12 @@ com.todpop.sweetenglish.R$id: int lv_wordlist
 com.todpop.sweetenglish.R$id: int lv_wordlist_export_popup_group
 com.todpop.sweetenglish.R$id: int lv_wordlist_group
 com.todpop.sweetenglish.R$id: int match_parent
+com.todpop.sweetenglish.R$id: int memoized_rate_category_basic
+com.todpop.sweetenglish.R$id: int memoized_rate_category_high
+com.todpop.sweetenglish.R$id: int memoized_rate_category_middle
+com.todpop.sweetenglish.R$id: int memoized_rate_category_toeic
+com.todpop.sweetenglish.R$id: int memorized_back
+com.todpop.sweetenglish.R$id: int memorized_percent
 com.todpop.sweetenglish.R$id: int monochrome
 com.todpop.sweetenglish.R$id: int none
 com.todpop.sweetenglish.R$id: int normal
@@ -2959,7 +3109,20 @@ com.todpop.sweetenglish.R$layout: int activity_study_test_result
 com.todpop.sweetenglish.R$layout: int activity_tutorial
 com.todpop.sweetenglish.R$layout: int activity_wordlist_test_result
 com.todpop.sweetenglish.R$layout: int alert_user_image
+com.todpop.sweetenglish.R$layout: int dialog_analysis
+com.todpop.sweetenglish.R$layout: int dialog_daily_history
 com.todpop.sweetenglish.R$layout: int dialog_progress
+com.todpop.sweetenglish.R$layout: int fragment_attend_continue
+com.todpop.sweetenglish.R$layout: int fragment_attend_daily
+com.todpop.sweetenglish.R$layout: int fragment_attend_time
+com.todpop.sweetenglish.R$layout: int fragment_goal_monthly
+com.todpop.sweetenglish.R$layout: int fragment_goal_weekly
+com.todpop.sweetenglish.R$layout: int fragment_home_circle_left
+com.todpop.sweetenglish.R$layout: int fragment_home_circle_right
+com.todpop.sweetenglish.R$layout: int fragment_home_graph
+com.todpop.sweetenglish.R$layout: int fragment_memorized_rate_all
+com.todpop.sweetenglish.R$layout: int fragment_memorized_rate_category
+com.todpop.sweetenglish.R$layout: int fragment_memorized_rate_time
 com.todpop.sweetenglish.R$layout: int fragment_study_begin
 com.todpop.sweetenglish.R$layout: int fragment_study_begin_finish
 com.todpop.sweetenglish.R$layout: int fragment_study_category
@@ -2970,6 +3133,7 @@ com.todpop.sweetenglish.R$layout: int home_word_list_export_item_view
 com.todpop.sweetenglish.R$layout: int home_word_list_list_item_view
 com.todpop.sweetenglish.R$layout: int list_home_drawer_menu
 com.todpop.sweetenglish.R$layout: int list_home_drawer_user
+com.todpop.sweetenglish.R$layout: int list_home_history_word
 com.todpop.sweetenglish.R$layout: int lock_screen_view_pager
 com.todpop.sweetenglish.R$layout: int lvtest_result_list_item_view
 com.todpop.sweetenglish.R$layout: int notice_item
@@ -2981,6 +3145,14 @@ com.todpop.sweetenglish.R$layout: int popup_wordlist_group_new
 com.todpop.sweetenglish.R$layout: int popup_wordlist_test
 com.todpop.sweetenglish.R$layout: int review_item
 com.todpop.sweetenglish.R$layout: int wordlist_group_item
+com.todpop.sweetenglish.R$string: int analysis_attendance_continue
+com.todpop.sweetenglish.R$string: int analysis_attendance_daily
+com.todpop.sweetenglish.R$string: int analysis_attendance_time
+com.todpop.sweetenglish.R$string: int analysis_memorized_rate_all
+com.todpop.sweetenglish.R$string: int analysis_memorized_rate_category
+com.todpop.sweetenglish.R$string: int analysis_memorized_rate_time
+com.todpop.sweetenglish.R$string: int analysis_monthly_achieve
+com.todpop.sweetenglish.R$string: int analysis_weekly_achieve
 com.todpop.sweetenglish.R$string: int app_name
 com.todpop.sweetenglish.R$string: int auth_client_needs_enabling_title
 com.todpop.sweetenglish.R$string: int auth_client_needs_installation_title
@@ -2990,7 +3162,9 @@ com.todpop.sweetenglish.R$string: int auth_client_requested_by_msg
 com.todpop.sweetenglish.R$string: int auth_client_using_bad_version_title
 com.todpop.sweetenglish.R$string: int com_kakao_alert_appKey
 com.todpop.sweetenglish.R$string: int com_kakao_alert_install_kakaotalk
+com.todpop.sweetenglish.R$string: int com_month
 com.todpop.sweetenglish.R$string: int com_score
+com.todpop.sweetenglish.R$string: int com_year
 com.todpop.sweetenglish.R$string: int common_google_play_services_enable_button
 com.todpop.sweetenglish.R$string: int common_google_play_services_enable_text
 com.todpop.sweetenglish.R$string: int common_google_play_services_enable_title
@@ -3038,6 +3212,7 @@ com.todpop.sweetenglish.R$style: int WalletFragmentDefaultStyle
 com.todpop.sweetenglish.R$style: int Widget
 com.todpop.sweetenglish.R$style: int Widget_ProgressBar
 com.todpop.sweetenglish.R$style: int Widget_ProgressBar_Vertical
+com.todpop.sweetenglish.R$style: int Widget_ProgressBar_Vertical_Blue
 com.todpop.sweetenglish.R$styleable: int[] AdsAttrs
 com.todpop.sweetenglish.R$styleable: int AdsAttrs_adSize
 com.todpop.sweetenglish.R$styleable: int AdsAttrs_adSizes
@@ -3124,3 +3299,16 @@ com.todpop.sweetenglish.WordListTestRenewal: void onClickTuto(android.view.View)
 com.todpop.sweetenglish.WordListTestResult
 com.todpop.sweetenglish.WordListTestResult: WordListTestResult()
 com.todpop.sweetenglish.WordListTestResult: void continueActivity(android.view.View)
+org.achartengine.GraphicalView: org.achartengine.model.SeriesSelection getCurrentSeriesAndPoint()
+org.achartengine.GraphicalView: void setZoomRate(float)
+org.achartengine.GraphicalView: android.graphics.RectF getZoomRectangle()
+org.achartengine.chart.BarChart$Type: org.achartengine.chart.BarChart$Type[] values()
+org.achartengine.chart.BarChart$Type: org.achartengine.chart.BarChart$Type valueOf(java.lang.String)
+org.achartengine.chart.PointStyle: org.achartengine.chart.PointStyle[] values()
+org.achartengine.chart.PointStyle: org.achartengine.chart.PointStyle valueOf(java.lang.String)
+org.achartengine.renderer.DialRenderer$Type: org.achartengine.renderer.DialRenderer$Type[] values()
+org.achartengine.renderer.DialRenderer$Type: org.achartengine.renderer.DialRenderer$Type valueOf(java.lang.String)
+org.achartengine.renderer.XYMultipleSeriesRenderer$Orientation: org.achartengine.renderer.XYMultipleSeriesRenderer$Orientation[] values()
+org.achartengine.renderer.XYMultipleSeriesRenderer$Orientation: org.achartengine.renderer.XYMultipleSeriesRenderer$Orientation valueOf(java.lang.String)
+org.achartengine.renderer.XYSeriesRenderer$FillOutsideLine$Type: org.achartengine.renderer.XYSeriesRenderer$FillOutsideLine$Type[] values()
+org.achartengine.renderer.XYSeriesRenderer$FillOutsideLine$Type: org.achartengine.renderer.XYSeriesRenderer$FillOutsideLine$Type valueOf(java.lang.String)

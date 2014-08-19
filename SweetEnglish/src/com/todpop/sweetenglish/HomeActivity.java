@@ -14,6 +14,7 @@ import com.kakao.KakaoParameterException;
 import com.kakao.KakaoTalkLinkMessageBuilder;
 import com.todpop.api.KakaoObject;
 import com.todpop.api.StudyHistoryAnalysis;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.api.request.GetKakao;
@@ -33,6 +34,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Gravity;
@@ -43,8 +45,11 @@ import android.view.Window;
 import android.view.View.OnKeyListener;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
@@ -53,6 +58,9 @@ import android.widget.TextView;
 public class HomeActivity extends TypefaceFragmentActivity{
 	private static final int IS_MAJOR_UPDATE = 0;
 	private static final int IS_MINOR_UPDATE = 1;
+	private static final int ANALYSIS_ATTEND = 0;
+	private static final int ANALYSIS_MEMORIZE = 1;
+	private static final int ANALYSIS_ACHIEVE = 2;
 	private DrawerLayout drawerLayout;
 	private ListView drawerMenu;
 	
@@ -70,8 +78,16 @@ public class HomeActivity extends TypefaceFragmentActivity{
 	private SQLiteDatabase aDB;
 
 	private ViewPager analysisViewPager;
+	private LinearLayout analysisText;
+	private ImageView indi1;
+	private ImageView indi2;
+	private ImageView indi3;
 	
 	private Integer userGoal;
+	
+	//for analysis fragments
+	private int totalStudied;
+	private int memorized;
 	
 	private KakaoObject kakaoObj;
 	
@@ -83,6 +99,8 @@ public class HomeActivity extends TypefaceFragmentActivity{
 	private static boolean isMajor = false;
 	
 	private DialogFragment analysisDialog;
+	
+	private TrackUsageTime tTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -105,6 +123,10 @@ public class HomeActivity extends TypefaceFragmentActivity{
         dbHelper = new WordDBHelper(this);
         
         analysisViewPager = (ViewPager)findViewById(R.id.home_analysis_pager);
+        analysisText = (LinearLayout)findViewById(R.id.home_analysis_text_explain);
+        indi1 = (ImageView)findViewById(R.id.home_indicator_1);
+        indi2 = (ImageView)findViewById(R.id.home_indicator_2);
+        indi3 = (ImageView)findViewById(R.id.home_indicator_3);
         analysisViewPager.setOffscreenPageLimit(3);
         
         View exitView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_exit_app, null);
@@ -130,11 +152,14 @@ public class HomeActivity extends TypefaceFragmentActivity{
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 
         analysisViewPager.setAdapter(new HomeDailyFragmentPagerAdapter(getSupportFragmentManager()));
+        analysisViewPager.setOnPageChangeListener(new HomeOnPageChangeListener());
+        
+        tTime = TrackUsageTime.getInstance(this);
 	}
 	@Override
 	protected void onResume(){
 		super.onResume();
-
+		
 		userNick = userInfo.getString("userNick", "No_Nickname");
 		userLevel = userInfo.getInt("userLevel", 1);
 		
@@ -162,12 +187,14 @@ public class HomeActivity extends TypefaceFragmentActivity{
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home Activity");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	@Override
 	protected void onPause(){
@@ -201,12 +228,15 @@ public class HomeActivity extends TypefaceFragmentActivity{
 		 startActivity(intent);
 	}
     public void onClickAttendance(View v){
+    	analysisDialog = HomeAnalysisDialogFragment.newInstance(ANALYSIS_ATTEND, null, null);
+		analysisDialog.show(getSupportFragmentManager(), "attend");   
     }
     public void onClickMemorizeRate(View v){
-    	
+    	analysisDialog = HomeAnalysisDialogFragment.newInstance(ANALYSIS_MEMORIZE, totalStudied, memorized);
+		analysisDialog.show(getSupportFragmentManager(), "memorize");    	
     }
     public void onClickAchieveRate(View v){
-    	analysisDialog = HomeAnalysisDialogFragment.newInstance(1);
+    	analysisDialog = HomeAnalysisDialogFragment.newInstance(ANALYSIS_ACHIEVE, null, null);
 		analysisDialog.show(getSupportFragmentManager(), "achieve");
     }
 	private void setContinuousStudyPercentage(){
@@ -221,9 +251,12 @@ public class HomeActivity extends TypefaceFragmentActivity{
 		memorizedCursor.moveToFirst();
 		totalCursor.moveToFirst();
 		
-		int memorized = (int)((double)memorizedCursor.getInt(0) / (double)totalCursor.getInt(0) * 100.0);
+		memorized = memorizedCursor.getInt(0);
+		totalStudied = totalCursor.getInt(0);
 		
-		memorizeText.setText(String.valueOf(memorized));
+		int memorizedRate = (int)((double)memorized / (double)totalStudied * 100.0);
+		
+		memorizeText.setText(String.valueOf(memorizedRate));
 	}
 	private void setGoalProgress(){    	
     	aHelper = new AnalysisDBHelper(this);
@@ -384,4 +417,48 @@ public class HomeActivity extends TypefaceFragmentActivity{
 			}
 		}
 	};
+	
+	private class HomeOnPageChangeListener implements OnPageChangeListener{
+		Animation in = null;
+		Animation out = null;
+
+		boolean isFromPageOne = true;
+		
+		@Override
+		public void onPageScrollStateChanged(int arg0) {}
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {}
+
+		@Override
+		public void onPageSelected(int position) {
+			if(position == 0){		
+				if(out == null){
+					out = AnimationUtils.loadAnimation(HomeActivity.this, android.R.anim.fade_out);
+					out.setFillAfter(true);
+				}
+				analysisText.startAnimation(out);
+				indi1.setImageResource(R.drawable.tutorial_img_indicator_white_on);
+				indi2.setImageResource(R.drawable.tutorial_img_indicator_navy_off);
+				isFromPageOne = true;
+			}
+			else if(position == 1){
+				if(in == null){
+					in = AnimationUtils.loadAnimation(HomeActivity.this, android.R.anim.fade_in);
+					in.setFillAfter(true);
+					analysisText.setVisibility(View.VISIBLE);
+				}
+				if(isFromPageOne){
+					analysisText.startAnimation(in);
+					isFromPageOne = false;
+				}
+				indi1.setImageResource(R.drawable.tutorial_img_indicator_navy_off);
+				indi2.setImageResource(R.drawable.tutorial_img_indicator_white_on);
+				indi3.setImageResource(R.drawable.tutorial_img_indicator_navy_off);
+			}
+			else{
+				indi2.setImageResource(R.drawable.tutorial_img_indicator_navy_off);
+				indi3.setImageResource(R.drawable.tutorial_img_indicator_white_on);
+			}
+		}
+	}
 }

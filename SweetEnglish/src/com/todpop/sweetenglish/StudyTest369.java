@@ -8,6 +8,7 @@ import java.util.Random;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.api.request.DownloadAndPlayPronounce;
 import com.todpop.sweetenglish.db.WordDBHelper;
@@ -30,6 +31,7 @@ import android.opengl.GLES20;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
@@ -97,9 +99,12 @@ public class StudyTest369 extends TypefaceActivity{
 	
 	TranslateAnimation leftToCenterAni;
 	TranslateAnimation rightToCenterAni;
+	TranslateAnimation resetAni;
 	AlphaAnimation fadeOut;
 	
 	Editor userInfoEdit;
+	
+	private TrackUsageTime tTime;
 	
 	private class EngKorSet{
 		public EngKorSet(String eng, String ans, String wro, boolean his){
@@ -175,6 +180,7 @@ public class StudyTest369 extends TypefaceActivity{
 		setQuiz();
 		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -183,12 +189,14 @@ public class StudyTest369 extends TypefaceActivity{
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Test 369");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	@Override
 	protected void onDestroy(){
@@ -216,6 +224,11 @@ public class StudyTest369 extends TypefaceActivity{
 										  Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
 		rightToCenterAni.setDuration(500);
 		rightToCenterAni.setFillAfter(true);
+		
+		resetAni = new TranslateAnimation(Animation.RELATIVE_TO_PARENT, 0.0f, Animation.RELATIVE_TO_PARENT, 0.0f,
+										  Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
+		resetAni.setDuration(0);
+		resetAni.setFillAfter(true);
 		
 		fadeOut = new AlphaAnimation(1.0f, 0.0f);
 		fadeOut.setDuration(500);
@@ -513,6 +526,10 @@ public class StudyTest369 extends TypefaceActivity{
 		public void run() {
 			touchBlocked = false;
 			backLayout.setBackgroundColor(colorList.get((quizCount - 1) % 6));
+
+			rightKor.startAnimation(resetAni);
+			leftKor.startAnimation(resetAni);
+			
 			setQuiz();
 		}
 		

@@ -20,11 +20,13 @@ public class AnalysisDBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE daily_achieve (date INTEGER PRIMARY KEY NOT NULL UNIQUE, achieve INTEGER);");
 		db.execSQL("CREATE TABLE weekly_achieve (yymmweek INTEGER PRIMARY KEY NOT NULL UNIQUE, achieve INTEGER);");
+		db.execSQL("CREATE TABLE time_memorize (time INTEGER PRIMARY KEY NOT NULL UNIQUE, correct INTEGER, total INTEGER);");
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL("DROP TABLE IF EXISTS daily_achieve");
 		db.execSQL("DROP TABLE IF EXISTS weekly_achieve");
+		db.execSQL("DROP TABLE IF EXISTS time_memorize");
 		onCreate(db);
 	}
 }

@@ -7,6 +7,7 @@ import java.util.Locale;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.StudyHistoryAnalysis;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -74,22 +75,34 @@ public class OpeningActivity extends TypefaceActivity {
 				
 				SharedPreferences userInfo = getSharedPreferences("userInfo", 0);
 				didSawHomeTuto = userInfo.getBoolean("homeTuto", false);
+
+				Calendar cal = Calendar.getInstance();
+				
+				int hour = cal.get(Calendar.HOUR_OF_DAY);
+				int attendHour = studyInfo.getInt("attendHour" + hour, 0);
+				studyInfoEditor.putInt("attendHour" + hour,  attendHour + 1);
+				studyInfoEditor.apply();
 				
 				String lastStudiedDate = studyInfo.getString("lastStudiedDate", "");
-				String yesterday = getDate(1);
-				String today = getDate(0);
+				String today = getDate(0, cal);
+				String yesterday = getDate(1, cal);
 
 				if(lastStudiedDate.equals("")){
 					studyInfoEditor.putString("lastStudiedDate", today);
 					studyInfoEditor.apply();
 				}
 				else if(!lastStudiedDate.equals(today)){
+					int lastContinuousStudy = studyInfo.getInt("continuousStudy", 0);
+					int highestAttend = studyInfo.getInt("highestAttend", 0);
+					
 					if(!lastStudiedDate.equals(yesterday)){					//if last studied date is not yesterday
 						studyInfoEditor.putInt("continuousStudy", 0);
 					}
 					else{
-						int lastContinuousStudy = studyInfo.getInt("continuousStudy", 0);
 						studyInfoEditor.putInt("continuousStudy", lastContinuousStudy + 1);
+						if(highestAttend <= lastContinuousStudy){
+							studyInfoEditor.putInt("highestAttend", lastContinuousStudy + 1);
+						}
 					}
 
 					studyInfoEditor.putString("lastStudiedDate", today);
@@ -101,8 +114,8 @@ public class OpeningActivity extends TypefaceActivity {
 		}).start();
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		TrackUsageTime.getInstance(this).attend();
 	}
-
 	@Override
 	protected void onStart(){
 		super.onStart();
@@ -126,9 +139,8 @@ public class OpeningActivity extends TypefaceActivity {
 		}
 	}
 	
-	private String getDate(int minusDate){
+	private String getDate(int minusDate, Calendar cal){
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-		Calendar cal = Calendar.getInstance();
 		if(minusDate > 0)
 			cal.add(Calendar.DATE, -minusDate);
 		return dateFormat.format(cal.getTime());

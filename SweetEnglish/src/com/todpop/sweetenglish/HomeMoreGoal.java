@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 
 import android.app.Activity;
@@ -25,7 +26,8 @@ public class HomeMoreGoal extends TypefaceActivity {
 	private int goalDailyWords;
 	private SharedPreferences sp;
 
-
+	TrackUsageTime tTime;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +42,7 @@ public class HomeMoreGoal extends TypefaceActivity {
 		initGoalNumber();
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -48,12 +51,14 @@ public class HomeMoreGoal extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home More Goal");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private void initGoalNumber() {
 		int frontNum = goalDailyWords / 10;

@@ -14,6 +14,7 @@ import org.json.JSONObject;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 
 import android.os.AsyncTask;
@@ -35,7 +36,8 @@ public class HomeMoreFAQ extends TypefaceActivity {
 	ArrayList<String> titleArray = new ArrayList<String>() ;
 	ArrayList<String> itemArray = new ArrayList<String>();
 
-
+	TrackUsageTime tTime;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -48,6 +50,8 @@ public class HomeMoreFAQ extends TypefaceActivity {
 		new GetHelp().execute("http://todpop.co.kr/api/app_infos/get_helps.json?pro=1");
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -56,12 +60,14 @@ public class HomeMoreFAQ extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home more FAQ");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	//--- request class ---
 	private class GetHelp extends AsyncTask<String, Void, JSONObject> 

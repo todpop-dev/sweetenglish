@@ -10,21 +10,26 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/common_popup_img_whitebox"
-        android:paddingBottom="12.5dp"
-        android:paddingTop="10.5dp" >
+        android:paddingBottom="12.5dp" >
 
-        <ImageButton
-            android:id="@+id/dialog_anal_close"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="11dp"
-            android:background="@drawable/analysis_btn_close" />
+            android:padding="10.5dp" >
+
+            <ImageButton
+                android:id="@+id/dialog_anal_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/analysis_btn_close" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_marginTop="10.5dp"
             android:orientation="vertical"
             android:paddingLeft="25dp"
             android:paddingRight="27dp" >

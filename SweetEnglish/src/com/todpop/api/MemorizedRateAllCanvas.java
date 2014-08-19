@@ -112,9 +112,8 @@ public class MemorizedRateAllCanvas extends View{
 		if(memorizedLineDegree == 90){
 			memorizedLineX = centerWidth + progressRadius;
 			memorizedLineY = centerHeight;
-			toX = centerWidth + progressRadius + extra;
+			toX = centerWidth + extra;// + progressRadius
 			toY = centerHeight;
-			toXEnd = toX;
 		}
 		else if(memorizedLineDegree < 90){
 			double cos = Math.cos(Math.toRadians(memorizedLineDegree));
@@ -124,8 +123,6 @@ public class MemorizedRateAllCanvas extends View{
 			memorizedLineY = (float)(centerHeight - progressRadius * cos);
 			toX = (float)(centerWidth + extra * sin);
 			toY = (float)(centerHeight - extra * cos);
-			toXEnd = toX + straightLineLength;
-			canvas.drawLine(toX, toY, toXEnd, toY, paint);
 		}
 		else{
 			double cos = Math.cos(Math.toRadians(memorizedLineDegree));
@@ -135,13 +132,22 @@ public class MemorizedRateAllCanvas extends View{
 			memorizedLineY = (float)(centerHeight - progressRadius * cos);
 			toX = (float)(centerWidth + extra * sin);
 			toY = (float)(centerHeight - extra * cos);
-			toXEnd = toX + straightLineLength;
+		}
+		
+		if(toX > (centerWidth * 2) - (koreanTextSize * 5)){
+			toX = (centerWidth * 2) - (koreanTextSize * 5);
+			toXEnd = toX;
+		}
+		else{
+			toXEnd = toX + numberTextSize;
+			if(toXEnd > (centerWidth * 2) - (koreanTextSize * 5)){
+				toXEnd = (centerWidth * 2) - (koreanTextSize * 5);
+			}
 			canvas.drawLine(toX, toY, toXEnd, toY, paint);
 		}
-
 		canvas.drawLine(memorizedLineX, memorizedLineY, toX, toY, paint);
 				
-		//target text word
+		//total text word
 		paint.setTextAlign(Paint.Align.RIGHT);
 		paint.setTextSize(koreanTextSize);
 		paint.setARGB(255, 37, 42, 58);
@@ -152,9 +158,9 @@ public class MemorizedRateAllCanvas extends View{
 		//memorized text word
 		paint.setTextAlign(Paint.Align.LEFT);
 		
-		canvas.drawText("암기 단어 수", toXEnd + 3, toY + (2 * outterStroke), paint);
+		canvas.drawText("암기 단어", toXEnd + 3, toY + (2 * outterStroke), paint);
 		
-		//target text number
+		//total text number
 		paint.setTextAlign(Paint.Align.RIGHT);
 		paint.setTextSize(numberTextSize);
 		paint.setTypeface(Typeface.DEFAULT_BOLD);

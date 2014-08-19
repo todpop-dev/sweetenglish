@@ -1,0 +1,621 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="14.5dp"
+    android:paddingLeft="18dp"
+    android:paddingRight="19.5dp"
+    android:paddingTop="4.5dp" >
+
+    <ImageView
+        android:id="@+id/attend_daily_top_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/graph_12_text_minute" />
+
+    <ImageView
+        android:id="@+id/attend_daily_bottom_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/graph_12_text_number" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="최근 7일간 학습에 투자한 시간과 횟수입니다."
+        android:textColor="@color/sweet_blue"
+        android:textSize="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/attend_daily_bottom_img"
+        android:layout_below="@id/attend_daily_top_img"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="40"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="124" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_1"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="74"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="90" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_2"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="40"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="124" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_3"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="74"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="90" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_4"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="40"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="124" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_5"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="74"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="90" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_6"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingLeft="6.5dp"
+                android:paddingRight="6.5dp" >
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_top_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="209"
+                    android:gravity="bottom|center_horizontal"
+                    android:textColor="@color/sweet_black"
+                    android:textSize="12dp" />
+
+                <TextView
+                    android:id="@+id/attend_daily_graph_bottom_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0"
+                    android:background="@color/sweet_blue"
+                    android:gravity="top|center_horizontal"
+                    android:paddingTop="7dp"
+                    android:text="0"
+                    android:textColor="@color/sweet_white"
+                    android:textSize="12dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"
+                    android:background="#909598" />
+
+                <TextView
+                    android:id="@+id/attend_daily_date_7"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:gravity="center"
+                    android:text="7.21"
+                    android:textColor="#000000"
+                    android:textSize="10dp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_weight="40"
+                    android:src="@drawable/attend_shape_dash" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="124" >
+
+                    <TextView
+                        android:id="@+id/attend_daily_times_7"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_centerHorizontal="true"
+                        android:background="@drawable/attend_shape_circle"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="12dp" />
+                </RelativeLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

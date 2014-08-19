@@ -3,7 +3,11 @@ package com.todpop.sweetenglish;
 import java.util.ArrayList;
 
 import com.todpop.api.EngKorOX;
+import com.todpop.sweetenglish.R;
+import com.todpop.sweetenglish.R.id;
+import com.todpop.sweetenglish.R.layout;
 import com.todpop.sweetenglish.db.DailyHistoryDBHelper;
+import com.todpop.sweetenglish.db.WordDBHelper;
 
 import android.database.Cursor;
 import android.database.DataSetObserver;
@@ -66,17 +70,19 @@ public class HomeDailyHistoryDialogFragment extends DialogFragment{
 		new Thread(new Runnable(){
 			@Override
 			public void run() {
-				SQLiteDatabase db = dHelper.getReadableDatabase();
-				Cursor cursor = db.rawQuery("SELECT name, mean, xo FROM history WHERE day_of_week = " + day, null);
+				SQLiteDatabase dDB = dHelper.getReadableDatabase();
+				Cursor dCursor = dDB.rawQuery("SELECT name, mean, xo, isNew FROM history WHERE day_of_week = " + day, null);
 				
-				while(cursor.moveToNext()){
-					engKorOXList.add(new EngKorOX(cursor.getString(0), cursor.getString(1), cursor.getString(2)));
+				while(dCursor.moveToNext()){
+					engKorOXList.add(new EngKorOX(dCursor.getInt(3), dCursor.getString(0), dCursor.getString(1), dCursor.getString(2)));
 				}
 				
 				if(engKorOXList.size() == 0)
 					engKorOXList.add(new EngKorOX("No History", "기록이 없습니다", "X"));
 				
 				handler.sendEmptyMessage(0);
+				
+				dHelper.close();
 			}
 		}).start();
 		

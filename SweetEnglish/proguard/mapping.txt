@@ -1,3 +1,40 @@
+android.support.v13.app.FragmentTabHost -> android.support.v13.app.FragmentTabHost:
+    java.util.ArrayList mTabs -> a
+    android.content.Context mContext -> b
+    android.app.FragmentManager mFragmentManager -> c
+    int mContainerId -> d
+    android.widget.TabHost$OnTabChangeListener mOnTabChangeListener -> e
+    android.support.v13.app.FragmentTabHost$TabInfo mLastTab -> f
+    boolean mAttached -> g
+    void setup() -> setup
+    void setOnTabChangedListener(android.widget.TabHost$OnTabChangeListener) -> setOnTabChangedListener
+    void onAttachedToWindow() -> onAttachedToWindow
+    void onDetachedFromWindow() -> onDetachedFromWindow
+    android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
+    void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
+    void onTabChanged(java.lang.String) -> onTabChanged
+    android.app.FragmentTransaction doTabChanged(java.lang.String,android.app.FragmentTransaction) -> a
+android.support.v13.app.FragmentTabHost$1 -> android.support.v13.app.a:
+android.support.v13.app.FragmentTabHost$SavedState -> android.support.v13.app.FragmentTabHost$SavedState:
+    java.lang.String curTab -> a
+    android.os.Parcelable$Creator CREATOR -> CREATOR
+    void writeToParcel(android.os.Parcel,int) -> writeToParcel
+    java.lang.String toString() -> toString
+android.support.v13.app.FragmentTabHost$SavedState$1 -> android.support.v13.app.b:
+    android.support.v13.app.FragmentTabHost$SavedState createFromParcel(android.os.Parcel) -> a
+    android.support.v13.app.FragmentTabHost$SavedState[] newArray(int) -> a
+    java.lang.Object[] newArray(int) -> newArray
+    java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v13.app.FragmentTabHost$TabInfo -> android.support.v13.app.c:
+    java.lang.String tag -> a
+    java.lang.Class clss -> b
+    android.os.Bundle args -> c
+    android.app.Fragment fragment -> d
+    android.app.Fragment access$102(android.support.v13.app.FragmentTabHost$TabInfo,android.app.Fragment) -> a
+    android.app.Fragment access$100(android.support.v13.app.FragmentTabHost$TabInfo) -> a
+    java.lang.String access$200(android.support.v13.app.FragmentTabHost$TabInfo) -> b
+    java.lang.Class access$300(android.support.v13.app.FragmentTabHost$TabInfo) -> c
+    android.os.Bundle access$400(android.support.v13.app.FragmentTabHost$TabInfo) -> d
 android.support.v4.app.ActivityCompatHoneycomb -> android.support.v4.app.a:
     void invalidateOptionsMenu(android.app.Activity) -> a
 android.support.v4.app.BackStackRecord -> android.support.v4.app.b:
@@ -24,6 +61,7 @@ android.support.v4.app.BackStackRecord -> android.support.v4.app.b:
     void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
     void dump(java.lang.String,java.io.PrintWriter,boolean) -> a
     void addOp(android.support.v4.app.BackStackRecord$Op) -> a
+    android.support.v4.app.FragmentTransaction add(android.support.v4.app.Fragment,java.lang.String) -> a
     android.support.v4.app.FragmentTransaction add(int,android.support.v4.app.Fragment) -> a
     android.support.v4.app.FragmentTransaction add(int,android.support.v4.app.Fragment,java.lang.String) -> a
     void doAddOp(int,android.support.v4.app.Fragment,java.lang.String,int) -> a
@@ -66,133 +104,162 @@ android.support.v4.app.BackStackState$1 -> android.support.v4.app.d:
     android.support.v4.app.BackStackState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v4.app.DialogFragment -> android.support.v4.app.e:
+    int mStyle -> a
+    int mTheme -> b
+    boolean mCancelable -> c
+    boolean mShowsDialog -> d
+    int mBackStackId -> e
+    android.app.Dialog mDialog -> f
+    boolean mViewDestroyed -> g
+    boolean mDismissed -> h
+    boolean mShownByMe -> i
+    void show(android.support.v4.app.FragmentManager,java.lang.String) -> a
+    void dismissInternal(boolean) -> a
+    android.app.Dialog getDialog() -> a
+    int getTheme() -> b
+    void onAttach(android.app.Activity) -> a
+    void onDetach() -> c
+    void onCreate(android.os.Bundle) -> a
+    android.view.LayoutInflater getLayoutInflater(android.os.Bundle) -> b
+    android.app.Dialog onCreateDialog(android.os.Bundle) -> c
+    void onCancel(android.content.DialogInterface) -> onCancel
+    void onDismiss(android.content.DialogInterface) -> onDismiss
+    void onActivityCreated(android.os.Bundle) -> d
+    void onStart() -> d
+    void onSaveInstanceState(android.os.Bundle) -> e
+    void onStop() -> e
+    void onDestroyView() -> f
 android.support.v4.app.Fragment -> android.support.v4.app.Fragment:
-    android.support.v4.util.SimpleArrayMap sClassMap -> P
-    int mState -> a
-    android.view.View mAnimatingAway -> b
-    int mStateAfterAnimating -> c
-    android.os.Bundle mSavedFragmentState -> d
-    android.util.SparseArray mSavedViewState -> e
-    int mIndex -> f
-    java.lang.String mWho -> g
-    android.os.Bundle mArguments -> h
-    android.support.v4.app.Fragment mTarget -> i
-    int mTargetIndex -> j
-    int mTargetRequestCode -> k
-    boolean mAdded -> l
-    boolean mRemoving -> m
-    boolean mResumed -> n
-    boolean mFromLayout -> o
-    boolean mInLayout -> p
-    boolean mRestored -> q
-    int mBackStackNesting -> r
-    android.support.v4.app.FragmentManagerImpl mFragmentManager -> s
-    android.support.v4.app.FragmentActivity mActivity -> t
-    android.support.v4.app.FragmentManagerImpl mChildFragmentManager -> u
-    android.support.v4.app.Fragment mParentFragment -> v
-    int mFragmentId -> w
-    int mContainerId -> x
-    java.lang.String mTag -> y
-    boolean mHidden -> z
-    boolean mDetached -> A
-    boolean mRetainInstance -> B
-    boolean mRetaining -> C
-    boolean mHasMenu -> D
-    boolean mMenuVisible -> E
-    boolean mCalled -> F
-    int mNextAnim -> G
-    android.view.ViewGroup mContainer -> H
-    android.view.View mView -> I
-    android.view.View mInnerView -> J
-    boolean mDeferStart -> K
-    boolean mUserVisibleHint -> L
-    android.support.v4.app.LoaderManagerImpl mLoaderManager -> M
-    boolean mLoadersStarted -> N
-    boolean mCheckedForLoaderManager -> O
+    android.support.v4.util.SimpleArrayMap sClassMap -> a
+    int mState -> j
+    android.view.View mAnimatingAway -> k
+    int mStateAfterAnimating -> l
+    android.os.Bundle mSavedFragmentState -> m
+    android.util.SparseArray mSavedViewState -> n
+    int mIndex -> o
+    java.lang.String mWho -> p
+    android.os.Bundle mArguments -> q
+    android.support.v4.app.Fragment mTarget -> r
+    int mTargetIndex -> s
+    int mTargetRequestCode -> t
+    boolean mAdded -> u
+    boolean mRemoving -> v
+    boolean mResumed -> w
+    boolean mFromLayout -> x
+    boolean mInLayout -> y
+    boolean mRestored -> z
+    int mBackStackNesting -> A
+    android.support.v4.app.FragmentManagerImpl mFragmentManager -> B
+    android.support.v4.app.FragmentActivity mActivity -> C
+    android.support.v4.app.FragmentManagerImpl mChildFragmentManager -> D
+    android.support.v4.app.Fragment mParentFragment -> E
+    int mFragmentId -> F
+    int mContainerId -> G
+    java.lang.String mTag -> H
+    boolean mHidden -> I
+    boolean mDetached -> J
+    boolean mRetainInstance -> K
+    boolean mRetaining -> L
+    boolean mHasMenu -> M
+    boolean mMenuVisible -> N
+    boolean mCalled -> O
+    int mNextAnim -> P
+    android.view.ViewGroup mContainer -> Q
+    android.view.View mView -> R
+    android.view.View mInnerView -> S
+    boolean mDeferStart -> T
+    boolean mUserVisibleHint -> U
+    android.support.v4.app.LoaderManagerImpl mLoaderManager -> V
+    boolean mLoadersStarted -> W
+    boolean mCheckedForLoaderManager -> X
     android.support.v4.app.Fragment instantiate(android.content.Context,java.lang.String) -> a
     android.support.v4.app.Fragment instantiate(android.content.Context,java.lang.String,android.os.Bundle) -> a
     boolean isSupportFragmentClass(android.content.Context,java.lang.String) -> b
-    void restoreViewState(android.os.Bundle) -> a
+    void restoreViewState(android.os.Bundle) -> f
     void setIndex(int,android.support.v4.app.Fragment) -> a
-    boolean isInBackStack() -> a
+    boolean isInBackStack() -> g
     boolean equals(java.lang.Object) -> equals
     int hashCode() -> hashCode
     java.lang.String toString() -> toString
-    void setArguments(android.os.Bundle) -> b
-    android.os.Bundle getArguments() -> b
+    void setArguments(android.os.Bundle) -> g
+    android.os.Bundle getArguments() -> h
     void setInitialSavedState(android.support.v4.app.Fragment$SavedState) -> a
-    android.support.v4.app.FragmentActivity getActivity() -> c
-    android.content.res.Resources getResources() -> d
-    boolean isAdded() -> e
-    boolean isDetached() -> f
-    boolean isHidden() -> g
-    void onHiddenChanged(boolean) -> a
-    void setMenuVisibility(boolean) -> b
-    void setUserVisibleHint(boolean) -> c
+    android.support.v4.app.FragmentActivity getActivity() -> i
+    android.content.res.Resources getResources() -> j
+    android.support.v4.app.FragmentManager getFragmentManager() -> k
+    android.support.v4.app.FragmentManager getChildFragmentManager() -> l
+    boolean isAdded() -> m
+    boolean isDetached() -> n
+    boolean isHidden() -> o
+    void onHiddenChanged(boolean) -> b
+    void setMenuVisibility(boolean) -> c
+    void setUserVisibleHint(boolean) -> d
+    void startActivity(android.content.Intent) -> a
     void onActivityResult(int,int,android.content.Intent) -> a
-    android.view.LayoutInflater getLayoutInflater(android.os.Bundle) -> c
+    android.view.LayoutInflater getLayoutInflater(android.os.Bundle) -> b
     void onInflate(android.app.Activity,android.util.AttributeSet,android.os.Bundle) -> a
     void onAttach(android.app.Activity) -> a
     android.view.animation.Animation onCreateAnimation(int,boolean,int) -> a
-    void onCreate(android.os.Bundle) -> d
+    void onCreate(android.os.Bundle) -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
     void onViewCreated(android.view.View,android.os.Bundle) -> a
-    android.view.View getView() -> h
-    void onActivityCreated(android.os.Bundle) -> e
-    void onViewStateRestored(android.os.Bundle) -> f
-    void onStart() -> i
-    void onResume() -> j
-    void onSaveInstanceState(android.os.Bundle) -> g
+    android.view.View getView() -> p
+    void onActivityCreated(android.os.Bundle) -> d
+    void onViewStateRestored(android.os.Bundle) -> h
+    void onStart() -> d
+    void onResume() -> q
+    void onSaveInstanceState(android.os.Bundle) -> e
     void onConfigurationChanged(android.content.res.Configuration) -> onConfigurationChanged
-    void onPause() -> k
-    void onStop() -> l
+    void onPause() -> r
+    void onStop() -> e
     void onLowMemory() -> onLowMemory
-    void onDestroyView() -> m
-    void onDestroy() -> n
-    void initState() -> o
-    void onDetach() -> p
+    void onDestroyView() -> f
+    void onDestroy() -> s
+    void initState() -> t
+    void onDetach() -> c
     void onCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> a
     void onPrepareOptionsMenu(android.view.Menu) -> a
-    void onDestroyOptionsMenu() -> q
+    void onDestroyOptionsMenu() -> u
     boolean onOptionsItemSelected(android.view.MenuItem) -> a
     void onOptionsMenuClosed(android.view.Menu) -> b
     void onCreateContextMenu(android.view.ContextMenu,android.view.View,android.view.ContextMenu$ContextMenuInfo) -> onCreateContextMenu
     boolean onContextItemSelected(android.view.MenuItem) -> b
     void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
-    void instantiateChildFragmentManager() -> r
-    void performCreate(android.os.Bundle) -> h
+    void instantiateChildFragmentManager() -> v
+    void performCreate(android.os.Bundle) -> i
     android.view.View performCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> b
-    void performActivityCreated(android.os.Bundle) -> i
-    void performStart() -> s
-    void performResume() -> t
+    void performActivityCreated(android.os.Bundle) -> j
+    void performStart() -> w
+    void performResume() -> x
     void performConfigurationChanged(android.content.res.Configuration) -> a
-    void performLowMemory() -> u
+    void performLowMemory() -> y
     boolean performCreateOptionsMenu(android.view.Menu,android.view.MenuInflater) -> b
     boolean performPrepareOptionsMenu(android.view.Menu) -> c
     boolean performOptionsItemSelected(android.view.MenuItem) -> c
     boolean performContextItemSelected(android.view.MenuItem) -> d
     void performOptionsMenuClosed(android.view.Menu) -> d
-    void performSaveInstanceState(android.os.Bundle) -> j
-    void performPause() -> v
-    void performStop() -> w
-    void performReallyStop() -> x
-    void performDestroyView() -> y
-    void performDestroy() -> z
-android.support.v4.app.Fragment$1 -> android.support.v4.app.e:
+    void performSaveInstanceState(android.os.Bundle) -> k
+    void performPause() -> z
+    void performStop() -> A
+    void performReallyStop() -> B
+    void performDestroyView() -> C
+    void performDestroy() -> D
+android.support.v4.app.Fragment$1 -> android.support.v4.app.f:
     android.support.v4.app.Fragment this$0 -> a
     android.view.View findViewById(int) -> a
-android.support.v4.app.Fragment$InstantiationException -> android.support.v4.app.f:
+android.support.v4.app.Fragment$InstantiationException -> android.support.v4.app.g:
 android.support.v4.app.Fragment$SavedState -> android.support.v4.app.Fragment$SavedState:
     android.os.Bundle mState -> a
     android.os.Parcelable$Creator CREATOR -> CREATOR
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-android.support.v4.app.Fragment$SavedState$1 -> android.support.v4.app.g:
+android.support.v4.app.Fragment$SavedState$1 -> android.support.v4.app.h:
     android.support.v4.app.Fragment$SavedState createFromParcel(android.os.Parcel) -> a
     android.support.v4.app.Fragment$SavedState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-android.support.v4.app.FragmentActivity -> android.support.v4.app.h:
+android.support.v4.app.FragmentActivity -> android.support.v4.app.i:
     android.os.Handler mHandler -> a
     android.support.v4.app.FragmentManagerImpl mFragments -> b
     android.support.v4.app.FragmentContainer mContainer -> c
@@ -238,34 +305,36 @@ android.support.v4.app.FragmentActivity -> android.support.v4.app.h:
     void onAttachFragment(android.support.v4.app.Fragment) -> a
     android.support.v4.app.FragmentManager getSupportFragmentManager() -> e
     void startActivityForResult(android.content.Intent,int) -> startActivityForResult
+    void startActivityFromFragment(android.support.v4.app.Fragment,android.content.Intent,int) -> a
     void invalidateSupportFragment(java.lang.String) -> a
     android.support.v4.app.LoaderManagerImpl getLoaderManager(java.lang.String,boolean,boolean) -> a
-android.support.v4.app.FragmentActivity$1 -> android.support.v4.app.i:
+android.support.v4.app.FragmentActivity$1 -> android.support.v4.app.j:
     android.support.v4.app.FragmentActivity this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-android.support.v4.app.FragmentActivity$2 -> android.support.v4.app.j:
+android.support.v4.app.FragmentActivity$2 -> android.support.v4.app.k:
     android.support.v4.app.FragmentActivity this$0 -> a
     android.view.View findViewById(int) -> a
-android.support.v4.app.FragmentActivity$FragmentTag -> android.support.v4.app.k:
+android.support.v4.app.FragmentActivity$FragmentTag -> android.support.v4.app.l:
     int[] Fragment -> a
-android.support.v4.app.FragmentActivity$NonConfigurationInstances -> android.support.v4.app.l:
+android.support.v4.app.FragmentActivity$NonConfigurationInstances -> android.support.v4.app.m:
     java.lang.Object activity -> a
     java.lang.Object custom -> b
     android.support.v4.util.SimpleArrayMap children -> c
     java.util.ArrayList fragments -> d
     android.support.v4.util.SimpleArrayMap loaders -> e
-android.support.v4.app.FragmentContainer -> android.support.v4.app.m:
+android.support.v4.app.FragmentContainer -> android.support.v4.app.n:
     android.view.View findViewById(int) -> a
-android.support.v4.app.FragmentManager -> android.support.v4.app.n:
+android.support.v4.app.FragmentManager -> android.support.v4.app.o:
     android.support.v4.app.FragmentTransaction beginTransaction() -> a
     boolean executePendingTransactions() -> b
     android.support.v4.app.Fragment findFragmentByTag(java.lang.String) -> a
+    void popBackStack(int,int) -> a
     void putFragment(android.os.Bundle,java.lang.String,android.support.v4.app.Fragment) -> a
     android.support.v4.app.Fragment getFragment(android.os.Bundle,java.lang.String) -> a
     android.support.v4.app.Fragment$SavedState saveFragmentInstanceState(android.support.v4.app.Fragment) -> a
-android.support.v4.app.FragmentManager$OnBackStackChangedListener -> android.support.v4.app.o:
+android.support.v4.app.FragmentManager$OnBackStackChangedListener -> android.support.v4.app.p:
     void onBackStackChanged() -> a
-android.support.v4.app.FragmentManagerImpl -> android.support.v4.app.p:
+android.support.v4.app.FragmentManagerImpl -> android.support.v4.app.q:
     boolean DEBUG -> a
     boolean HONEYCOMB -> b
     java.util.ArrayList mPendingActions -> c
@@ -299,6 +368,7 @@ android.support.v4.app.FragmentManagerImpl -> android.support.v4.app.p:
     android.support.v4.app.FragmentTransaction beginTransaction() -> a
     boolean executePendingTransactions() -> b
     boolean popBackStackImmediate() -> c
+    void popBackStack(int,int) -> a
     void putFragment(android.os.Bundle,java.lang.String,android.support.v4.app.Fragment) -> a
     android.support.v4.app.Fragment getFragment(android.os.Bundle,java.lang.String) -> a
     android.support.v4.app.Fragment$SavedState saveFragmentInstanceState(android.support.v4.app.Fragment) -> a
@@ -357,10 +427,15 @@ android.support.v4.app.FragmentManagerImpl -> android.support.v4.app.p:
     void dispatchOptionsMenuClosed(android.view.Menu) -> b
     int reverseTransit(int) -> c
     int transitToStyleIndex(int,boolean) -> b
-android.support.v4.app.FragmentManagerImpl$1 -> android.support.v4.app.q:
+android.support.v4.app.FragmentManagerImpl$1 -> android.support.v4.app.r:
     android.support.v4.app.FragmentManagerImpl this$0 -> a
     void run() -> run
-android.support.v4.app.FragmentManagerImpl$5 -> android.support.v4.app.r:
+android.support.v4.app.FragmentManagerImpl$4 -> android.support.v4.app.s:
+    int val$id -> a
+    int val$flags -> b
+    android.support.v4.app.FragmentManagerImpl this$0 -> c
+    void run() -> run
+android.support.v4.app.FragmentManagerImpl$5 -> android.support.v4.app.t:
     android.support.v4.app.Fragment val$fragment -> a
     android.support.v4.app.FragmentManagerImpl this$0 -> b
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
@@ -373,11 +448,26 @@ android.support.v4.app.FragmentManagerState -> android.support.v4.app.FragmentMa
     android.os.Parcelable$Creator CREATOR -> CREATOR
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-android.support.v4.app.FragmentManagerState$1 -> android.support.v4.app.s:
+android.support.v4.app.FragmentManagerState$1 -> android.support.v4.app.u:
     android.support.v4.app.FragmentManagerState createFromParcel(android.os.Parcel) -> a
     android.support.v4.app.FragmentManagerState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+android.support.v4.app.FragmentPagerAdapter -> android.support.v4.app.v:
+    android.support.v4.app.FragmentManager mFragmentManager -> a
+    android.support.v4.app.FragmentTransaction mCurTransaction -> b
+    android.support.v4.app.Fragment mCurrentPrimaryItem -> c
+    android.support.v4.app.Fragment getItem(int) -> a
+    void startUpdate(android.view.ViewGroup) -> a
+    java.lang.Object instantiateItem(android.view.ViewGroup,int) -> a
+    void destroyItem(android.view.ViewGroup,int,java.lang.Object) -> a
+    void setPrimaryItem(android.view.ViewGroup,int,java.lang.Object) -> b
+    void finishUpdate(android.view.ViewGroup) -> b
+    boolean isViewFromObject(android.view.View,java.lang.Object) -> a
+    android.os.Parcelable saveState() -> a
+    void restoreState(android.os.Parcelable,java.lang.ClassLoader) -> a
+    long getItemId(int) -> b
+    java.lang.String makeFragmentName(int,long) -> a
 android.support.v4.app.FragmentState -> android.support.v4.app.FragmentState:
     java.lang.String mClassName -> a
     int mIndex -> b
@@ -394,12 +484,12 @@ android.support.v4.app.FragmentState -> android.support.v4.app.FragmentState:
     android.support.v4.app.Fragment instantiate(android.support.v4.app.FragmentActivity,android.support.v4.app.Fragment) -> a
     int describeContents() -> describeContents
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-android.support.v4.app.FragmentState$1 -> android.support.v4.app.t:
+android.support.v4.app.FragmentState$1 -> android.support.v4.app.w:
     android.support.v4.app.FragmentState createFromParcel(android.os.Parcel) -> a
     android.support.v4.app.FragmentState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-android.support.v4.app.FragmentStatePagerAdapter -> android.support.v4.app.u:
+android.support.v4.app.FragmentStatePagerAdapter -> android.support.v4.app.x:
     android.support.v4.app.FragmentManager mFragmentManager -> a
     android.support.v4.app.FragmentTransaction mCurTransaction -> b
     java.util.ArrayList mSavedState -> c
@@ -430,18 +520,18 @@ android.support.v4.app.FragmentTabHost -> android.support.v4.app.FragmentTabHost
     void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
     void onTabChanged(java.lang.String) -> onTabChanged
     android.support.v4.app.FragmentTransaction doTabChanged(java.lang.String,android.support.v4.app.FragmentTransaction) -> a
-android.support.v4.app.FragmentTabHost$1 -> android.support.v4.app.v:
+android.support.v4.app.FragmentTabHost$1 -> android.support.v4.app.y:
 android.support.v4.app.FragmentTabHost$SavedState -> android.support.v4.app.FragmentTabHost$SavedState:
     java.lang.String curTab -> a
     android.os.Parcelable$Creator CREATOR -> CREATOR
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
     java.lang.String toString() -> toString
-android.support.v4.app.FragmentTabHost$SavedState$1 -> android.support.v4.app.w:
+android.support.v4.app.FragmentTabHost$SavedState$1 -> android.support.v4.app.z:
     android.support.v4.app.FragmentTabHost$SavedState createFromParcel(android.os.Parcel) -> a
     android.support.v4.app.FragmentTabHost$SavedState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-android.support.v4.app.FragmentTabHost$TabInfo -> android.support.v4.app.x:
+android.support.v4.app.FragmentTabHost$TabInfo -> android.support.v4.app.aa:
     java.lang.String tag -> a
     java.lang.Class clss -> b
     android.os.Bundle args -> c
@@ -451,7 +541,8 @@ android.support.v4.app.FragmentTabHost$TabInfo -> android.support.v4.app.x:
     java.lang.String access$200(android.support.v4.app.FragmentTabHost$TabInfo) -> b
     java.lang.Class access$300(android.support.v4.app.FragmentTabHost$TabInfo) -> c
     android.os.Bundle access$400(android.support.v4.app.FragmentTabHost$TabInfo) -> d
-android.support.v4.app.FragmentTransaction -> android.support.v4.app.y:
+android.support.v4.app.FragmentTransaction -> android.support.v4.app.ab:
+    android.support.v4.app.FragmentTransaction add(android.support.v4.app.Fragment,java.lang.String) -> a
     android.support.v4.app.FragmentTransaction add(int,android.support.v4.app.Fragment) -> a
     android.support.v4.app.FragmentTransaction add(int,android.support.v4.app.Fragment,java.lang.String) -> a
     android.support.v4.app.FragmentTransaction remove(android.support.v4.app.Fragment) -> a
@@ -459,13 +550,13 @@ android.support.v4.app.FragmentTransaction -> android.support.v4.app.y:
     android.support.v4.app.FragmentTransaction attach(android.support.v4.app.Fragment) -> c
     int commit() -> a
     int commitAllowingStateLoss() -> b
-android.support.v4.app.LoaderManager -> android.support.v4.app.z:
+android.support.v4.app.LoaderManager -> android.support.v4.app.ac:
     boolean hasRunningLoaders() -> a
-android.support.v4.app.LoaderManager$LoaderCallbacks -> android.support.v4.app.aa:
+android.support.v4.app.LoaderManager$LoaderCallbacks -> android.support.v4.app.ad:
     android.support.v4.content.Loader onCreateLoader(int,android.os.Bundle) -> a
     void onLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
     void onLoaderReset(android.support.v4.content.Loader) -> a
-android.support.v4.app.LoaderManagerImpl -> android.support.v4.app.ab:
+android.support.v4.app.LoaderManagerImpl -> android.support.v4.app.ae:
     boolean DEBUG -> a
     android.support.v4.util.SparseArrayCompat mLoaders -> b
     android.support.v4.util.SparseArrayCompat mInactiveLoaders -> c
@@ -484,7 +575,7 @@ android.support.v4.app.LoaderManagerImpl -> android.support.v4.app.ab:
     java.lang.String toString() -> toString
     void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
     boolean hasRunningLoaders() -> a
-android.support.v4.app.LoaderManagerImpl$LoaderInfo -> android.support.v4.app.ac:
+android.support.v4.app.LoaderManagerImpl$LoaderInfo -> android.support.v4.app.af:
     int mId -> a
     android.os.Bundle mArgs -> b
     android.support.v4.app.LoaderManager$LoaderCallbacks mCallbacks -> c
@@ -509,11 +600,11 @@ android.support.v4.app.LoaderManagerImpl$LoaderInfo -> android.support.v4.app.ac
     void callOnLoadFinished(android.support.v4.content.Loader,java.lang.Object) -> a
     java.lang.String toString() -> toString
     void dump(java.lang.String,java.io.FileDescriptor,java.io.PrintWriter,java.lang.String[]) -> a
-android.support.v4.app.NoSaveStateFrameLayout -> android.support.v4.app.ad:
+android.support.v4.app.NoSaveStateFrameLayout -> android.support.v4.app.ag:
     android.view.ViewGroup wrap(android.view.View) -> a
     void dispatchSaveInstanceState(android.util.SparseArray) -> dispatchSaveInstanceState
     void dispatchRestoreInstanceState(android.util.SparseArray) -> dispatchRestoreInstanceState
-android.support.v4.app.SuperNotCalledException -> android.support.v4.app.ae:
+android.support.v4.app.SuperNotCalledException -> android.support.v4.app.ah:
 android.support.v4.content.Loader -> android.support.v4.a.a:
     int mId -> a
     android.support.v4.content.Loader$OnLoadCompleteListener mListener -> b
@@ -938,9 +1029,10 @@ android.support.v4.view.PagerAdapter -> android.support.v4.view.ae:
     android.os.Parcelable saveState() -> a
     void restoreState(android.os.Parcelable,java.lang.ClassLoader) -> a
     int getItemPosition(java.lang.Object) -> a
+    void notifyDataSetChanged() -> c
     void registerDataSetObserver(android.database.DataSetObserver) -> a
     void unregisterDataSetObserver(android.database.DataSetObserver) -> b
-    float getPageWidth(int) -> b
+    float getPageWidth(int) -> c
 android.support.v4.view.VelocityTrackerCompat -> android.support.v4.view.af:
     android.support.v4.view.VelocityTrackerCompat$VelocityTrackerVersionImpl IMPL -> a
     float getXVelocity(android.view.VelocityTracker,int) -> a
@@ -974,6 +1066,7 @@ android.support.v4.view.ViewCompat -> android.support.v4.view.ak:
     android.view.ViewParent getParentForAccessibility(android.view.View) -> f
     boolean isOpaque(android.view.View) -> g
 android.support.v4.view.ViewCompat$BaseViewCompatImpl -> android.support.v4.view.al:
+    java.util.WeakHashMap mViewPropertyAnimatorCompatMap -> a
     boolean canScrollHorizontally(android.view.View,int) -> a
     int getOverScrollMode(android.view.View) -> a
     void setAccessibilityDelegate(android.view.View,android.support.v4.view.AccessibilityDelegateCompat) -> a
@@ -1012,6 +1105,7 @@ android.support.v4.view.ViewCompat$JbMr1ViewCompatImpl -> android.support.v4.vie
     void setLayerPaint(android.view.View,android.graphics.Paint) -> a
     int getLayoutDirection(android.view.View) -> e
 android.support.v4.view.ViewCompat$KitKatViewCompatImpl -> android.support.v4.view.as:
+    void setImportantForAccessibility(android.view.View,int) -> b
 android.support.v4.view.ViewCompat$ViewCompatImpl -> android.support.v4.view.at:
     boolean canScrollHorizontally(android.view.View,int) -> a
     int getOverScrollMode(android.view.View) -> a
@@ -1577,28 +1671,29 @@ android.support.v4.view.accessibility.AccessibilityRecordCompatIcs -> android.su
     void setToIndex(java.lang.Object,int) -> c
 android.support.v4.widget.DrawerLayout -> android.support.v4.widget.DrawerLayout:
     int[] LAYOUT_ATTRS -> a
-    int mMinDrawerMargin -> b
-    int mScrimColor -> c
-    float mScrimOpacity -> d
-    android.graphics.Paint mScrimPaint -> e
-    android.support.v4.widget.ViewDragHelper mLeftDragger -> f
-    android.support.v4.widget.ViewDragHelper mRightDragger -> g
-    android.support.v4.widget.DrawerLayout$ViewDragCallback mLeftCallback -> h
-    android.support.v4.widget.DrawerLayout$ViewDragCallback mRightCallback -> i
-    int mDrawerState -> j
-    boolean mInLayout -> k
-    boolean mFirstLayout -> l
-    int mLockModeLeft -> m
-    int mLockModeRight -> n
-    boolean mDisallowInterceptRequested -> o
-    boolean mChildrenCanceledTouch -> p
-    android.support.v4.widget.DrawerLayout$DrawerListener mListener -> q
-    float mInitialMotionX -> r
-    float mInitialMotionY -> s
-    android.graphics.drawable.Drawable mShadowLeft -> t
-    android.graphics.drawable.Drawable mShadowRight -> u
-    java.lang.CharSequence mTitleLeft -> v
-    java.lang.CharSequence mTitleRight -> w
+    android.support.v4.widget.DrawerLayout$ChildAccessibilityDelegate mChildAccessibilityDelegate -> b
+    int mMinDrawerMargin -> c
+    int mScrimColor -> d
+    float mScrimOpacity -> e
+    android.graphics.Paint mScrimPaint -> f
+    android.support.v4.widget.ViewDragHelper mLeftDragger -> g
+    android.support.v4.widget.ViewDragHelper mRightDragger -> h
+    android.support.v4.widget.DrawerLayout$ViewDragCallback mLeftCallback -> i
+    android.support.v4.widget.DrawerLayout$ViewDragCallback mRightCallback -> j
+    int mDrawerState -> k
+    boolean mInLayout -> l
+    boolean mFirstLayout -> m
+    int mLockModeLeft -> n
+    int mLockModeRight -> o
+    boolean mDisallowInterceptRequested -> p
+    boolean mChildrenCanceledTouch -> q
+    android.support.v4.widget.DrawerLayout$DrawerListener mListener -> r
+    float mInitialMotionX -> s
+    float mInitialMotionY -> t
+    android.graphics.drawable.Drawable mShadowLeft -> u
+    android.graphics.drawable.Drawable mShadowRight -> v
+    java.lang.CharSequence mTitleLeft -> w
+    java.lang.CharSequence mTitleRight -> x
     void setScrimColor(int) -> setScrimColor
     void setDrawerListener(android.support.v4.widget.DrawerLayout$DrawerListener) -> setDrawerListener
     void setDrawerLockMode(int) -> setDrawerLockMode
@@ -1622,7 +1717,7 @@ android.support.v4.widget.DrawerLayout -> android.support.v4.widget.DrawerLayout
     void onLayout(boolean,int,int,int,int) -> onLayout
     void requestLayout() -> requestLayout
     void computeScroll() -> computeScroll
-    boolean hasOpaqueBackground(android.view.View) -> k
+    boolean hasOpaqueBackground(android.view.View) -> m
     boolean drawChild(android.graphics.Canvas,android.view.View,long) -> drawChild
     boolean isContentView(android.view.View) -> f
     boolean isDrawerView(android.view.View) -> g
@@ -1633,7 +1728,8 @@ android.support.v4.widget.DrawerLayout -> android.support.v4.widget.DrawerLayout
     void closeDrawers(boolean) -> a
     void openDrawer(android.view.View) -> h
     void closeDrawer(android.view.View) -> i
-    boolean isDrawerVisible(android.view.View) -> j
+    boolean isDrawerOpen(android.view.View) -> j
+    boolean isDrawerVisible(android.view.View) -> k
     boolean hasPeekingDrawer() -> e
     android.view.ViewGroup$LayoutParams generateDefaultLayoutParams() -> generateDefaultLayoutParams
     android.view.ViewGroup$LayoutParams generateLayoutParams(android.view.ViewGroup$LayoutParams) -> generateLayoutParams
@@ -1646,8 +1742,11 @@ android.support.v4.widget.DrawerLayout -> android.support.v4.widget.DrawerLayout
     boolean onKeyUp(int,android.view.KeyEvent) -> onKeyUp
     void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
     android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
+    void addView(android.view.View,int,android.view.ViewGroup$LayoutParams) -> addView
+    boolean includeChildForAccessibilitiy(android.view.View) -> n
     int[] access$100() -> d
     android.view.View access$200(android.support.v4.widget.DrawerLayout) -> a
+    boolean access$300(android.view.View) -> l
 android.support.v4.widget.DrawerLayout$AccessibilityDelegate -> android.support.v4.widget.a:
     android.graphics.Rect mTmpRect -> c
     android.support.v4.widget.DrawerLayout this$0 -> b
@@ -1656,14 +1755,16 @@ android.support.v4.widget.DrawerLayout$AccessibilityDelegate -> android.support.
     boolean dispatchPopulateAccessibilityEvent(android.view.View,android.view.accessibility.AccessibilityEvent) -> b
     void addChildrenForAccessibility(android.support.v4.view.accessibility.AccessibilityNodeInfoCompat,android.view.ViewGroup) -> a
     boolean onRequestSendAccessibilityEvent(android.view.ViewGroup,android.view.View,android.view.accessibility.AccessibilityEvent) -> a
-    boolean filter(android.view.View) -> b
     void copyNodeInfoNoChildren(android.support.v4.view.accessibility.AccessibilityNodeInfoCompat,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat) -> a
-android.support.v4.widget.DrawerLayout$DrawerListener -> android.support.v4.widget.b:
+android.support.v4.widget.DrawerLayout$ChildAccessibilityDelegate -> android.support.v4.widget.b:
+    android.support.v4.widget.DrawerLayout this$0 -> b
+    void onInitializeAccessibilityNodeInfo(android.view.View,android.support.v4.view.accessibility.AccessibilityNodeInfoCompat) -> a
+android.support.v4.widget.DrawerLayout$DrawerListener -> android.support.v4.widget.c:
     void onDrawerSlide(android.view.View,float) -> a
     void onDrawerOpened(android.view.View) -> a
     void onDrawerClosed(android.view.View) -> b
     void onDrawerStateChanged(int) -> a
-android.support.v4.widget.DrawerLayout$LayoutParams -> android.support.v4.widget.c:
+android.support.v4.widget.DrawerLayout$LayoutParams -> android.support.v4.widget.d:
     int gravity -> a
     float onScreen -> b
     boolean isPeeking -> c
@@ -1674,12 +1775,12 @@ android.support.v4.widget.DrawerLayout$SavedState -> android.support.v4.widget.D
     int lockModeRight -> c
     android.os.Parcelable$Creator CREATOR -> CREATOR
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-android.support.v4.widget.DrawerLayout$SavedState$1 -> android.support.v4.widget.d:
+android.support.v4.widget.DrawerLayout$SavedState$1 -> android.support.v4.widget.e:
     android.support.v4.widget.DrawerLayout$SavedState createFromParcel(android.os.Parcel) -> a
     android.support.v4.widget.DrawerLayout$SavedState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-android.support.v4.widget.DrawerLayout$ViewDragCallback -> android.support.v4.widget.e:
+android.support.v4.widget.DrawerLayout$ViewDragCallback -> android.support.v4.widget.f:
     int mAbsGravity -> b
     android.support.v4.widget.ViewDragHelper mDragger -> c
     java.lang.Runnable mPeekRunnable -> d
@@ -1700,10 +1801,10 @@ android.support.v4.widget.DrawerLayout$ViewDragCallback -> android.support.v4.wi
     int clampViewPositionHorizontal(android.view.View,int,int) -> a
     int clampViewPositionVertical(android.view.View,int,int) -> b
     void access$000(android.support.v4.widget.DrawerLayout$ViewDragCallback) -> a
-android.support.v4.widget.DrawerLayout$ViewDragCallback$1 -> android.support.v4.widget.f:
+android.support.v4.widget.DrawerLayout$ViewDragCallback$1 -> android.support.v4.widget.g:
     android.support.v4.widget.DrawerLayout$ViewDragCallback this$1 -> a
     void run() -> run
-android.support.v4.widget.EdgeEffectCompat -> android.support.v4.widget.g:
+android.support.v4.widget.EdgeEffectCompat -> android.support.v4.widget.h:
     java.lang.Object mEdgeEffect -> a
     android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl IMPL -> b
     void setSize(int,int) -> a
@@ -1712,7 +1813,7 @@ android.support.v4.widget.EdgeEffectCompat -> android.support.v4.widget.g:
     boolean onPull(float) -> a
     boolean onRelease() -> c
     boolean draw(android.graphics.Canvas) -> a
-android.support.v4.widget.EdgeEffectCompat$BaseEdgeEffectImpl -> android.support.v4.widget.h:
+android.support.v4.widget.EdgeEffectCompat$BaseEdgeEffectImpl -> android.support.v4.widget.i:
     java.lang.Object newEdgeEffect(android.content.Context) -> a
     void setSize(java.lang.Object,int,int) -> a
     boolean isFinished(java.lang.Object) -> a
@@ -1720,7 +1821,7 @@ android.support.v4.widget.EdgeEffectCompat$BaseEdgeEffectImpl -> android.support
     boolean onPull(java.lang.Object,float) -> a
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
-android.support.v4.widget.EdgeEffectCompat$EdgeEffectIcsImpl -> android.support.v4.widget.i:
+android.support.v4.widget.EdgeEffectCompat$EdgeEffectIcsImpl -> android.support.v4.widget.j:
     java.lang.Object newEdgeEffect(android.content.Context) -> a
     void setSize(java.lang.Object,int,int) -> a
     boolean isFinished(java.lang.Object) -> a
@@ -1728,7 +1829,7 @@ android.support.v4.widget.EdgeEffectCompat$EdgeEffectIcsImpl -> android.support.
     boolean onPull(java.lang.Object,float) -> a
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
-android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl -> android.support.v4.widget.j:
+android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl -> android.support.v4.widget.k:
     java.lang.Object newEdgeEffect(android.content.Context) -> a
     void setSize(java.lang.Object,int,int) -> a
     boolean isFinished(java.lang.Object) -> a
@@ -1736,7 +1837,7 @@ android.support.v4.widget.EdgeEffectCompat$EdgeEffectImpl -> android.support.v4.
     boolean onPull(java.lang.Object,float) -> a
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
-android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.widget.k:
+android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.widget.l:
     java.lang.Object newEdgeEffect(android.content.Context) -> a
     void setSize(java.lang.Object,int,int) -> a
     boolean isFinished(java.lang.Object) -> a
@@ -1744,9 +1845,9 @@ android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.widget.k:
     boolean onPull(java.lang.Object,float) -> a
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
-android.support.v4.widget.ScrollerCompat -> android.support.v4.widget.l:
+android.support.v4.widget.ScrollerCompat -> android.support.v4.widget.m:
     java.lang.Object mScroller -> a
-    android.support.v4.widget.ScrollerCompat$ScrollerCompatImpl IMPL -> b
+    android.support.v4.widget.ScrollerCompat$ScrollerCompatImpl mImpl -> b
     android.support.v4.widget.ScrollerCompat create(android.content.Context,android.view.animation.Interpolator) -> a
     boolean isFinished() -> a
     int getCurrX() -> b
@@ -1756,7 +1857,7 @@ android.support.v4.widget.ScrollerCompat -> android.support.v4.widget.l:
     boolean computeScrollOffset() -> f
     void startScroll(int,int,int,int,int) -> a
     void abortAnimation() -> g
-android.support.v4.widget.ScrollerCompat$ScrollerCompatImpl -> android.support.v4.widget.m:
+android.support.v4.widget.ScrollerCompat$ScrollerCompatImpl -> android.support.v4.widget.n:
     java.lang.Object createScroller(android.content.Context,android.view.animation.Interpolator) -> a
     boolean isFinished(java.lang.Object) -> a
     int getCurrX(java.lang.Object) -> b
@@ -1766,7 +1867,7 @@ android.support.v4.widget.ScrollerCompat$ScrollerCompatImpl -> android.support.v
     void abortAnimation(java.lang.Object) -> e
     int getFinalX(java.lang.Object) -> f
     int getFinalY(java.lang.Object) -> g
-android.support.v4.widget.ScrollerCompat$ScrollerCompatImplBase -> android.support.v4.widget.n:
+android.support.v4.widget.ScrollerCompat$ScrollerCompatImplBase -> android.support.v4.widget.o:
     java.lang.Object createScroller(android.content.Context,android.view.animation.Interpolator) -> a
     boolean isFinished(java.lang.Object) -> a
     int getCurrX(java.lang.Object) -> b
@@ -1776,7 +1877,7 @@ android.support.v4.widget.ScrollerCompat$ScrollerCompatImplBase -> android.suppo
     void abortAnimation(java.lang.Object) -> e
     int getFinalX(java.lang.Object) -> f
     int getFinalY(java.lang.Object) -> g
-android.support.v4.widget.ScrollerCompat$ScrollerCompatImplGingerbread -> android.support.v4.widget.o:
+android.support.v4.widget.ScrollerCompat$ScrollerCompatImplGingerbread -> android.support.v4.widget.p:
     java.lang.Object createScroller(android.content.Context,android.view.animation.Interpolator) -> a
     boolean isFinished(java.lang.Object) -> a
     int getCurrX(java.lang.Object) -> b
@@ -1786,8 +1887,8 @@ android.support.v4.widget.ScrollerCompat$ScrollerCompatImplGingerbread -> androi
     void abortAnimation(java.lang.Object) -> e
     int getFinalX(java.lang.Object) -> f
     int getFinalY(java.lang.Object) -> g
-android.support.v4.widget.ScrollerCompat$ScrollerCompatImplIcs -> android.support.v4.widget.p:
-android.support.v4.widget.ScrollerCompatGingerbread -> android.support.v4.widget.q:
+android.support.v4.widget.ScrollerCompat$ScrollerCompatImplIcs -> android.support.v4.widget.q:
+android.support.v4.widget.ScrollerCompatGingerbread -> android.support.v4.widget.r:
     java.lang.Object createScroller(android.content.Context,android.view.animation.Interpolator) -> a
     boolean isFinished(java.lang.Object) -> a
     int getCurrX(java.lang.Object) -> b
@@ -1800,23 +1901,24 @@ android.support.v4.widget.ScrollerCompatGingerbread -> android.support.v4.widget
 android.support.v4.widget.SlidingPaneLayout -> android.support.v4.widget.SlidingPaneLayout:
     int mSliderFadeColor -> b
     int mCoveredFadeColor -> c
-    android.graphics.drawable.Drawable mShadowDrawable -> d
-    int mOverhangSize -> e
-    boolean mCanSlide -> f
-    android.view.View mSlideableView -> g
-    float mSlideOffset -> h
-    float mParallaxOffset -> i
-    int mSlideRange -> j
-    boolean mIsUnableToDrag -> k
-    int mParallaxBy -> l
-    float mInitialMotionX -> m
-    float mInitialMotionY -> n
-    android.support.v4.widget.SlidingPaneLayout$PanelSlideListener mPanelSlideListener -> o
-    android.support.v4.widget.ViewDragHelper mDragHelper -> p
-    boolean mPreservedOpenState -> q
-    boolean mFirstLayout -> r
-    android.graphics.Rect mTmpRect -> s
-    java.util.ArrayList mPostedRunnables -> t
+    android.graphics.drawable.Drawable mShadowDrawableLeft -> d
+    android.graphics.drawable.Drawable mShadowDrawableRight -> e
+    int mOverhangSize -> f
+    boolean mCanSlide -> g
+    android.view.View mSlideableView -> h
+    float mSlideOffset -> i
+    float mParallaxOffset -> j
+    int mSlideRange -> k
+    boolean mIsUnableToDrag -> l
+    int mParallaxBy -> m
+    float mInitialMotionX -> n
+    float mInitialMotionY -> o
+    android.support.v4.widget.SlidingPaneLayout$PanelSlideListener mPanelSlideListener -> p
+    android.support.v4.widget.ViewDragHelper mDragHelper -> q
+    boolean mPreservedOpenState -> r
+    boolean mFirstLayout -> s
+    android.graphics.Rect mTmpRect -> t
+    java.util.ArrayList mPostedRunnables -> u
     android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImpl IMPL -> a
     void setParallaxDistance(int) -> setParallaxDistance
     int getParallaxDistance() -> getParallaxDistance
@@ -1848,7 +1950,11 @@ android.support.v4.widget.SlidingPaneLayout -> android.support.v4.widget.Sliding
     boolean smoothSlideTo(float,int) -> a
     void computeScroll() -> computeScroll
     void setShadowDrawable(android.graphics.drawable.Drawable) -> setShadowDrawable
+    void setShadowDrawableLeft(android.graphics.drawable.Drawable) -> setShadowDrawableLeft
+    void setShadowDrawableRight(android.graphics.drawable.Drawable) -> setShadowDrawableRight
     void setShadowResource(int) -> setShadowResource
+    void setShadowResourceLeft(int) -> setShadowResourceLeft
+    void setShadowResourceRight(int) -> setShadowResourceRight
     void draw(android.graphics.Canvas) -> draw
     void parallaxOtherViews(float) -> a
     boolean isDimmed(android.view.View) -> b
@@ -1858,40 +1964,41 @@ android.support.v4.widget.SlidingPaneLayout -> android.support.v4.widget.Sliding
     android.view.ViewGroup$LayoutParams generateLayoutParams(android.util.AttributeSet) -> generateLayoutParams
     android.os.Parcelable onSaveInstanceState() -> onSaveInstanceState
     void onRestoreInstanceState(android.os.Parcelable) -> onRestoreInstanceState
-    void access$900(android.support.v4.widget.SlidingPaneLayout,android.view.View) -> a
-    java.util.ArrayList access$1000(android.support.v4.widget.SlidingPaneLayout) -> a
-android.support.v4.widget.SlidingPaneLayout$1 -> android.support.v4.widget.r:
-android.support.v4.widget.SlidingPaneLayout$DisableLayerRunnable -> android.support.v4.widget.s:
+    boolean isLayoutRtlSupport() -> f
+    void access$1000(android.support.v4.widget.SlidingPaneLayout,android.view.View) -> a
+    java.util.ArrayList access$1100(android.support.v4.widget.SlidingPaneLayout) -> a
+android.support.v4.widget.SlidingPaneLayout$1 -> android.support.v4.widget.s:
+android.support.v4.widget.SlidingPaneLayout$DisableLayerRunnable -> android.support.v4.widget.t:
     android.view.View mChildView -> a
     android.support.v4.widget.SlidingPaneLayout this$0 -> b
     void run() -> run
-android.support.v4.widget.SlidingPaneLayout$LayoutParams -> android.support.v4.widget.t:
+android.support.v4.widget.SlidingPaneLayout$LayoutParams -> android.support.v4.widget.u:
     int[] ATTRS -> e
     float weight -> a
     boolean slideable -> b
     boolean dimWhenOffset -> c
     android.graphics.Paint dimPaint -> d
-android.support.v4.widget.SlidingPaneLayout$PanelSlideListener -> android.support.v4.widget.u:
+android.support.v4.widget.SlidingPaneLayout$PanelSlideListener -> android.support.v4.widget.v:
 android.support.v4.widget.SlidingPaneLayout$SavedState -> android.support.v4.widget.SlidingPaneLayout$SavedState:
     boolean isOpen -> a
     android.os.Parcelable$Creator CREATOR -> CREATOR
     void writeToParcel(android.os.Parcel,int) -> writeToParcel
-android.support.v4.widget.SlidingPaneLayout$SavedState$1 -> android.support.v4.widget.v:
+android.support.v4.widget.SlidingPaneLayout$SavedState$1 -> android.support.v4.widget.w:
     android.support.v4.widget.SlidingPaneLayout$SavedState createFromParcel(android.os.Parcel) -> a
     android.support.v4.widget.SlidingPaneLayout$SavedState[] newArray(int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
-android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImpl -> android.support.v4.widget.w:
+android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImpl -> android.support.v4.widget.x:
     void invalidateChildRegion(android.support.v4.widget.SlidingPaneLayout,android.view.View) -> a
-android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplBase -> android.support.v4.widget.x:
+android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplBase -> android.support.v4.widget.y:
     void invalidateChildRegion(android.support.v4.widget.SlidingPaneLayout,android.view.View) -> a
-android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB -> android.support.v4.widget.y:
+android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJB -> android.support.v4.widget.z:
     java.lang.reflect.Method mGetDisplayList -> a
     java.lang.reflect.Field mRecreateDisplayList -> b
     void invalidateChildRegion(android.support.v4.widget.SlidingPaneLayout,android.view.View) -> a
-android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJBMR1 -> android.support.v4.widget.z:
+android.support.v4.widget.SlidingPaneLayout$SlidingPanelLayoutImplJBMR1 -> android.support.v4.widget.aa:
     void invalidateChildRegion(android.support.v4.widget.SlidingPaneLayout,android.view.View) -> a
-android.support.v4.widget.ViewDragHelper -> android.support.v4.widget.aa:
+android.support.v4.widget.ViewDragHelper -> android.support.v4.widget.ab:
     int mDragState -> a
     int mTouchSlop -> b
     int mActivePointerId -> c
@@ -1957,12 +2064,12 @@ android.support.v4.widget.ViewDragHelper -> android.support.v4.widget.aa:
     boolean isViewUnder(android.view.View,int,int) -> b
     android.view.View findTopChildUnder(int,int) -> d
     int getEdgesTouched(int,int) -> e
-android.support.v4.widget.ViewDragHelper$1 -> android.support.v4.widget.ab:
+android.support.v4.widget.ViewDragHelper$1 -> android.support.v4.widget.ac:
     float getInterpolation(float) -> getInterpolation
-android.support.v4.widget.ViewDragHelper$2 -> android.support.v4.widget.ac:
+android.support.v4.widget.ViewDragHelper$2 -> android.support.v4.widget.ad:
     android.support.v4.widget.ViewDragHelper this$0 -> a
     void run() -> run
-android.support.v4.widget.ViewDragHelper$Callback -> android.support.v4.widget.ad:
+android.support.v4.widget.ViewDragHelper$Callback -> android.support.v4.widget.ae:
     void onViewDragStateChanged(int) -> a
     void onViewPositionChanged(android.view.View,int,int,int,int) -> a
     void onViewCaptured(android.view.View,int) -> b
@@ -9846,14 +9953,23 @@ com.kakao.sdk.R$string -> com.a.c.b:
 com.todpop.api.BootReceiver -> com.todpop.api.BootReceiver:
     android.content.SharedPreferences setting -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.todpop.api.FileManager -> com.todpop.api.a:
+com.todpop.api.EngKorOX -> com.todpop.api.a:
+    int isNew -> a
+    java.lang.String en -> b
+    java.lang.String kr -> c
+    java.lang.String check -> d
+    int getIsNew() -> a
+    java.lang.String getEn() -> b
+    java.lang.String getKr() -> c
+    java.lang.String getCheck() -> d
+com.todpop.api.FileManager -> com.todpop.api.b:
     android.content.Context context -> a
     boolean pronounceFileCheck(java.lang.String) -> a
     boolean fileCheck(java.lang.String) -> b
     boolean isUserImgSet() -> a
     android.graphics.Bitmap getUserImgFile() -> b
     java.lang.String getUserImgPath() -> c
-com.todpop.api.KakaoObject -> com.todpop.api.b:
+com.todpop.api.KakaoObject -> com.todpop.api.c:
     java.lang.String ment -> a
     java.lang.String imgSrc -> b
     int imgWidth -> c
@@ -9869,7 +9985,44 @@ com.todpop.api.KakaoObject -> com.todpop.api.b:
     void setImgHeight(int) -> b
     java.lang.String getBtnText() -> e
     void setBtnText(java.lang.String) -> c
-com.todpop.api.LoadingDialog -> com.todpop.api.c:
+com.todpop.api.LineGraphCanvas -> com.todpop.api.d:
+    int width -> b
+    int height -> c
+    boolean drawYAxis -> d
+    boolean drawValuesText -> e
+    int axis -> f
+    int yDivider -> g
+    int axisText -> h
+    int valueText -> i
+    int valuePointFill -> j
+    int valuePointStroke -> k
+    int valueLine -> l
+    android.graphics.Paint$Style dotStyle -> m
+    android.graphics.Paint paint -> n
+    android.graphics.Paint dotText -> o
+    android.graphics.Path path -> p
+    int maxY -> q
+    int yDivideTimes -> r
+    java.util.ArrayList xAxisString -> s
+    java.util.ArrayList values -> t
+    float[] yPointsOfValues -> u
+    float[] xPointsOfValues -> v
+    float yDivideHeight -> w
+    float yAxisTextWidth -> x
+    float yAxisTextSize -> y
+    float yAxisTextLineSpace -> z
+    float lineWidth -> A
+    float xAxisTextSize -> B
+    float yAxisXcoordinate -> C
+    float graphHeight -> D
+    android.graphics.Typeface mTypeface -> a
+    void setMaxY(int) -> setMaxY
+    void setYDivideTimes(int) -> setYDivideTimes
+    void setXAxisString(java.util.ArrayList) -> setXAxisString
+    void setValues(java.util.ArrayList) -> setValues
+    void onMeasure(int,int) -> onMeasure
+    void onDraw(android.graphics.Canvas) -> onDraw
+com.todpop.api.LoadingDialog -> com.todpop.api.e:
     android.content.Context context -> e
     com.todpop.api.LoadingDialog loadingDialog -> f
     android.app.Dialog dialog -> a
@@ -9879,19 +10032,74 @@ com.todpop.api.LoadingDialog -> com.todpop.api.c:
     void show() -> a
     void dissmiss() -> b
     android.content.Context access$0(com.todpop.api.LoadingDialog) -> a
-com.todpop.api.LoadingDialog$1 -> com.todpop.api.d:
+com.todpop.api.LoadingDialog$1 -> com.todpop.api.f:
     com.todpop.api.LoadingDialog this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
+com.todpop.api.MemorizedRateAllCanvas -> com.todpop.api.g:
+    float outterRadius -> c
+    float outterStroke -> d
+    float progressRadius -> e
+    float progressStroke -> f
+    float innerRadius -> g
+    float angledLineLength -> h
+    float straightLineLength -> i
+    float koreanTextSize -> j
+    float numberTextSize -> k
+    android.graphics.Paint paint -> l
+    int total -> m
+    int memorized -> n
+    int centerWidth -> o
+    int centerHeight -> p
+    android.graphics.RectF progress -> a
+    android.graphics.Typeface mTypeface -> b
+    void setTotalAndCorrect(int,int) -> a
+    void onDraw(android.graphics.Canvas) -> onDraw
 com.todpop.api.SquareImageView -> com.todpop.api.SquareImageView:
     void onMeasure(int,int) -> onMeasure
-com.todpop.api.TypefaceActivity -> com.todpop.api.e:
+com.todpop.api.StudyHistoryAnalysis -> com.todpop.api.h:
+    com.todpop.sweetenglish.db.WordDBHelper wHelper -> a
+    com.todpop.sweetenglish.db.AnalysisDBHelper aHelper -> b
+    com.todpop.sweetenglish.db.DailyHistoryDBHelper dHelper -> c
+    android.database.sqlite.SQLiteDatabase wordDB -> d
+    android.database.sqlite.SQLiteDatabase analysisDB -> e
+    java.lang.String lastWeekStart -> f
+    java.lang.String lastWeekEnd -> g
+    void saveAchieveRate(int,java.lang.String) -> a
+    void saveTodayAchieveRate(int) -> a
+    void findAndSaveDaily(int,java.lang.String) -> b
+    void findAndSaveWeekly(java.lang.String,java.lang.String,java.lang.String) -> a
+    java.lang.String checkNewWeek(java.lang.String) -> a
+com.todpop.api.StudyHistoryAnalysis$1 -> com.todpop.api.i:
+    com.todpop.api.StudyHistoryAnalysis this$0 -> a
+    void run() -> run
+com.todpop.api.TrackUsageTime -> com.todpop.api.j:
+    com.todpop.api.TrackUsageTime tTime -> a
+    com.todpop.sweetenglish.db.UsageTimeDBHelper uHelper -> b
+    java.text.SimpleDateFormat dateFormat -> c
+    java.lang.String date -> d
+    java.util.Queue startTimeQueue -> e
+    long stopTime -> f
+    com.todpop.api.TrackUsageTime getInstance(android.content.Context) -> a
+    void attend() -> a
+    void start() -> b
+    void stop() -> c
+    com.todpop.sweetenglish.db.UsageTimeDBHelper access$0(com.todpop.api.TrackUsageTime) -> a
+com.todpop.api.TrackUsageTime$AttendToDB -> com.todpop.api.k:
+    com.todpop.api.TrackUsageTime this$0 -> a
+    java.lang.Void doInBackground(java.lang.String[]) -> a
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.todpop.api.TrackUsageTime$SaveTimeToDB -> com.todpop.api.l:
+    com.todpop.api.TrackUsageTime this$0 -> a
+    java.lang.Void doInBackground(java.lang.String[]) -> a
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.todpop.api.TypefaceActivity -> com.todpop.api.m:
     android.graphics.Typeface mTypeface -> a
     void setContentView(int) -> setContentView
     void setGlobalFont(android.view.ViewGroup) -> a
     void setFont(android.view.View) -> setFont
-com.todpop.api.TypefaceFragmentActivity -> com.todpop.api.f:
+com.todpop.api.TypefaceFragmentActivity -> com.todpop.api.n:
     android.graphics.Typeface mTypeface -> n
     void setContentView(int) -> setContentView
     void setGlobalFont(android.view.ViewGroup) -> a
@@ -9965,71 +10173,359 @@ com.todpop.sweetenglish.AlarmActivity -> com.todpop.sweetenglish.AlarmActivity:
     void onClickClose(android.view.View) -> onClickClose
     void onClickStart(android.view.View) -> onClickStart
 com.todpop.sweetenglish.HomeActivity -> com.todpop.sweetenglish.HomeActivity:
-    android.support.v4.widget.DrawerLayout drawerLayout -> d
-    android.widget.ListView drawerMenu -> e
-    java.lang.String userNick -> f
-    int userLevel -> g
-    android.widget.TextView attendanceText -> h
-    android.widget.TextView memorizeText -> i
-    android.widget.TextView goalText -> j
-    com.todpop.sweetenglish.db.WordDBHelper dbHelper -> k
-    android.database.sqlite.SQLiteDatabase db -> l
-    java.util.ArrayList progressList -> m
-    int weekMemorized -> n
-    int handlerCnt -> o
-    com.todpop.api.KakaoObject kakaoObj -> p
-    android.content.SharedPreferences userInfo -> a
-    android.content.SharedPreferences studyInfo -> b
-    android.widget.PopupWindow exitPopup -> q
-    android.widget.PopupWindow updatePopup -> r
-    boolean isMajor -> s
-    android.os.Handler progressHandler -> c
+    android.support.v4.widget.DrawerLayout drawerLayout -> n
+    android.widget.ListView drawerMenu -> o
+    java.lang.String userNick -> p
+    int userLevel -> q
+    android.widget.TextView attendanceText -> r
+    android.widget.TextView memorizeText -> s
+    android.widget.TextView goalText -> t
+    com.todpop.sweetenglish.db.WordDBHelper dbHelper -> u
+    android.database.sqlite.SQLiteDatabase db -> v
+    com.todpop.sweetenglish.db.AnalysisDBHelper aHelper -> w
+    android.database.sqlite.SQLiteDatabase aDB -> x
+    android.support.v4.view.ViewPager analysisViewPager -> y
+    android.widget.LinearLayout analysisText -> z
+    android.widget.ImageView indi1 -> A
+    android.widget.ImageView indi2 -> B
+    android.widget.ImageView indi3 -> C
+    java.lang.Integer userGoal -> D
+    int totalStudied -> E
+    int memorized -> F
+    com.todpop.api.KakaoObject kakaoObj -> G
+    android.content.SharedPreferences userInfo -> H
+    android.content.SharedPreferences studyInfo -> I
+    android.widget.PopupWindow exitPopup -> J
+    android.widget.PopupWindow updatePopup -> K
+    boolean isMajor -> L
+    android.support.v4.app.DialogFragment analysisDialog -> M
+    com.todpop.api.TrackUsageTime tTime -> N
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onStart() -> onStart
     void onStop() -> onStop
     void onPause() -> onPause
-    java.lang.String getDate(int) -> b
     void onClickDrawer(android.view.View) -> onClickDrawer
     void onClickFAQ(android.view.View) -> onClickFAQ
     void onClickUserImg(android.view.View) -> onClickUserImg
     void onClickWordBook(android.view.View) -> onClickWordBook
     void onClickStudy(android.view.View) -> onClickStudy
-    void setContinuousStudyPercentage() -> f
-    void setMemorizePercentage() -> g
-    void setGoalProgress() -> h
-    void setUpdatePopup() -> i
-    void sendKakaoLink() -> j
+    void onClickAttendance(android.view.View) -> onClickAttendance
+    void onClickMemorizeRate(android.view.View) -> onClickMemorizeRate
+    void onClickAchieveRate(android.view.View) -> onClickAchieveRate
+    void setContinuousStudyPercentage() -> i
+    void setMemorizePercentage() -> j
+    void setGoalProgress() -> k
+    void setAnalysisDialog() -> l
+    void setUpdatePopup() -> m
+    int addTodayData(java.lang.String) -> b
+    int addPeriodData(java.lang.String,java.lang.String) -> a
+    void sendKakaoLink() -> n
     void onBackPressed() -> onBackPressed
-    java.util.ArrayList access$0() -> a
-    int access$1() -> b
-    android.support.v4.widget.DrawerLayout access$2(com.todpop.sweetenglish.HomeActivity) -> a
-    android.widget.ListView access$3(com.todpop.sweetenglish.HomeActivity) -> b
-    void access$4(com.todpop.sweetenglish.HomeActivity) -> c
-    void access$5(boolean) -> a
-    android.widget.PopupWindow access$6() -> c
-    android.widget.TextView access$7() -> d
-    android.widget.PopupWindow access$8(com.todpop.sweetenglish.HomeActivity) -> d
-    void access$9(int) -> a
-    boolean access$10() -> e
+    void access$0(com.todpop.sweetenglish.HomeActivity) -> a
+    void access$1(boolean) -> b
+    android.widget.PopupWindow access$2() -> f
+    android.widget.TextView access$3() -> g
+    android.widget.LinearLayout access$4(com.todpop.sweetenglish.HomeActivity) -> b
+    android.widget.ImageView access$5(com.todpop.sweetenglish.HomeActivity) -> c
+    android.widget.ImageView access$6(com.todpop.sweetenglish.HomeActivity) -> d
+    android.widget.ImageView access$7(com.todpop.sweetenglish.HomeActivity) -> e
+    android.widget.PopupWindow access$8(com.todpop.sweetenglish.HomeActivity) -> f
+    boolean access$9() -> h
 com.todpop.sweetenglish.HomeActivity$1 -> com.todpop.sweetenglish.a:
     com.todpop.sweetenglish.HomeActivity this$0 -> a
-    void handleMessage(android.os.Message) -> handleMessage
+    void onClick(android.view.View) -> onClick
 com.todpop.sweetenglish.HomeActivity$2 -> com.todpop.sweetenglish.b:
     com.todpop.sweetenglish.HomeActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeActivity$3 -> com.todpop.sweetenglish.c:
-    com.todpop.sweetenglish.HomeActivity this$0 -> a
-    void run() -> run
-com.todpop.sweetenglish.HomeActivity$4 -> com.todpop.sweetenglish.d:
-    com.todpop.sweetenglish.HomeActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeActivity$HomeDrawerItemClickListener -> com.todpop.sweetenglish.e:
+com.todpop.sweetenglish.HomeActivity$HomeDrawerItemClickListener -> com.todpop.sweetenglish.c:
     com.todpop.sweetenglish.HomeActivity this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.todpop.sweetenglish.HomeActivity$NoticeHandler -> com.todpop.sweetenglish.f:
+com.todpop.sweetenglish.HomeActivity$HomeOnPageChangeListener -> com.todpop.sweetenglish.d:
+    android.view.animation.Animation in -> a
+    android.view.animation.Animation out -> b
+    boolean isFromPageOne -> c
+    com.todpop.sweetenglish.HomeActivity this$0 -> d
+    void onPageScrollStateChanged(int) -> b
+    void onPageScrolled(int,float,int) -> a
+    void onPageSelected(int) -> a
+com.todpop.sweetenglish.HomeActivity$NoticeHandler -> com.todpop.sweetenglish.e:
     void handleMessage(android.os.Message) -> handleMessage
-com.todpop.sweetenglish.HomeDrawerAdapter -> com.todpop.sweetenglish.g:
+com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment -> com.todpop.sweetenglish.f:
+    java.util.ArrayList progressBarList -> a
+    java.util.ArrayList progressList -> b
+    int maxProgress -> d
+    int year -> e
+    com.todpop.sweetenglish.db.AnalysisDBHelper aHelper -> f
+    android.database.sqlite.SQLiteDatabase mDB -> g
+    android.os.Handler yearlyHandler -> c
+    com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onResume() -> q
+    void getProgress() -> b
+    int access$0(com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment) -> a
+com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment$1 -> com.todpop.sweetenglish.g:
+    com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment$2 -> com.todpop.sweetenglish.h:
+    com.todpop.sweetenglish.HomeAnalysisAchieveMonthlyFragment this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.HomeAnalysisAchievePagerAdapter -> com.todpop.sweetenglish.i:
+    android.support.v4.app.Fragment getItem(int) -> a
+    int getCount() -> b
+com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment -> com.todpop.sweetenglish.j:
+    java.util.ArrayList topViewList -> a
+    java.util.ArrayList bottomViewList -> b
+    java.util.ArrayList progressList -> c
+    android.view.View viewForWeek5 -> d
+    android.widget.LinearLayout llForWeek5 -> e
+    android.view.View viewForWeek6 -> f
+    android.widget.LinearLayout llForWeek6 -> g
+    java.util.ArrayList periodList -> h
+    com.todpop.sweetenglish.db.AnalysisDBHelper aHelper -> i
+    android.database.sqlite.SQLiteDatabase mDB -> Y
+    java.util.Calendar cal -> Z
+    java.lang.String month -> aa
+    int maxWeek -> ab
+    android.os.Handler weeklyHandler -> ac
+    com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onActivityCreated(android.os.Bundle) -> d
+    void onResume() -> q
+    void getProgress() -> b
+    void setPeriod() -> E
+    int access$0(com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment) -> a
+    java.util.ArrayList access$1(com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment) -> b
+    java.util.ArrayList access$2(com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment) -> c
+    java.util.ArrayList access$3(com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment) -> d
+    android.os.Handler access$4(com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment) -> e
+com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment$1 -> com.todpop.sweetenglish.k:
+    com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment$2 -> com.todpop.sweetenglish.l:
+    com.todpop.sweetenglish.HomeAnalysisAchieveWeeklyFragment this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment -> com.todpop.sweetenglish.m:
+    android.widget.TextView highestText -> a
+    android.view.View highestGraph -> b
+    android.widget.TextView currentText -> c
+    android.view.View currentGraph -> d
+    int highest -> e
+    int current -> f
+    com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    android.widget.TextView access$0(com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment) -> a
+    android.view.View access$1(com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment) -> b
+    android.widget.TextView access$2(com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment) -> c
+    android.view.View access$3(com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment) -> d
+    int access$4(com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment) -> e
+    int access$5(com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment) -> f
+com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment$AnimationAsync -> com.todpop.sweetenglish.n:
+    android.widget.LinearLayout$LayoutParams highestTopParams -> a
+    android.widget.LinearLayout$LayoutParams highestBottomParams -> b
+    android.widget.LinearLayout$LayoutParams currentTopParams -> c
+    android.widget.LinearLayout$LayoutParams currentBottomParams -> d
+    com.todpop.sweetenglish.HomeAnalysisAttendContinueFragment this$0 -> e
+    void onPreExecute() -> onPreExecute
+    java.lang.Void doInBackground(java.lang.Void[]) -> a
+    void onProgressUpdate(java.lang.Integer[]) -> a
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
+com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment -> com.todpop.sweetenglish.o:
+    android.widget.TextView[] graphTop -> a
+    android.widget.TextView[] graphBottom -> b
+    android.widget.TextView[] date -> c
+    android.widget.TextView[] times -> d
+    com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    android.widget.TextView[] access$0(com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment) -> a
+    android.widget.TextView[] access$1(com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment) -> b
+    android.widget.TextView[] access$2(com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment) -> c
+    android.widget.TextView[] access$3(com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment) -> d
+com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment$SetAttend -> com.todpop.sweetenglish.p:
+    int useMax -> a
+    int[] useTime -> b
+    int[] attendTime -> c
+    java.util.Calendar cal -> d
+    com.todpop.sweetenglish.HomeAnalysisAttendDailyFragment this$0 -> e
+    java.lang.Void doInBackground(java.lang.Void[]) -> a
+    void onPostExecute(java.lang.Void) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.todpop.sweetenglish.HomeAnalysisAttendPagerAdapter -> com.todpop.sweetenglish.q:
+    android.support.v4.app.Fragment getItem(int) -> a
+    int getCount() -> b
+com.todpop.sweetenglish.HomeAnalysisAttendTimeFragment -> com.todpop.sweetenglish.r:
+    com.todpop.api.LineGraphCanvas a -> a
+    java.util.ArrayList xAxis -> b
+    java.util.ArrayList values -> c
+    int maxValue -> d
+    com.todpop.sweetenglish.HomeAnalysisAttendTimeFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+com.todpop.sweetenglish.HomeAnalysisDialogFragment -> com.todpop.sweetenglish.s:
+    android.widget.TextSwitcher textSwitcher -> Y
+    android.widget.ImageView indi1 -> Z
+    android.widget.ImageView indi2 -> aa
+    android.widget.ImageView indi3 -> ab
+    com.todpop.sweetenglish.HomeAnalysisDialogFragment newInstance(int,java.lang.Integer,java.lang.Integer) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    android.widget.TextSwitcher access$0(com.todpop.sweetenglish.HomeAnalysisDialogFragment) -> a
+    android.widget.ImageView access$1(com.todpop.sweetenglish.HomeAnalysisDialogFragment) -> b
+    android.widget.ImageView access$2(com.todpop.sweetenglish.HomeAnalysisDialogFragment) -> c
+    android.widget.ImageView access$3(com.todpop.sweetenglish.HomeAnalysisDialogFragment) -> d
+com.todpop.sweetenglish.HomeAnalysisDialogFragment$1 -> com.todpop.sweetenglish.t:
+    com.todpop.sweetenglish.HomeAnalysisDialogFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.todpop.sweetenglish.HomeAnalysisDialogFragment$2 -> com.todpop.sweetenglish.u:
+    com.todpop.sweetenglish.HomeAnalysisDialogFragment this$0 -> a
+    android.view.View makeView() -> makeView
+com.todpop.sweetenglish.HomeAnalysisDialogFragment$AchievePageChangeListener -> com.todpop.sweetenglish.v:
+    com.todpop.sweetenglish.HomeAnalysisDialogFragment this$0 -> a
+    void onPageScrollStateChanged(int) -> b
+    void onPageScrolled(int,float,int) -> a
+    void onPageSelected(int) -> a
+com.todpop.sweetenglish.HomeAnalysisDialogFragment$AttendPageChangeListener -> com.todpop.sweetenglish.w:
+    com.todpop.sweetenglish.HomeAnalysisDialogFragment this$0 -> a
+    void onPageScrollStateChanged(int) -> b
+    void onPageScrolled(int,float,int) -> a
+    void onPageSelected(int) -> a
+com.todpop.sweetenglish.HomeAnalysisDialogFragment$MemorizePageChangeListener -> com.todpop.sweetenglish.x:
+    com.todpop.sweetenglish.HomeAnalysisDialogFragment this$0 -> a
+    void onPageScrollStateChanged(int) -> b
+    void onPageScrolled(int,float,int) -> a
+    void onPageSelected(int) -> a
+com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment -> com.todpop.sweetenglish.y:
+    int total -> c
+    int memorized -> d
+    int percent -> e
+    com.todpop.api.MemorizedRateAllCanvas a -> f
+    android.widget.TextView percentTextView -> g
+    android.os.Handler countHandler -> a
+    android.os.Handler percentHandler -> b
+    com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment init(int,int) -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onResume() -> q
+    com.todpop.api.MemorizedRateAllCanvas access$0(com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment) -> a
+    int access$1(com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment) -> b
+    android.widget.TextView access$2(com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment) -> c
+    int access$3(com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment) -> d
+    int access$4(com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment) -> e
+com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment$1 -> com.todpop.sweetenglish.z:
+    com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment$2 -> com.todpop.sweetenglish.aa:
+    com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment$3 -> com.todpop.sweetenglish.ab:
+    com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment$4 -> com.todpop.sweetenglish.ac:
+    com.todpop.sweetenglish.HomeAnalysisMemorizedAllFragment this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment -> com.todpop.sweetenglish.ad:
+    java.util.ArrayList categoryMemo -> a
+    java.util.ArrayList progressBarList -> b
+    int maxProgress -> c
+    com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onResume() -> q
+    java.util.ArrayList access$0(com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment) -> a
+    java.util.ArrayList access$1(com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment) -> b
+    void access$2(com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment,int) -> a
+    int access$3(com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment) -> c
+com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment$ProgressAsyncTask -> com.todpop.sweetenglish.ae:
+    com.todpop.sweetenglish.HomeAnalysisMemorizedCategoryFragment this$0 -> a
+    void onPreExecute() -> onPreExecute
+    java.lang.Void doInBackground(java.lang.Void[]) -> a
+    void onProgressUpdate(java.lang.Integer[]) -> a
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+    void onProgressUpdate(java.lang.Object[]) -> onProgressUpdate
+com.todpop.sweetenglish.HomeAnalysisMemorizedPagerAdapter -> com.todpop.sweetenglish.af:
+    int total -> a
+    int memorized -> b
+    android.support.v4.app.Fragment getItem(int) -> a
+    int getCount() -> b
+com.todpop.sweetenglish.HomeAnalysisMemorizedTimeFragment -> com.todpop.sweetenglish.ag:
+    com.todpop.api.LineGraphCanvas a -> a
+    java.util.ArrayList xAxis -> b
+    java.util.ArrayList values -> c
+    com.todpop.sweetenglish.HomeAnalysisMemorizedTimeFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void addFromQuery(android.database.Cursor) -> a
+com.todpop.sweetenglish.HomeDailyCircleFragment -> com.todpop.sweetenglish.ah:
+    com.todpop.sweetenglish.db.WordDBHelper wHelper -> b
+    android.content.SharedPreferences userInfo -> a
+    android.support.v4.app.DialogFragment historyDialog -> c
+    com.todpop.sweetenglish.HomeDailyCircleFragment init(int) -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onClick(android.view.View) -> onClick
+com.todpop.sweetenglish.HomeDailyFragmentPagerAdapter -> com.todpop.sweetenglish.ai:
+    android.support.v4.app.Fragment getItem(int) -> a
+    int getCount() -> b
+    int getItemPosition(java.lang.Object) -> a
+com.todpop.sweetenglish.HomeDailyGraphFragment -> com.todpop.sweetenglish.aj:
+    java.util.ArrayList progressBarList -> b
+    java.util.ArrayList progressList -> c
+    int maxProgress -> d
+    com.todpop.sweetenglish.db.AnalysisDBHelper aHelper -> a
+    android.os.Handler progressHandler -> e
+    com.todpop.sweetenglish.HomeDailyGraphFragment init() -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    void onResume() -> q
+    void setProgressList() -> b
+    java.util.ArrayList access$0(com.todpop.sweetenglish.HomeDailyGraphFragment) -> a
+    java.util.ArrayList access$1(com.todpop.sweetenglish.HomeDailyGraphFragment) -> b
+    void access$2(com.todpop.sweetenglish.HomeDailyGraphFragment) -> c
+    int access$3(com.todpop.sweetenglish.HomeDailyGraphFragment) -> d
+    android.os.Handler access$4(com.todpop.sweetenglish.HomeDailyGraphFragment) -> e
+com.todpop.sweetenglish.HomeDailyGraphFragment$1 -> com.todpop.sweetenglish.ak:
+    com.todpop.sweetenglish.HomeDailyGraphFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.todpop.sweetenglish.HomeDailyGraphFragment$2 -> com.todpop.sweetenglish.al:
+    com.todpop.sweetenglish.HomeDailyGraphFragment this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.HomeDailyHistoryArrayAdapter -> com.todpop.sweetenglish.am:
+    com.todpop.sweetenglish.HomeDailyHistoryArrayAdapter$ViewHolder viewHolder -> a
+    android.view.LayoutInflater inflater -> b
+    android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
+com.todpop.sweetenglish.HomeDailyHistoryArrayAdapter$ViewHolder -> com.todpop.sweetenglish.an:
+    android.widget.ImageView newIv -> a
+    android.widget.TextView eng -> b
+    android.widget.TextView kor -> c
+    android.widget.ImageView ox -> d
+    com.todpop.sweetenglish.HomeDailyHistoryArrayAdapter this$0 -> e
+com.todpop.sweetenglish.HomeDailyHistoryDialogFragment -> com.todpop.sweetenglish.ao:
+    java.util.ArrayList engKorOXList -> Z
+    com.todpop.sweetenglish.db.DailyHistoryDBHelper dHelper -> aa
+    android.widget.ListView listView -> ab
+    android.os.Handler handler -> Y
+    com.todpop.sweetenglish.HomeDailyHistoryDialogFragment newInstance(int) -> a
+    void onCreate(android.os.Bundle) -> a
+    android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
+    android.widget.ListView access$0(com.todpop.sweetenglish.HomeDailyHistoryDialogFragment) -> a
+    java.util.ArrayList access$1(com.todpop.sweetenglish.HomeDailyHistoryDialogFragment) -> b
+    com.todpop.sweetenglish.db.DailyHistoryDBHelper access$2(com.todpop.sweetenglish.HomeDailyHistoryDialogFragment) -> c
+com.todpop.sweetenglish.HomeDailyHistoryDialogFragment$1 -> com.todpop.sweetenglish.ap:
+    com.todpop.sweetenglish.HomeDailyHistoryDialogFragment this$0 -> a
+    void handleMessage(android.os.Message) -> handleMessage
+com.todpop.sweetenglish.HomeDailyHistoryDialogFragment$2 -> com.todpop.sweetenglish.aq:
+    com.todpop.sweetenglish.HomeDailyHistoryDialogFragment this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.todpop.sweetenglish.HomeDailyHistoryDialogFragment$3 -> com.todpop.sweetenglish.ar:
+    com.todpop.sweetenglish.HomeDailyHistoryDialogFragment this$0 -> a
+    int val$day -> b
+    void run() -> run
+com.todpop.sweetenglish.HomeDrawerAdapter -> com.todpop.sweetenglish.as:
     android.content.Context context -> a
     com.todpop.sweetenglish.HomeDrawerAdapter$ViewHolder viewHolder -> b
     android.view.LayoutInflater inflater -> c
@@ -10039,12 +10535,13 @@ com.todpop.sweetenglish.HomeDrawerAdapter -> com.todpop.sweetenglish.g:
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.todpop.sweetenglish.HomeDrawerAdapter$ViewHolder -> com.todpop.sweetenglish.h:
+com.todpop.sweetenglish.HomeDrawerAdapter$ViewHolder -> com.todpop.sweetenglish.at:
     android.widget.ImageView img -> a
     android.widget.TextView userId -> b
     android.widget.TextView userLv -> c
     com.todpop.sweetenglish.HomeDrawerAdapter this$0 -> d
 com.todpop.sweetenglish.HomeMoreContact -> com.todpop.sweetenglish.HomeMoreContact:
+    com.todpop.api.TrackUsageTime tTime -> a
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10052,11 +10549,12 @@ com.todpop.sweetenglish.HomeMoreContact -> com.todpop.sweetenglish.HomeMoreConta
 com.todpop.sweetenglish.HomeMoreFAQ -> com.todpop.sweetenglish.HomeMoreFAQ:
     java.util.ArrayList titleArray -> a
     java.util.ArrayList itemArray -> b
+    com.todpop.api.TrackUsageTime tTime -> c
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
     void onClickBack(android.view.View) -> onClickBack
-com.todpop.sweetenglish.HomeMoreFAQ$GetHelp -> com.todpop.sweetenglish.i:
+com.todpop.sweetenglish.HomeMoreFAQ$GetHelp -> com.todpop.sweetenglish.au:
     org.apache.http.impl.client.DefaultHttpClient httpClient -> a
     com.todpop.sweetenglish.HomeMoreFAQ this$0 -> b
     org.json.JSONObject doInBackground(java.lang.String[]) -> a
@@ -10064,7 +10562,7 @@ com.todpop.sweetenglish.HomeMoreFAQ$GetHelp -> com.todpop.sweetenglish.i:
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
     com.todpop.sweetenglish.HomeMoreFAQ access$3(com.todpop.sweetenglish.HomeMoreFAQ$GetHelp) -> a
-com.todpop.sweetenglish.HomeMoreFAQ$GetHelp$1 -> com.todpop.sweetenglish.j:
+com.todpop.sweetenglish.HomeMoreFAQ$GetHelp$1 -> com.todpop.sweetenglish.av:
     com.todpop.sweetenglish.HomeMoreFAQ$GetHelp this$1 -> a
     java.lang.Object getChild(int,int) -> getChild
     long getChildId(int,int) -> getChildId
@@ -10080,12 +10578,13 @@ com.todpop.sweetenglish.HomeMoreFAQ$GetHelp$1 -> com.todpop.sweetenglish.j:
 com.todpop.sweetenglish.HomeMoreGoal -> com.todpop.sweetenglish.HomeMoreGoal:
     java.util.ArrayList titleArray -> a
     java.util.ArrayList itemArray -> b
-    int curFrontNum -> c
-    int curBackNum -> d
-    android.widget.ImageButton ibFrontNum -> e
-    android.widget.ImageButton ibBackNum -> f
-    int goalDailyWords -> g
-    android.content.SharedPreferences sp -> h
+    int curFrontNum -> d
+    int curBackNum -> e
+    android.widget.ImageButton ibFrontNum -> f
+    android.widget.ImageButton ibBackNum -> g
+    int goalDailyWords -> h
+    android.content.SharedPreferences sp -> i
+    com.todpop.api.TrackUsageTime tTime -> c
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10100,6 +10599,7 @@ com.todpop.sweetenglish.HomeMoreLockerBackgroundSetting -> com.todpop.sweetengli
     android.widget.ImageView latestPic -> a
     android.widget.TextView totalPic -> b
     android.content.SharedPreferences$Editor settingEditor -> c
+    com.todpop.api.TrackUsageTime tTime -> d
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10120,13 +10620,14 @@ com.todpop.sweetenglish.HomeMoreLockerSetting -> com.todpop.sweetenglish.HomeMor
     android.widget.TextView time -> i
     android.widget.TextView apm -> j
     android.widget.TextView date -> k
-    java.text.SimpleDateFormat timeFormat -> p
-    java.text.SimpleDateFormat apmFormat -> q
-    java.text.SimpleDateFormat dateFormat -> r
+    java.text.SimpleDateFormat timeFormat -> q
+    java.text.SimpleDateFormat apmFormat -> r
+    java.text.SimpleDateFormat dateFormat -> s
     android.content.SharedPreferences setting -> l
     android.content.SharedPreferences$Editor settingEditor -> m
     android.view.animation.Animation fadeOut -> n
     android.view.animation.Animation fadeIn -> o
+    com.todpop.api.TrackUsageTime tTime -> p
     void onCreate(android.os.Bundle) -> onCreate
     void onResume() -> onResume
     void onStart() -> onStart
@@ -10137,10 +10638,10 @@ com.todpop.sweetenglish.HomeMoreLockerSetting -> com.todpop.sweetenglish.HomeMor
     void onClickBack(android.view.View) -> onClickBack
     void disable() -> b
     void access$0(com.todpop.sweetenglish.HomeMoreLockerSetting) -> a
-com.todpop.sweetenglish.HomeMoreLockerSetting$CheckBoxChangeListener -> com.todpop.sweetenglish.k:
+com.todpop.sweetenglish.HomeMoreLockerSetting$CheckBoxChangeListener -> com.todpop.sweetenglish.aw:
     com.todpop.sweetenglish.HomeMoreLockerSetting this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.todpop.sweetenglish.HomeMoreLockerSetting$SeekBarChangeListener -> com.todpop.sweetenglish.l:
+com.todpop.sweetenglish.HomeMoreLockerSetting$SeekBarChangeListener -> com.todpop.sweetenglish.ax:
     com.todpop.sweetenglish.HomeMoreLockerSetting this$0 -> a
     void onStopTrackingTouch(android.widget.SeekBar) -> onStopTrackingTouch
     void onStartTrackingTouch(android.widget.SeekBar) -> onStartTrackingTouch
@@ -10155,12 +10656,13 @@ com.todpop.sweetenglish.HomeMoreLockerWordSetting -> com.todpop.sweetenglish.Hom
     int selected -> g
     android.content.SharedPreferences setting -> h
     android.content.SharedPreferences$Editor settingEditor -> i
+    com.todpop.api.TrackUsageTime tTime -> j
     void onCreate(android.os.Bundle) -> onCreate
     void setList() -> a
     void onStart() -> onStart
     void onStop() -> onStop
     void onClickBack(android.view.View) -> onClickBack
-com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter -> com.todpop.sweetenglish.m:
+com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter -> com.todpop.sweetenglish.ay:
     android.content.Context mContext -> b
     java.util.ArrayList mArrGroups -> c
     java.lang.Boolean mIsCategory -> d
@@ -10170,27 +10672,28 @@ com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter -
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     com.todpop.sweetenglish.HomeMoreLockerWordSetting access$0(com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter) -> a
-com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter$1 -> com.todpop.sweetenglish.n:
+com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter$1 -> com.todpop.sweetenglish.az:
     com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter this$1 -> a
     int val$position -> b
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter$2 -> com.todpop.sweetenglish.o:
+com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter$2 -> com.todpop.sweetenglish.ba:
     com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter this$1 -> a
     int val$position -> b
     java.lang.String val$item -> c
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter$ViewHolder -> com.todpop.sweetenglish.p:
+com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter$ViewHolder -> com.todpop.sweetenglish.bb:
     android.widget.CheckBox chk -> a
     android.widget.TextView title -> b
     com.todpop.sweetenglish.HomeMoreLockerWordSetting$LockerWordSettingListAdapter this$1 -> c
 com.todpop.sweetenglish.HomeMoreNotice -> com.todpop.sweetenglish.HomeMoreNotice:
     java.util.ArrayList titleArray -> a
     java.util.ArrayList itemArray -> b
+    com.todpop.api.TrackUsageTime tTime -> c
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
     void onClickBack(android.view.View) -> onClickBack
-com.todpop.sweetenglish.HomeMoreNotice$GetHelp -> com.todpop.sweetenglish.q:
+com.todpop.sweetenglish.HomeMoreNotice$GetHelp -> com.todpop.sweetenglish.bc:
     org.apache.http.impl.client.DefaultHttpClient httpClient -> a
     com.todpop.sweetenglish.HomeMoreNotice this$0 -> b
     org.json.JSONObject doInBackground(java.lang.String[]) -> a
@@ -10198,7 +10701,7 @@ com.todpop.sweetenglish.HomeMoreNotice$GetHelp -> com.todpop.sweetenglish.q:
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
     com.todpop.sweetenglish.HomeMoreNotice access$3(com.todpop.sweetenglish.HomeMoreNotice$GetHelp) -> a
-com.todpop.sweetenglish.HomeMoreNotice$GetHelp$1 -> com.todpop.sweetenglish.r:
+com.todpop.sweetenglish.HomeMoreNotice$GetHelp$1 -> com.todpop.sweetenglish.bd:
     com.todpop.sweetenglish.HomeMoreNotice$GetHelp this$1 -> a
     java.lang.Object getChild(int,int) -> getChild
     long getChildId(int,int) -> getChildId
@@ -10212,33 +10715,34 @@ com.todpop.sweetenglish.HomeMoreNotice$GetHelp$1 -> com.todpop.sweetenglish.r:
     boolean isChildSelectable(int,int) -> isChildSelectable
     boolean hasStableIds() -> hasStableIds
 com.todpop.sweetenglish.HomeMoreSetting -> com.todpop.sweetenglish.HomeMoreSetting:
-    android.net.Uri mImageCaptureUri -> l
+    android.net.Uri mImageCaptureUri -> m
     android.content.SharedPreferences setting -> a
     android.content.SharedPreferences$Editor settingEdit -> b
     android.content.SharedPreferences userInfo -> c
     android.content.SharedPreferences$Editor userInfoEdit -> d
     android.content.SharedPreferences studyInfo -> e
     android.content.SharedPreferences$Editor studyInfoEdit -> f
-    java.lang.String nickname -> m
-    boolean isPopupEnabled -> n
-    java.lang.String alarmTime -> o
-    android.widget.EditText etNickName -> p
-    android.widget.TextView tvFrontTime -> q
-    android.widget.TextView tvBackTime -> r
-    android.app.AlertDialog userPicDialog -> s
-    android.app.TimePickerDialog$OnTimeSetListener timeSetListener -> t
-    android.widget.CheckBox swAlarmOnOff -> u
-    android.widget.CheckBox swPopupOnOff -> v
-    boolean isAlarmEnabled -> w
-    android.widget.LinearLayout llSettingAlarm -> x
-    android.widget.ImageView ivMyPicture -> y
-    android.graphics.Bitmap bmpMyPicture -> z
-    com.todpop.api.FileManager fm -> A
+    java.lang.String nickname -> n
+    boolean isPopupEnabled -> o
+    java.lang.String alarmTime -> p
+    android.widget.EditText etNickName -> q
+    android.widget.TextView tvFrontTime -> r
+    android.widget.TextView tvBackTime -> s
+    android.app.AlertDialog userPicDialog -> t
+    android.app.TimePickerDialog$OnTimeSetListener timeSetListener -> u
+    android.widget.CheckBox swAlarmOnOff -> v
+    android.widget.CheckBox swPopupOnOff -> w
+    boolean isAlarmEnabled -> x
+    android.widget.LinearLayout llSettingAlarm -> y
+    android.widget.ImageView ivMyPicture -> z
+    android.graphics.Bitmap bmpMyPicture -> A
+    com.todpop.api.FileManager fm -> B
     android.app.NotificationManager notificationManager -> g
     android.app.AlarmManager alarmManager -> h
     android.view.animation.Animation fadeOut -> i
     android.view.animation.Animation fadeIn -> j
     android.widget.PopupWindow popupWindow -> k
+    com.todpop.api.TrackUsageTime tTime -> l
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10273,25 +10777,25 @@ com.todpop.sweetenglish.HomeMoreSetting -> com.todpop.sweetenglish.HomeMoreSetti
     void access$13(com.todpop.sweetenglish.HomeMoreSetting,android.app.AlertDialog) -> a
     void access$14(com.todpop.sweetenglish.HomeMoreSetting) -> j
     void access$15(com.todpop.sweetenglish.HomeMoreSetting) -> k
-com.todpop.sweetenglish.HomeMoreSetting$1 -> com.todpop.sweetenglish.s:
+com.todpop.sweetenglish.HomeMoreSetting$1 -> com.todpop.sweetenglish.be:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onTimeSet(android.widget.TimePicker,int,int) -> onTimeSet
-com.todpop.sweetenglish.HomeMoreSetting$2 -> com.todpop.sweetenglish.t:
+com.todpop.sweetenglish.HomeMoreSetting$2 -> com.todpop.sweetenglish.bf:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.todpop.sweetenglish.HomeMoreSetting$3 -> com.todpop.sweetenglish.u:
+com.todpop.sweetenglish.HomeMoreSetting$3 -> com.todpop.sweetenglish.bg:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.todpop.sweetenglish.HomeMoreSetting$4 -> com.todpop.sweetenglish.v:
+com.todpop.sweetenglish.HomeMoreSetting$4 -> com.todpop.sweetenglish.bh:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeMoreSetting$5 -> com.todpop.sweetenglish.w:
+com.todpop.sweetenglish.HomeMoreSetting$5 -> com.todpop.sweetenglish.bi:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeMoreSetting$6 -> com.todpop.sweetenglish.x:
+com.todpop.sweetenglish.HomeMoreSetting$6 -> com.todpop.sweetenglish.bj:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeMoreSetting$7 -> com.todpop.sweetenglish.y:
+com.todpop.sweetenglish.HomeMoreSetting$7 -> com.todpop.sweetenglish.bk:
     com.todpop.sweetenglish.HomeMoreSetting this$0 -> a
     void onClick(android.view.View) -> onClick
 com.todpop.sweetenglish.HomeWordListGroup -> com.todpop.sweetenglish.HomeWordListGroup:
@@ -10307,6 +10811,7 @@ com.todpop.sweetenglish.HomeWordListGroup -> com.todpop.sweetenglish.HomeWordLis
     android.widget.ImageView ivPopupNewGroupSave -> j
     boolean isEditMode -> k
     android.widget.Button btnEditbarDel -> l
+    com.todpop.api.TrackUsageTime tTime -> m
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10325,32 +10830,32 @@ com.todpop.sweetenglish.HomeWordListGroup -> com.todpop.sweetenglish.HomeWordLis
     void access$4(com.todpop.sweetenglish.HomeWordListGroup) -> e
     com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter access$5(com.todpop.sweetenglish.HomeWordListGroup) -> f
     java.util.ArrayList access$6(com.todpop.sweetenglish.HomeWordListGroup) -> g
-com.todpop.sweetenglish.HomeWordListGroup$1 -> com.todpop.sweetenglish.z:
+com.todpop.sweetenglish.HomeWordListGroup$1 -> com.todpop.sweetenglish.bl:
     com.todpop.sweetenglish.HomeWordListGroup this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListGroup$2 -> com.todpop.sweetenglish.aa:
+com.todpop.sweetenglish.HomeWordListGroup$2 -> com.todpop.sweetenglish.bm:
     com.todpop.sweetenglish.HomeWordListGroup this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListGroup$3 -> com.todpop.sweetenglish.ab:
+com.todpop.sweetenglish.HomeWordListGroup$3 -> com.todpop.sweetenglish.bn:
     com.todpop.sweetenglish.HomeWordListGroup this$0 -> a
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.todpop.sweetenglish.HomeWordListGroup$WordGroup -> com.todpop.sweetenglish.ac:
+com.todpop.sweetenglish.HomeWordListGroup$WordGroup -> com.todpop.sweetenglish.bo:
     java.lang.String title -> a
     int cnt -> b
     boolean isChecked -> c
     com.todpop.sweetenglish.HomeWordListGroup this$0 -> d
-com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter -> com.todpop.sweetenglish.ad:
+com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter -> com.todpop.sweetenglish.bp:
     java.util.ArrayList arrGroups -> a
     com.todpop.sweetenglish.HomeWordListGroup this$0 -> b
     int getCount() -> getCount
     java.lang.Object getItem(int) -> getItem
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter$1 -> com.todpop.sweetenglish.ae:
+com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter$1 -> com.todpop.sweetenglish.bq:
     com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter this$1 -> a
     com.todpop.sweetenglish.HomeWordListGroup$WordGroup val$item -> b
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter$ViewHolder -> com.todpop.sweetenglish.af:
+com.todpop.sweetenglish.HomeWordListGroup$WordGroupAdapter$ViewHolder -> com.todpop.sweetenglish.br:
     android.widget.CheckBox delChk -> a
     android.widget.TextView title -> b
     android.widget.TextView cnt -> c
@@ -10382,6 +10887,7 @@ com.todpop.sweetenglish.HomeWordListRenewal -> com.todpop.sweetenglish.HomeWordL
     android.widget.ImageView ivPopupNewGroupCancel -> v
     android.widget.ImageView ivPopupNewGroupSave -> w
     android.widget.TextView tvTitle -> x
+    com.todpop.api.TrackUsageTime tTime -> y
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10398,7 +10904,6 @@ com.todpop.sweetenglish.HomeWordListRenewal -> com.todpop.sweetenglish.HomeWordL
     void allSelect(android.view.View) -> allSelect
     void exportWords(android.view.View) -> exportWords
     void deleteWords(android.view.View) -> deleteWords
-    java.lang.String getDate(int) -> a
     void onClickBack(android.view.View) -> onClickBack
     void onResume() -> onResume
     com.todpop.sweetenglish.db.WordDBHelper access$0(com.todpop.sweetenglish.HomeWordListRenewal) -> a
@@ -10416,48 +10921,48 @@ com.todpop.sweetenglish.HomeWordListRenewal -> com.todpop.sweetenglish.HomeWordL
     android.widget.PopupWindow access$12(com.todpop.sweetenglish.HomeWordListRenewal) -> l
     com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupItem access$13(com.todpop.sweetenglish.HomeWordListRenewal) -> m
     void access$14(com.todpop.sweetenglish.HomeWordListRenewal,com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupItem) -> a
-com.todpop.sweetenglish.HomeWordListRenewal$1 -> com.todpop.sweetenglish.ag:
+com.todpop.sweetenglish.HomeWordListRenewal$1 -> com.todpop.sweetenglish.bs:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     boolean onEditorAction(android.widget.TextView,int,android.view.KeyEvent) -> onEditorAction
-com.todpop.sweetenglish.HomeWordListRenewal$10 -> com.todpop.sweetenglish.ah:
+com.todpop.sweetenglish.HomeWordListRenewal$10 -> com.todpop.sweetenglish.bt:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     android.widget.PopupWindow val$popupExport -> b
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$11 -> com.todpop.sweetenglish.ai:
+com.todpop.sweetenglish.HomeWordListRenewal$11 -> com.todpop.sweetenglish.bu:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     android.widget.PopupWindow val$popupExport -> b
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$2 -> com.todpop.sweetenglish.aj:
+com.todpop.sweetenglish.HomeWordListRenewal$2 -> com.todpop.sweetenglish.bv:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
-com.todpop.sweetenglish.HomeWordListRenewal$3 -> com.todpop.sweetenglish.ak:
+com.todpop.sweetenglish.HomeWordListRenewal$3 -> com.todpop.sweetenglish.bw:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
-com.todpop.sweetenglish.HomeWordListRenewal$4 -> com.todpop.sweetenglish.al:
+com.todpop.sweetenglish.HomeWordListRenewal$4 -> com.todpop.sweetenglish.bx:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$5 -> com.todpop.sweetenglish.am:
+com.todpop.sweetenglish.HomeWordListRenewal$5 -> com.todpop.sweetenglish.by:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$6 -> com.todpop.sweetenglish.an:
+com.todpop.sweetenglish.HomeWordListRenewal$6 -> com.todpop.sweetenglish.bz:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$7 -> com.todpop.sweetenglish.ao:
+com.todpop.sweetenglish.HomeWordListRenewal$7 -> com.todpop.sweetenglish.ca:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$8 -> com.todpop.sweetenglish.ap:
+com.todpop.sweetenglish.HomeWordListRenewal$8 -> com.todpop.sweetenglish.cb:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$9 -> com.todpop.sweetenglish.aq:
+com.todpop.sweetenglish.HomeWordListRenewal$9 -> com.todpop.sweetenglish.cc:
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> a
     java.util.ArrayList val$arrGroups -> b
     com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter val$adapter -> c
     void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter -> com.todpop.sweetenglish.ar:
+com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter -> com.todpop.sweetenglish.cd:
     java.util.ArrayList arrGroups -> a
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> b
     int getCount() -> getCount
@@ -10465,16 +10970,16 @@ com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter -> com.todpop.swee
     long getItemId(int) -> getItemId
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     java.lang.Object getItem(int) -> getItem
-com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter$ViewHolder -> com.todpop.sweetenglish.as:
+com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter$ViewHolder -> com.todpop.sweetenglish.ce:
     android.widget.TextView groupName -> a
     android.widget.TextView cnt -> b
     com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupAdapter this$1 -> c
-com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupItem -> com.todpop.sweetenglish.at:
+com.todpop.sweetenglish.HomeWordListRenewal$GroupPopupItem -> com.todpop.sweetenglish.cf:
     java.lang.String groupName -> a
     int cnt -> b
     boolean isSelected -> c
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> d
-com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter -> com.todpop.sweetenglish.au:
+com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter -> com.todpop.sweetenglish.cg:
     android.content.Context maincon -> a
     android.view.LayoutInflater Inflater -> b
     java.util.ArrayList arSrc -> c
@@ -10486,27 +10991,27 @@ com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter -> com.todpop.sw
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     java.lang.Object getItem(int) -> getItem
     com.todpop.sweetenglish.HomeWordListRenewal access$1(com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter) -> a
-com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter$1 -> com.todpop.sweetenglish.av:
+com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter$1 -> com.todpop.sweetenglish.ch:
     com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter this$1 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter$2 -> com.todpop.sweetenglish.aw:
+com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter$2 -> com.todpop.sweetenglish.ci:
     com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewAdapter this$1 -> a
     int val$position -> b
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewItem -> com.todpop.sweetenglish.ax:
+com.todpop.sweetenglish.HomeWordListRenewal$HomeWordViewItem -> com.todpop.sweetenglish.cj:
     java.lang.String word1 -> a
     java.lang.String word2 -> b
     boolean isChecked -> c
     boolean isMine -> d
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> e
-com.todpop.sweetenglish.HomeWordListRenewal$SerachWord -> com.todpop.sweetenglish.ay:
+com.todpop.sweetenglish.HomeWordListRenewal$SerachWord -> com.todpop.sweetenglish.ck:
     org.apache.http.impl.client.DefaultHttpClient httpClient -> a
     com.todpop.sweetenglish.HomeWordListRenewal this$0 -> b
     org.json.JSONObject doInBackground(java.lang.String[]) -> a
     void onPostExecute(org.json.JSONObject) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.todpop.sweetenglish.HomeWordListRenewal$ViewHolder -> com.todpop.sweetenglish.az:
+com.todpop.sweetenglish.HomeWordListRenewal$ViewHolder -> com.todpop.sweetenglish.cl:
     android.widget.TextView textEn -> a
     android.widget.TextView textKr -> b
     android.widget.CheckBox select -> c
@@ -10555,31 +11060,31 @@ com.todpop.sweetenglish.LockScreen -> com.todpop.sweetenglish.LockScreen:
     void access$1(com.todpop.sweetenglish.LockScreen,boolean) -> a
     void access$2(com.todpop.sweetenglish.LockScreen) -> a
     void access$3(com.todpop.sweetenglish.LockScreen) -> b
-com.todpop.sweetenglish.LockScreen$1 -> com.todpop.sweetenglish.ba:
+com.todpop.sweetenglish.LockScreen$1 -> com.todpop.sweetenglish.cm:
     com.todpop.sweetenglish.LockScreen this$0 -> a
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
-com.todpop.sweetenglish.LockScreen$2 -> com.todpop.sweetenglish.bb:
+com.todpop.sweetenglish.LockScreen$2 -> com.todpop.sweetenglish.cn:
     com.todpop.sweetenglish.LockScreen this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.LockScreen$3 -> com.todpop.sweetenglish.bc:
+com.todpop.sweetenglish.LockScreen$3 -> com.todpop.sweetenglish.co:
     com.todpop.sweetenglish.LockScreen this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.LockScreen$DoneHandler -> com.todpop.sweetenglish.bd:
+com.todpop.sweetenglish.LockScreen$DoneHandler -> com.todpop.sweetenglish.cp:
     com.todpop.sweetenglish.LockScreen this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.todpop.sweetenglish.LockScreen$FinishHandler -> com.todpop.sweetenglish.be:
+com.todpop.sweetenglish.LockScreen$FinishHandler -> com.todpop.sweetenglish.cq:
     com.todpop.sweetenglish.LockScreen this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.todpop.sweetenglish.LockScreen$LockScreenPageChangeListener -> com.todpop.sweetenglish.bf:
+com.todpop.sweetenglish.LockScreen$LockScreenPageChangeListener -> com.todpop.sweetenglish.cr:
     int lastState -> b
     com.todpop.sweetenglish.LockScreen this$0 -> a
     void onPageScrollStateChanged(int) -> b
     void onPageScrolled(int,float,int) -> a
     void onPageSelected(int) -> a
-com.todpop.sweetenglish.LockScreenEngKorSet -> com.todpop.sweetenglish.bg:
+com.todpop.sweetenglish.LockScreenEngKorSet -> com.todpop.sweetenglish.cs:
     java.lang.String english -> a
     java.lang.String korean -> b
-com.todpop.sweetenglish.LockScreenPagerAdapter -> com.todpop.sweetenglish.bh:
+com.todpop.sweetenglish.LockScreenPagerAdapter -> com.todpop.sweetenglish.ct:
     android.view.LayoutInflater mInflater -> a
     java.util.ArrayList mWordList -> b
     int getCount() -> b
@@ -10595,10 +11100,10 @@ com.todpop.sweetenglish.LockScreenReceiver -> com.todpop.sweetenglish.LockScreen
     void onReceive(android.content.Context,android.content.Intent) -> onReceive
     void disableKeyguard() -> a
     void access$0(com.todpop.sweetenglish.LockScreenReceiver,boolean) -> a
-com.todpop.sweetenglish.LockScreenReceiver$1 -> com.todpop.sweetenglish.bi:
+com.todpop.sweetenglish.LockScreenReceiver$1 -> com.todpop.sweetenglish.cu:
     com.todpop.sweetenglish.LockScreenReceiver this$0 -> a
     void onCallStateChanged(int,java.lang.String) -> onCallStateChanged
-com.todpop.sweetenglish.LockScreenSeekBarListener -> com.todpop.sweetenglish.bj:
+com.todpop.sweetenglish.LockScreenSeekBarListener -> com.todpop.sweetenglish.cv:
     android.content.Context context -> b
     android.os.Vibrator vibrator -> c
     boolean isFromCenter -> a
@@ -10623,24 +11128,25 @@ com.todpop.sweetenglish.LockScreenService -> com.todpop.sweetenglish.LockScreenS
     int onStartCommand(android.content.Intent,int,int) -> onStartCommand
     void onDestroy() -> onDestroy
 com.todpop.sweetenglish.OpeningActivity -> com.todpop.sweetenglish.OpeningActivity:
-    com.todpop.sweetenglish.db.WordDBHelper dbHelper -> a
-    boolean didSawHomeTuto -> b
+    boolean didSawHomeTuto -> a
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
-    void startLockService() -> a
-    java.lang.String getDate(int) -> a
-com.todpop.sweetenglish.OpeningActivity$1 -> com.todpop.sweetenglish.bk:
+    void checkAndStartLockService() -> a
+    java.lang.String getDate(int,java.util.Calendar) -> a
+    java.lang.String access$0(com.todpop.sweetenglish.OpeningActivity,int,java.util.Calendar) -> a
+com.todpop.sweetenglish.OpeningActivity$1 -> com.todpop.sweetenglish.cw:
     com.todpop.sweetenglish.OpeningActivity this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
-com.todpop.sweetenglish.OpeningActivity$2 -> com.todpop.sweetenglish.bl:
+com.todpop.sweetenglish.OpeningActivity$2 -> com.todpop.sweetenglish.cx:
     com.todpop.sweetenglish.OpeningActivity this$0 -> a
     void run() -> run
 com.todpop.sweetenglish.SetNicknameActivity -> com.todpop.sweetenglish.SetNicknameActivity:
     android.widget.EditText nickText -> a
     android.content.SharedPreferences$Editor userInfoEdit -> b
+    com.todpop.api.TrackUsageTime tTime -> c
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10672,6 +11178,7 @@ com.todpop.sweetenglish.StudyBegin -> com.todpop.sweetenglish.StudyBegin:
     android.database.sqlite.SQLiteDatabase pDB -> K
     com.todpop.api.LoadingDialog loadingDialog -> L
     com.todpop.api.request.DownloadAndPlayPronounce player -> M
+    com.todpop.api.TrackUsageTime tTime -> N
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10699,63 +11206,63 @@ com.todpop.sweetenglish.StudyBegin -> com.todpop.sweetenglish.StudyBegin:
     android.widget.ImageView access$16(com.todpop.sweetenglish.StudyBegin) -> n
     android.widget.ImageView access$17(com.todpop.sweetenglish.StudyBegin) -> o
     android.widget.ImageView access$18(com.todpop.sweetenglish.StudyBegin) -> p
-com.todpop.sweetenglish.StudyBegin$GetWord -> com.todpop.sweetenglish.bm:
+com.todpop.sweetenglish.StudyBegin$GetWord -> com.todpop.sweetenglish.cy:
     org.apache.http.impl.client.DefaultHttpClient httpClient -> a
     com.todpop.sweetenglish.StudyBegin this$0 -> b
     org.json.JSONObject doInBackground(java.lang.String[]) -> a
     void onPostExecute(org.json.JSONObject) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.todpop.sweetenglish.StudyBegin$PageListener -> com.todpop.sweetenglish.bn:
+com.todpop.sweetenglish.StudyBegin$PageListener -> com.todpop.sweetenglish.cz:
     com.todpop.sweetenglish.StudyBegin this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrollStateChanged(int) -> b
     void onPageScrolled(int,float,int) -> a
-com.todpop.sweetenglish.StudyBeginPagerAdapter -> com.todpop.sweetenglish.bo:
+com.todpop.sweetenglish.StudyBeginPagerAdapter -> com.todpop.sweetenglish.da:
     java.util.ArrayList wordList -> a
     android.support.v4.app.Fragment getItem(int) -> a
     int getCount() -> b
-com.todpop.sweetenglish.StudyBeginReviewFragment -> com.todpop.sweetenglish.bp:
+com.todpop.sweetenglish.StudyBeginReviewFragment -> com.todpop.sweetenglish.db:
     com.todpop.sweetenglish.StudyBeginReviewFragment init(int,java.util.ArrayList) -> a
-    void onCreate(android.os.Bundle) -> d
+    void onCreate(android.os.Bundle) -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
-com.todpop.sweetenglish.StudyBeginReviewListAdapter -> com.todpop.sweetenglish.bq:
+com.todpop.sweetenglish.StudyBeginReviewListAdapter -> com.todpop.sweetenglish.dc:
     com.todpop.sweetenglish.StudyBeginReviewListAdapter$ViewHolder viewHolder -> a
     android.view.LayoutInflater inflater -> b
     int rowResourceId -> c
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
-com.todpop.sweetenglish.StudyBeginReviewListAdapter$ViewHolder -> com.todpop.sweetenglish.br:
+com.todpop.sweetenglish.StudyBeginReviewListAdapter$ViewHolder -> com.todpop.sweetenglish.dd:
     android.widget.TextView eng -> a
     android.widget.TextView kor -> b
     com.todpop.sweetenglish.StudyBeginReviewListAdapter this$0 -> c
-com.todpop.sweetenglish.StudyBeginStudyFragment -> com.todpop.sweetenglish.bs:
-    android.widget.LinearLayout frontCard -> P
-    android.widget.LinearLayout backCard -> Q
-    android.view.animation.Animation inAnimation -> R
-    android.view.animation.Animation outAnimation -> S
-    android.animation.AnimatorSet leftInAnimator -> T
-    android.animation.Animator leftOutAnimator -> U
-    android.animation.Animator rightInAnimator -> V
-    android.animation.Animator rightOutAnimator -> W
-    android.widget.ImageView imgFront -> X
+com.todpop.sweetenglish.StudyBeginStudyFragment -> com.todpop.sweetenglish.de:
+    android.widget.LinearLayout frontCard -> a
+    android.widget.LinearLayout backCard -> b
+    android.view.animation.Animation inAnimation -> c
+    android.view.animation.Animation outAnimation -> d
+    android.animation.AnimatorSet leftInAnimator -> e
+    android.animation.Animator leftOutAnimator -> f
+    android.animation.Animator rightInAnimator -> g
+    android.animation.Animator rightOutAnimator -> h
+    android.widget.ImageView imgFront -> i
     android.widget.ImageView imgBack -> Y
     boolean isFront -> Z
     com.todpop.sweetenglish.StudyBeginStudyFragment init(int,java.util.ArrayList) -> a
-    void onCreate(android.os.Bundle) -> d
+    void onCreate(android.os.Bundle) -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
-    void onDestroyView() -> m
-com.todpop.sweetenglish.StudyBeginStudyFragment$AnimationFlipDoneListener -> com.todpop.sweetenglish.bt:
+    void onDestroyView() -> f
+com.todpop.sweetenglish.StudyBeginStudyFragment$AnimationFlipDoneListener -> com.todpop.sweetenglish.df:
     com.todpop.sweetenglish.StudyBeginStudyFragment this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
-com.todpop.sweetenglish.StudyBeginStudyFragment$AnimatorFlipDoneListener -> com.todpop.sweetenglish.bu:
+com.todpop.sweetenglish.StudyBeginStudyFragment$AnimatorFlipDoneListener -> com.todpop.sweetenglish.dg:
     com.todpop.sweetenglish.StudyBeginStudyFragment this$0 -> a
     void onAnimationCancel(android.animation.Animator) -> onAnimationCancel
     void onAnimationEnd(android.animation.Animator) -> onAnimationEnd
     void onAnimationRepeat(android.animation.Animator) -> onAnimationRepeat
     void onAnimationStart(android.animation.Animator) -> onAnimationStart
-com.todpop.sweetenglish.StudyBeginStudyFragment$DownloadImageTask -> com.todpop.sweetenglish.bv:
+com.todpop.sweetenglish.StudyBeginStudyFragment$DownloadImageTask -> com.todpop.sweetenglish.dh:
     java.lang.ref.WeakReference imageViewReferenceFront -> b
     java.lang.ref.WeakReference imageViewReferenceBack -> c
     com.todpop.sweetenglish.StudyBeginStudyFragment this$0 -> a
@@ -10763,7 +11270,7 @@ com.todpop.sweetenglish.StudyBeginStudyFragment$DownloadImageTask -> com.todpop.
     void onPostExecute(android.graphics.Bitmap) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.todpop.sweetenglish.StudyBeginStudyFragment$FlipListener -> com.todpop.sweetenglish.bw:
+com.todpop.sweetenglish.StudyBeginStudyFragment$FlipListener -> com.todpop.sweetenglish.di:
     com.todpop.sweetenglish.StudyBeginStudyFragment this$0 -> a
     void onClick(android.view.View) -> onClick
 com.todpop.sweetenglish.StudyBeginWord -> com.todpop.sweetenglish.StudyBeginWord:
@@ -10785,7 +11292,7 @@ com.todpop.sweetenglish.StudyBeginWord -> com.todpop.sweetenglish.StudyBeginWord
     java.lang.String getPhonetics() -> e
     java.lang.String getImgUrl() -> f
     java.lang.String getVoiceVer() -> g
-com.todpop.sweetenglish.StudyBeginWord$1 -> com.todpop.sweetenglish.bx:
+com.todpop.sweetenglish.StudyBeginWord$1 -> com.todpop.sweetenglish.dj:
     com.todpop.sweetenglish.StudyBeginWord createFromParcel(android.os.Parcel) -> a
     com.todpop.sweetenglish.StudyBeginWord[] newArray(int) -> a
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
@@ -10793,6 +11300,7 @@ com.todpop.sweetenglish.StudyBeginWord$1 -> com.todpop.sweetenglish.bx:
 com.todpop.sweetenglish.StudyCategory -> com.todpop.sweetenglish.StudyCategory:
     android.support.v4.view.ViewPager categoryPager -> a
     android.content.SharedPreferences studyInfo -> b
+    com.todpop.api.TrackUsageTime tTime -> c
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10800,7 +11308,7 @@ com.todpop.sweetenglish.StudyCategory -> com.todpop.sweetenglish.StudyCategory:
     void onClickStart(android.view.View) -> onClickStart
     void saveInfoAndStudy(int) -> a
     void onClickBack(android.view.View) -> onClickBack
-com.todpop.sweetenglish.StudyCategoryPagerAdapter -> com.todpop.sweetenglish.by:
+com.todpop.sweetenglish.StudyCategoryPagerAdapter -> com.todpop.sweetenglish.dk:
     android.view.LayoutInflater mInflater -> a
     int getCount() -> b
     java.lang.Object instantiateItem(android.view.View,int) -> a
@@ -10821,6 +11329,7 @@ com.todpop.sweetenglish.StudyLevel -> com.todpop.sweetenglish.StudyLevel:
     int fregmentCount -> y
     java.lang.String userId -> z
     int category -> A
+    com.todpop.api.TrackUsageTime tTime -> B
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10831,19 +11340,19 @@ com.todpop.sweetenglish.StudyLevel -> com.todpop.sweetenglish.StudyLevel:
     void onResume() -> onResume
     void onRestart() -> onRestart
     void access$0(com.todpop.sweetenglish.StudyLevel,int) -> a
-com.todpop.sweetenglish.StudyLevel$1 -> com.todpop.sweetenglish.bz:
+com.todpop.sweetenglish.StudyLevel$1 -> com.todpop.sweetenglish.dl:
     com.todpop.sweetenglish.StudyLevel this$0 -> a
     void onPageSelected(int) -> a
     void onPageScrolled(int,float,int) -> a
     void onPageScrollStateChanged(int) -> b
-com.todpop.sweetenglish.StudyLevel$LevelFragment -> com.todpop.sweetenglish.ca:
-    android.view.View$OnClickListener clickListener -> P
+com.todpop.sweetenglish.StudyLevel$LevelFragment -> com.todpop.sweetenglish.dm:
+    android.view.View$OnClickListener clickListener -> a
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> a
     void adjustLevelStageButtonStatus(android.view.View,int) -> a
-com.todpop.sweetenglish.StudyLevel$LevelFragment$1 -> com.todpop.sweetenglish.cb:
+com.todpop.sweetenglish.StudyLevel$LevelFragment$1 -> com.todpop.sweetenglish.dn:
     com.todpop.sweetenglish.StudyLevel$LevelFragment this$1 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.StudyLevel$PagerAdapter -> com.todpop.sweetenglish.cc:
+com.todpop.sweetenglish.StudyLevel$PagerAdapter -> com.todpop.sweetenglish.do:
     com.todpop.sweetenglish.StudyLevel this$0 -> a
     android.support.v4.app.Fragment getItem(int) -> a
     int getCount() -> b
@@ -10870,6 +11379,7 @@ com.todpop.sweetenglish.StudyTest10 -> com.todpop.sweetenglish.StudyTest10:
     boolean random -> h
     android.view.animation.Animation rotateAni -> i
     android.content.SharedPreferences$Editor userInfoEdit -> j
+    com.todpop.api.TrackUsageTime tTime -> w
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10893,41 +11403,41 @@ com.todpop.sweetenglish.StudyTest10 -> com.todpop.sweetenglish.StudyTest10:
     void access$8(com.todpop.sweetenglish.StudyTest10,boolean) -> c
     void access$9(com.todpop.sweetenglish.StudyTest10) -> g
     android.widget.LinearLayout access$10(com.todpop.sweetenglish.StudyTest10) -> h
-com.todpop.sweetenglish.StudyTest10$KorEngSet -> com.todpop.sweetenglish.cd:
+com.todpop.sweetenglish.StudyTest10$KorEngSet -> com.todpop.sweetenglish.dp:
     java.lang.String korean -> a
     java.lang.String answer -> b
     java.lang.String wrong -> c
     boolean hasHistory -> d
     com.todpop.sweetenglish.StudyTest10 this$0 -> e
-com.todpop.sweetenglish.StudyTest10$TimerAniListener -> com.todpop.sweetenglish.ce:
+com.todpop.sweetenglish.StudyTest10$TimerAniListener -> com.todpop.sweetenglish.dq:
     com.todpop.sweetenglish.StudyTest10 this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
-com.todpop.sweetenglish.StudyTest10$TouchListener -> com.todpop.sweetenglish.cf:
+com.todpop.sweetenglish.StudyTest10$TouchListener -> com.todpop.sweetenglish.dr:
     com.todpop.sweetenglish.StudyTest10 this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
 com.todpop.sweetenglish.StudyTest369 -> com.todpop.sweetenglish.StudyTest369:
-    android.widget.RelativeLayout backLayout -> q
+    android.widget.RelativeLayout backLayout -> r
     android.widget.ImageView tuto -> a
-    android.widget.TextView english -> r
-    android.widget.TextView leftKor -> s
-    android.widget.TextView rightKor -> t
-    int mActivePointerId -> u
-    int screenHeight -> v
-    int screenXCenter -> w
+    android.widget.TextView english -> s
+    android.widget.TextView leftKor -> t
+    android.widget.TextView rightKor -> u
+    int mActivePointerId -> v
+    int screenHeight -> w
+    int screenXCenter -> x
     com.todpop.sweetenglish.StudyTest369$CanvasView canvasView -> b
-    boolean touchBlocked -> x
-    float locationY -> y
-    float firstTouchX -> z
-    float lastTouchX -> A
-    float lastTouchY -> B
-    float lastScale -> C
-    boolean gotSmaller -> D
-    float power -> E
-    int[] max -> F
-    boolean isNeverChecked -> G
-    boolean isFromSmall -> H
+    boolean touchBlocked -> y
+    float locationY -> z
+    float firstTouchX -> A
+    float lastTouchX -> B
+    float lastTouchY -> C
+    float lastScale -> D
+    boolean gotSmaller -> E
+    float power -> F
+    int[] max -> G
+    boolean isNeverChecked -> H
+    boolean isFromSmall -> I
     int tmpStageAccumulated -> c
     int quizCount -> d
     java.util.ArrayList colorList -> e
@@ -10939,9 +11449,11 @@ com.todpop.sweetenglish.StudyTest369 -> com.todpop.sweetenglish.StudyTest369:
     boolean random -> k
     android.view.animation.TranslateAnimation leftToCenterAni -> l
     android.view.animation.TranslateAnimation rightToCenterAni -> m
-    android.view.animation.AlphaAnimation fadeOut -> n
-    android.content.SharedPreferences$Editor userInfoEdit -> o
-    java.lang.Runnable resetIncorrect -> p
+    android.view.animation.TranslateAnimation resetAni -> n
+    android.view.animation.AlphaAnimation fadeOut -> o
+    android.content.SharedPreferences$Editor userInfoEdit -> p
+    com.todpop.api.TrackUsageTime tTime -> J
+    java.lang.Runnable resetIncorrect -> q
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -10959,25 +11471,27 @@ com.todpop.sweetenglish.StudyTest369 -> com.todpop.sweetenglish.StudyTest369:
     void closeTutorial(android.view.View) -> closeTutorial
     void access$0(com.todpop.sweetenglish.StudyTest369,boolean) -> a
     android.widget.RelativeLayout access$1(com.todpop.sweetenglish.StudyTest369) -> a
-    void access$2(com.todpop.sweetenglish.StudyTest369) -> b
-    float access$3(com.todpop.sweetenglish.StudyTest369) -> c
-    int access$4(com.todpop.sweetenglish.StudyTest369) -> d
+    android.widget.TextView access$2(com.todpop.sweetenglish.StudyTest369) -> b
+    android.widget.TextView access$3(com.todpop.sweetenglish.StudyTest369) -> c
+    void access$4(com.todpop.sweetenglish.StudyTest369) -> d
     float access$5(com.todpop.sweetenglish.StudyTest369) -> e
-    float access$6(com.todpop.sweetenglish.StudyTest369) -> f
-com.todpop.sweetenglish.StudyTest369$1 -> com.todpop.sweetenglish.cg:
+    int access$6(com.todpop.sweetenglish.StudyTest369) -> f
+    float access$7(com.todpop.sweetenglish.StudyTest369) -> g
+    float access$8(com.todpop.sweetenglish.StudyTest369) -> h
+com.todpop.sweetenglish.StudyTest369$1 -> com.todpop.sweetenglish.ds:
     com.todpop.sweetenglish.StudyTest369 this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.StudyTest369$CanvasView -> com.todpop.sweetenglish.ch:
+com.todpop.sweetenglish.StudyTest369$CanvasView -> com.todpop.sweetenglish.dt:
     android.graphics.Paint paint -> a
     com.todpop.sweetenglish.StudyTest369 this$0 -> b
     void onDraw(android.graphics.Canvas) -> onDraw
-com.todpop.sweetenglish.StudyTest369$EngKorSet -> com.todpop.sweetenglish.ci:
+com.todpop.sweetenglish.StudyTest369$EngKorSet -> com.todpop.sweetenglish.du:
     java.lang.String english -> a
     java.lang.String answer -> b
     java.lang.String wrong -> c
     boolean hasHistory -> d
     com.todpop.sweetenglish.StudyTest369 this$0 -> e
-com.todpop.sweetenglish.StudyTest369$StudyTest369ResetAnimationListener -> com.todpop.sweetenglish.cj:
+com.todpop.sweetenglish.StudyTest369$StudyTest369ResetAnimationListener -> com.todpop.sweetenglish.dv:
     com.todpop.sweetenglish.StudyTest369 this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
@@ -11007,6 +11521,7 @@ com.todpop.sweetenglish.StudyTestInfinite -> com.todpop.sweetenglish.StudyTestIn
     android.content.SharedPreferences$Editor userInfoEdit -> j
     boolean sawTutorial -> x
     com.todpop.api.LoadingDialog loadingDialog -> y
+    com.todpop.api.TrackUsageTime tTime -> z
     android.os.Handler handler -> k
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
@@ -11035,22 +11550,22 @@ com.todpop.sweetenglish.StudyTestInfinite -> com.todpop.sweetenglish.StudyTestIn
     android.widget.LinearLayout access$12(com.todpop.sweetenglish.StudyTestInfinite) -> j
     android.widget.ImageView access$13(com.todpop.sweetenglish.StudyTestInfinite) -> k
     android.widget.ImageView access$14(com.todpop.sweetenglish.StudyTestInfinite) -> l
-com.todpop.sweetenglish.StudyTestInfinite$1 -> com.todpop.sweetenglish.ck:
+com.todpop.sweetenglish.StudyTestInfinite$1 -> com.todpop.sweetenglish.dw:
     com.todpop.sweetenglish.StudyTestInfinite this$0 -> a
     void handleMessage(android.os.Message) -> handleMessage
-com.todpop.sweetenglish.StudyTestInfinite$BackCounterTimer -> com.todpop.sweetenglish.cl:
+com.todpop.sweetenglish.StudyTestInfinite$BackCounterTimer -> com.todpop.sweetenglish.dx:
     com.todpop.sweetenglish.StudyTestInfinite this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
-com.todpop.sweetenglish.StudyTestInfinite$TimerAniListener -> com.todpop.sweetenglish.cm:
+com.todpop.sweetenglish.StudyTestInfinite$TimerAniListener -> com.todpop.sweetenglish.dy:
     com.todpop.sweetenglish.StudyTestInfinite this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
-com.todpop.sweetenglish.StudyTestInfinite$TouchListener -> com.todpop.sweetenglish.cn:
+com.todpop.sweetenglish.StudyTestInfinite$TouchListener -> com.todpop.sweetenglish.dz:
     com.todpop.sweetenglish.StudyTestInfinite this$0 -> a
     boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.todpop.sweetenglish.StudyTestInfiniteEngKorSet -> com.todpop.sweetenglish.co:
+com.todpop.sweetenglish.StudyTestInfiniteEngKorSet -> com.todpop.sweetenglish.ea:
     java.lang.String english -> a
     java.lang.String answer -> b
     java.lang.String wrong -> c
@@ -11092,6 +11607,7 @@ com.todpop.sweetenglish.StudyTestRenewal -> com.todpop.sweetenglish.StudyTestRen
     int tmpStageAccumulated -> v
     java.lang.String finalAnswerForRequest -> J
     java.lang.String todayDate -> K
+    com.todpop.api.TrackUsageTime tTime -> L
     void onCreate(android.os.Bundle) -> onCreate
     void onStart() -> onStart
     void onStop() -> onStop
@@ -11118,27 +11634,27 @@ com.todpop.sweetenglish.StudyTestRenewal -> com.todpop.sweetenglish.StudyTestRen
     void access$8(com.todpop.sweetenglish.StudyTestRenewal,long) -> a
     java.lang.Runnable access$9() -> c
     void access$10(com.todpop.sweetenglish.StudyTestRenewal) -> f
-com.todpop.sweetenglish.StudyTestRenewal$1 -> com.todpop.sweetenglish.cp:
+com.todpop.sweetenglish.StudyTestRenewal$1 -> com.todpop.sweetenglish.eb:
     com.todpop.sweetenglish.StudyTestRenewal this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.StudyTestRenewal$2 -> com.todpop.sweetenglish.cq:
+com.todpop.sweetenglish.StudyTestRenewal$2 -> com.todpop.sweetenglish.ec:
     com.todpop.sweetenglish.StudyTestRenewal this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.StudyTestRenewal$3 -> com.todpop.sweetenglish.cr:
+com.todpop.sweetenglish.StudyTestRenewal$3 -> com.todpop.sweetenglish.ed:
     com.todpop.sweetenglish.StudyTestRenewal this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.StudyTestRenewal$ButtonListener -> com.todpop.sweetenglish.cs:
+com.todpop.sweetenglish.StudyTestRenewal$ButtonListener -> com.todpop.sweetenglish.ee:
     com.todpop.sweetenglish.StudyTestRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.StudyTestRenewal$ProgressTimer -> com.todpop.sweetenglish.ct:
+com.todpop.sweetenglish.StudyTestRenewal$ProgressTimer -> com.todpop.sweetenglish.ef:
     com.todpop.sweetenglish.StudyTestRenewal this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
-com.todpop.sweetenglish.StudyTestRenewal$TotalTimer -> com.todpop.sweetenglish.cu:
+com.todpop.sweetenglish.StudyTestRenewal$TotalTimer -> com.todpop.sweetenglish.eg:
     com.todpop.sweetenglish.StudyTestRenewal this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
-com.todpop.sweetenglish.StudyTestRenewal$Word -> com.todpop.sweetenglish.cv:
+com.todpop.sweetenglish.StudyTestRenewal$Word -> com.todpop.sweetenglish.eh:
     java.lang.String word -> b
     java.lang.String mean -> c
     java.lang.String incorrect1 -> d
@@ -11160,24 +11676,30 @@ com.todpop.sweetenglish.StudyTestResult -> com.todpop.sweetenglish.StudyTestResu
     int avgScore -> e
     com.todpop.sweetenglish.db.WordDBHelper mHelper -> f
     int tmpStageAccumulated -> g
-    com.todpop.sweetenglish.StudyTestResult$MyItem mi -> h
+    com.todpop.api.EngKorOX mi -> h
     android.widget.TextView scoreView -> i
     android.content.SharedPreferences studyInfo -> j
     android.content.SharedPreferences$Editor studyInfoEdit -> k
+    com.todpop.api.TrackUsageTime tTime -> m
+    java.util.Calendar cal -> l
+    int today -> n
     void onCreate(android.os.Bundle) -> onCreate
+    void onResume() -> onResume
     void getTestWords() -> a
     void addToList(android.database.Cursor) -> a
+    void saveToDailyHistoryDB() -> b
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
     void onClickContinue(android.view.View) -> onClickContinue
     void onDestroy() -> onDestroy
     void onStart() -> onStart
     void onStop() -> onStop
-com.todpop.sweetenglish.StudyTestResult$MyItem -> com.todpop.sweetenglish.cw:
-    java.lang.String en -> a
-    java.lang.String kr -> b
-    java.lang.String check -> c
-    com.todpop.sweetenglish.StudyTestResult this$0 -> d
-com.todpop.sweetenglish.StudyTestResult$MyListAdapter -> com.todpop.sweetenglish.cx:
+com.todpop.sweetenglish.StudyTestResult$1 -> com.todpop.sweetenglish.ei:
+    com.todpop.sweetenglish.StudyTestResult this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.StudyTestResult$2 -> com.todpop.sweetenglish.ej:
+    com.todpop.sweetenglish.StudyTestResult this$0 -> a
+    void run() -> run
+com.todpop.sweetenglish.StudyTestResult$MyListAdapter -> com.todpop.sweetenglish.ek:
     android.content.Context maincon -> a
     android.view.LayoutInflater Inflater -> b
     java.util.ArrayList arSrc -> c
@@ -11189,14 +11711,14 @@ com.todpop.sweetenglish.StudyTestResult$MyListAdapter -> com.todpop.sweetenglish
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     java.lang.Object getItem(int) -> getItem
     com.todpop.sweetenglish.StudyTestResult access$1(com.todpop.sweetenglish.StudyTestResult$MyListAdapter) -> a
-com.todpop.sweetenglish.StudyTestResult$MyListAdapter$1 -> com.todpop.sweetenglish.cy:
+com.todpop.sweetenglish.StudyTestResult$MyListAdapter$1 -> com.todpop.sweetenglish.el:
     com.todpop.sweetenglish.StudyTestResult$MyListAdapter this$1 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
 com.todpop.sweetenglish.SweetEnglish -> com.todpop.sweetenglish.SweetEnglish:
     int GENERAL_TRACKER -> a
     java.util.HashMap mTrackers -> b
     com.google.android.gms.analytics.Tracker getTracker(com.todpop.sweetenglish.SweetEnglish$TrackerName) -> a
-com.todpop.sweetenglish.SweetEnglish$TrackerName -> com.todpop.sweetenglish.cz:
+com.todpop.sweetenglish.SweetEnglish$TrackerName -> com.todpop.sweetenglish.em:
     com.todpop.sweetenglish.SweetEnglish$TrackerName APP_TRACKER -> a
     com.todpop.sweetenglish.SweetEnglish$TrackerName GLOBAL_TRACKER -> b
     com.todpop.sweetenglish.SweetEnglish$TrackerName ECOMMERCE_TRACKER -> c
@@ -11222,6 +11744,7 @@ com.todpop.sweetenglish.TutorialActivity -> com.todpop.sweetenglish.TutorialActi
     android.view.animation.Animation fadeIn -> f
     android.view.animation.Animation fadeOut -> g
     android.content.SharedPreferences$Editor userInfoEdit -> h
+    com.todpop.api.TrackUsageTime tTime -> s
     void onCreate(android.os.Bundle) -> onCreate
     void goHome(android.view.View) -> goHome
     void goWordBook(android.view.View) -> goWordBook
@@ -11230,17 +11753,17 @@ com.todpop.sweetenglish.TutorialActivity -> com.todpop.sweetenglish.TutorialActi
     int access$0(com.todpop.sweetenglish.TutorialActivity) -> a
     android.widget.ImageButton access$1(com.todpop.sweetenglish.TutorialActivity) -> b
     android.widget.ImageButton access$2(com.todpop.sweetenglish.TutorialActivity) -> c
-com.todpop.sweetenglish.TutorialActivity$1 -> com.todpop.sweetenglish.da:
+com.todpop.sweetenglish.TutorialActivity$1 -> com.todpop.sweetenglish.en:
     com.todpop.sweetenglish.TutorialActivity this$0 -> a
     void onAnimationEnd(android.view.animation.Animation) -> onAnimationEnd
     void onAnimationRepeat(android.view.animation.Animation) -> onAnimationRepeat
     void onAnimationStart(android.view.animation.Animation) -> onAnimationStart
-com.todpop.sweetenglish.TutorialActivity$2 -> com.todpop.sweetenglish.db:
+com.todpop.sweetenglish.TutorialActivity$2 -> com.todpop.sweetenglish.eo:
     com.todpop.sweetenglish.TutorialActivity this$0 -> a
     void onPageScrollStateChanged(int) -> b
     void onPageScrolled(int,float,int) -> a
     void onPageSelected(int) -> a
-com.todpop.sweetenglish.TutorialActivity$TutorialPagerAdapter -> com.todpop.sweetenglish.dc:
+com.todpop.sweetenglish.TutorialActivity$TutorialPagerAdapter -> com.todpop.sweetenglish.ep:
     android.view.LayoutInflater mInflater -> b
     com.todpop.sweetenglish.TutorialActivity this$0 -> a
     int getCount() -> b
@@ -11283,6 +11806,7 @@ com.todpop.sweetenglish.WordListTestRenewal -> com.todpop.sweetenglish.WordListT
     java.lang.String finalAnswerForRequest -> G
     java.lang.String groupName -> H
     int testSize -> I
+    com.todpop.api.TrackUsageTime tTime -> J
     void onCreate(android.os.Bundle) -> onCreate
     void getTestWords() -> d
     void onResume() -> onResume
@@ -11309,27 +11833,27 @@ com.todpop.sweetenglish.WordListTestRenewal -> com.todpop.sweetenglish.WordListT
     void access$8(com.todpop.sweetenglish.WordListTestRenewal,long) -> a
     java.lang.Runnable access$9() -> c
     void access$10(com.todpop.sweetenglish.WordListTestRenewal) -> f
-com.todpop.sweetenglish.WordListTestRenewal$1 -> com.todpop.sweetenglish.dd:
+com.todpop.sweetenglish.WordListTestRenewal$1 -> com.todpop.sweetenglish.eq:
     com.todpop.sweetenglish.WordListTestRenewal this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.WordListTestRenewal$2 -> com.todpop.sweetenglish.de:
+com.todpop.sweetenglish.WordListTestRenewal$2 -> com.todpop.sweetenglish.er:
     com.todpop.sweetenglish.WordListTestRenewal this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.WordListTestRenewal$3 -> com.todpop.sweetenglish.df:
+com.todpop.sweetenglish.WordListTestRenewal$3 -> com.todpop.sweetenglish.es:
     com.todpop.sweetenglish.WordListTestRenewal this$0 -> a
     void run() -> run
-com.todpop.sweetenglish.WordListTestRenewal$ButtonListener -> com.todpop.sweetenglish.dg:
+com.todpop.sweetenglish.WordListTestRenewal$ButtonListener -> com.todpop.sweetenglish.et:
     com.todpop.sweetenglish.WordListTestRenewal this$0 -> a
     void onClick(android.view.View) -> onClick
-com.todpop.sweetenglish.WordListTestRenewal$ProgressTimer -> com.todpop.sweetenglish.dh:
+com.todpop.sweetenglish.WordListTestRenewal$ProgressTimer -> com.todpop.sweetenglish.eu:
     com.todpop.sweetenglish.WordListTestRenewal this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
-com.todpop.sweetenglish.WordListTestRenewal$TotalTimer -> com.todpop.sweetenglish.di:
+com.todpop.sweetenglish.WordListTestRenewal$TotalTimer -> com.todpop.sweetenglish.ev:
     com.todpop.sweetenglish.WordListTestRenewal this$0 -> a
     void onFinish() -> onFinish
     void onTick(long) -> onTick
-com.todpop.sweetenglish.WordListTestRenewal$Word -> com.todpop.sweetenglish.dj:
+com.todpop.sweetenglish.WordListTestRenewal$Word -> com.todpop.sweetenglish.ew:
     java.lang.String word -> b
     java.lang.String mean -> c
     java.lang.String incorrect1 -> d
@@ -11354,6 +11878,7 @@ com.todpop.sweetenglish.WordListTestResult -> com.todpop.sweetenglish.WordListTe
     java.util.ArrayList krArray -> h
     android.content.SharedPreferences studyInfo -> i
     android.content.SharedPreferences$Editor studyInfoEdit -> j
+    com.todpop.api.TrackUsageTime tTime -> k
     void onCreate(android.os.Bundle) -> onCreate
     void getTestWords() -> a
     boolean onKeyDown(int,android.view.KeyEvent) -> onKeyDown
@@ -11362,12 +11887,12 @@ com.todpop.sweetenglish.WordListTestResult -> com.todpop.sweetenglish.WordListTe
     void onDestroy() -> onDestroy
     void onStart() -> onStart
     void onStop() -> onStop
-com.todpop.sweetenglish.WordListTestResult$MyItem -> com.todpop.sweetenglish.dk:
+com.todpop.sweetenglish.WordListTestResult$MyItem -> com.todpop.sweetenglish.ex:
     java.lang.String en -> a
     java.lang.String kr -> b
     java.lang.String check -> c
     com.todpop.sweetenglish.WordListTestResult this$0 -> d
-com.todpop.sweetenglish.WordListTestResult$MyListAdapter -> com.todpop.sweetenglish.dl:
+com.todpop.sweetenglish.WordListTestResult$MyListAdapter -> com.todpop.sweetenglish.ey:
     android.content.Context maincon -> a
     android.view.LayoutInflater Inflater -> b
     java.util.ArrayList arSrc -> c
@@ -11379,18 +11904,27 @@ com.todpop.sweetenglish.WordListTestResult$MyListAdapter -> com.todpop.sweetengl
     android.view.View getView(int,android.view.View,android.view.ViewGroup) -> getView
     java.lang.Object getItem(int) -> getItem
     com.todpop.sweetenglish.WordListTestResult access$1(com.todpop.sweetenglish.WordListTestResult$MyListAdapter) -> a
-com.todpop.sweetenglish.WordListTestResult$MyListAdapter$1 -> com.todpop.sweetenglish.dm:
+com.todpop.sweetenglish.WordListTestResult$MyListAdapter$1 -> com.todpop.sweetenglish.ez:
     com.todpop.sweetenglish.WordListTestResult$MyListAdapter this$1 -> a
     void onCheckedChanged(android.widget.CompoundButton,boolean) -> onCheckedChanged
-com.todpop.sweetenglish.WordListTestResult$ViewHolder -> com.todpop.sweetenglish.dn:
+com.todpop.sweetenglish.WordListTestResult$ViewHolder -> com.todpop.sweetenglish.fa:
     android.widget.TextView textEn -> a
     android.widget.TextView textKr -> b
     android.widget.ImageView checkView -> c
     android.widget.CheckBox selectBtn -> d
     com.todpop.sweetenglish.WordListTestResult this$0 -> e
-com.todpop.sweetenglish.db.PronounceDBHelper -> com.todpop.sweetenglish.a.a:
+com.todpop.sweetenglish.db.AnalysisDBHelper -> com.todpop.sweetenglish.a.a:
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
-com.todpop.sweetenglish.db.WordDBHelper -> com.todpop.sweetenglish.a.b:
+com.todpop.sweetenglish.db.DailyHistoryDBHelper -> com.todpop.sweetenglish.a.b:
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+com.todpop.sweetenglish.db.PronounceDBHelper -> com.todpop.sweetenglish.a.c:
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+com.todpop.sweetenglish.db.UsageTimeDBHelper -> com.todpop.sweetenglish.a.d:
+    void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
+com.todpop.sweetenglish.db.WordDBHelper -> com.todpop.sweetenglish.a.e:
     void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
     void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade

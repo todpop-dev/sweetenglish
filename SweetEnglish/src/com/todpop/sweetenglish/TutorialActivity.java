@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.flurry.android.FlurryAgent;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 
 public class TutorialActivity extends TypefaceActivity{
@@ -46,6 +47,9 @@ public class TutorialActivity extends TypefaceActivity{
 	Animation fadeOut;
 	
 	Editor userInfoEdit;
+	
+	private TrackUsageTime tTime;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -187,6 +191,7 @@ public class TutorialActivity extends TypefaceActivity{
 			}
 			
 		});
+		tTime = TrackUsageTime.getInstance(this);
 	}
 	
 	private class TutorialPagerAdapter extends PagerAdapter{
@@ -263,10 +268,12 @@ public class TutorialActivity extends TypefaceActivity{
 		super.onStart();
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Tutorial Activity");
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
+		tTime.stop();
 	}
 }

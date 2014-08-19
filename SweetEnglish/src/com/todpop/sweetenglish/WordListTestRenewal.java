@@ -26,6 +26,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -89,6 +90,8 @@ public class WordListTestRenewal extends TypefaceActivity {
 
 	private int testSize;
 
+	private TrackUsageTime tTime;
+	
 	private class Word{
 		public Word(String word, String mean, String incorrect1, String incorrect2, String incorrect3){
 			this.word = word;
@@ -192,6 +195,7 @@ public class WordListTestRenewal extends TypefaceActivity {
 		getTestWords();
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	private void getTestWords()
@@ -506,11 +510,13 @@ public class WordListTestRenewal extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Word List Test Renewal");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 }

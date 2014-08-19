@@ -20,7 +20,6 @@
                 android:layout_height="wrap_content"
                 android:onClick="onClickDrawer"
                 android:paddingBottom="17.5dp"
-                android:paddingLeft="14.5dp"
                 android:paddingRight="14.5dp"
                 android:paddingTop="17.5dp" >
 
@@ -51,12 +50,39 @@
                     android:layout_weight="43"
                     android:src="@drawable/home_text_graphtitle" />
 
-                <android.support.v4.view.ViewPager
-                    xmlns:android="http://schemas.android.com/apk/res/android"
-                    android:id="@+id/home_analysis_pager"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="550" />
+                    android:layout_weight="550" >
+
+                    <android.support.v4.view.ViewPager
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:id="@+id/home_analysis_pager"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <LinearLayout
+                        android:id="@+id/home_analysis_text_explain"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:orientation="vertical" >
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="440" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_marginRight="15dp"
+                            android:layout_weight="110"
+                            android:scaleType="matrix"
+                            android:src="@drawable/graph_2_text_explain" />
+                    </LinearLayout>
+                </RelativeLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"

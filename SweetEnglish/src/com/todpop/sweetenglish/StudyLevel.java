@@ -22,6 +22,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceFragmentActivity;
 
 public class StudyLevel extends TypefaceFragmentActivity {
@@ -55,6 +56,8 @@ public class StudyLevel extends TypefaceFragmentActivity {
 	
 	static String userId = "0";
 	static int category = 0;
+	
+	private TrackUsageTime tTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -136,6 +139,7 @@ public class StudyLevel extends TypefaceFragmentActivity {
 		}
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -144,12 +148,14 @@ public class StudyLevel extends TypefaceFragmentActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Level");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private void changePointerViewIndicator(int position) {
 		for(int i = 0; i < pageViewPointIndexCount; i++) {

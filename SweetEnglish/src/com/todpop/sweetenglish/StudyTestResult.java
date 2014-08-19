@@ -1,7 +1,9 @@
 package com.todpop.sweetenglish;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,6 +13,7 @@ import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,11 +31,13 @@ import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.EngKorOX;
 import com.todpop.api.LoadingDialog;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.sweetenglish.db.AnalysisDBHelper;
 import com.todpop.sweetenglish.db.DailyHistoryDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-public class StudyTestResult extends TypefaceActivity {
+public class StudyTestResult extends TypefaceActivity {	
 	ArrayList<String> reviewList;
 	
 	ArrayList<EngKorOX> arItem;
@@ -40,6 +45,7 @@ public class StudyTestResult extends TypefaceActivity {
 
 	int totalScore = 0;
 	int avgScore = 0;
+	
 	// Database
 	WordDBHelper mHelper;
 
@@ -53,6 +59,11 @@ public class StudyTestResult extends TypefaceActivity {
 
 	SharedPreferences studyInfo;
 	SharedPreferences.Editor studyInfoEdit;
+	
+	private TrackUsageTime tTime;
+
+	final Calendar cal = Calendar.getInstance();
+	private int today;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +94,8 @@ public class StudyTestResult extends TypefaceActivity {
 
 		// Get Test result from database
 		tmpStageAccumulated = studyInfo.getInt("tmpStageAccumulated", 1);
-		Log.i("STEVEN", "tmpStageAccumulated : " + tmpStageAccumulated);
+		SimpleDateFormat dateForamt = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
+		today = Integer.valueOf(dateForamt.format(cal.getTime()));
 		getTestWords();
 
 		// ----------- Request Result -------------
@@ -107,10 +119,9 @@ public class StudyTestResult extends TypefaceActivity {
 		ListView MyList;
 		MyList=(ListView)findViewById(R.id.study_test_result_list);
 		MyList.setAdapter(MyAdapter);
-
-		
 		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -131,7 +142,7 @@ public class StudyTestResult extends TypefaceActivity {
 			int cnt = 0;
 
 			if (stage == 0) {
-				Cursor cursor = db.rawQuery("SELECT name,  mean, xo FROM dic WHERE stage > " + (((tmpStageAccumulated - 1) / 10) * 10) + " AND stage <= " + (tmpStageAccumulated - 1), null);
+				Cursor cursor = db.rawQuery("SELECT name,  mean, xo, memorized_date FROM dic WHERE stage > " + (((tmpStageAccumulated - 1) / 10) * 10) + " AND stage <= " + (tmpStageAccumulated - 1), null);
 				
 				addToList(cursor);
 				
@@ -139,7 +150,7 @@ public class StudyTestResult extends TypefaceActivity {
 				
 				avgScore = Math.round(((float)totalScore / cnt) * 100);
 			} else if(stage == 3 || stage == 6 || stage == 9){
-				Cursor cursor = db.rawQuery("SELECT name,  mean, xo FROM dic WHERE stage >= " + (tmpStageAccumulated - 2) + " AND stage <= " + tmpStageAccumulated, null);
+				Cursor cursor = db.rawQuery("SELECT name,  mean, xo, memorized_date FROM dic WHERE stage >= " + (tmpStageAccumulated - 2) + " AND stage <= " + tmpStageAccumulated, null);
 				
 				addToList(cursor);
 				
@@ -148,14 +159,14 @@ public class StudyTestResult extends TypefaceActivity {
 				avgScore = Math.round(((float)totalScore / cnt) * 100);
 			}
 			else{
-				Cursor cursor = db.rawQuery("SELECT name, mean, xo FROM dic WHERE stage=" + tmpStageAccumulated + ";", null);
+				Cursor cursor = db.rawQuery("SELECT name, mean, xo, memorized_date FROM dic WHERE stage=" + tmpStageAccumulated + ";", null);
 				
 				addToList(cursor);
 				
 				cnt += cursor.getCount();
 				
 				for(int i = 0; i < reviewList.size(); i++){
-					Cursor reviewCursor = db.rawQuery("SELECT name, mean, xo FROM dic WHERE stage >= " + ((tmpStageAccumulated / 10) * 10) + 
+					Cursor reviewCursor = db.rawQuery("SELECT name, mean, xo, memorized_date FROM dic WHERE stage >= " + ((tmpStageAccumulated / 10) * 10) + 
 											" AND stage <= " + (tmpStageAccumulated - 1) + " AND name = '" + reviewList.get(i) + "'", null);
 					addToList(reviewCursor);
 					
@@ -228,23 +239,30 @@ public class StudyTestResult extends TypefaceActivity {
 	}
 	
 	private void addToList(Cursor cursor){
+		int isNew;
 		if (cursor.getCount() > 0) {
 			while(cursor.moveToNext()) {
 				if(cursor.getString(2).equals("O")){
 					totalScore += 1;
 				}
-
-				mi = new EngKorOX(cursor.getString(0), cursor.getString(1), cursor.getString(2));
+				Log.i("STEVEN", "db Date : " + cursor.getInt(3) + "  today : " + today);
+				if(cursor.getInt(3) == today){
+					isNew = 1;
+				}
+				else{
+					isNew = 0;
+				}
+				mi = new EngKorOX(isNew, cursor.getString(0), cursor.getString(1), cursor.getString(2));
 				arItem.add(mi);
 			}
 		}
 	}
 
 	private void saveToDailyHistoryDB(){
+		
 		new Thread(new Runnable(){
 			@Override
 			public void run() {
-				Calendar cal = Calendar.getInstance();
 				int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 				
 				DailyHistoryDBHelper dHelper = new DailyHistoryDBHelper(StudyTestResult.this);
@@ -254,18 +272,62 @@ public class StudyTestResult extends TypefaceActivity {
 				EngKorOX myItem;
 				
 				for(int i = 0; i < arItem.size(); i++){
-					myItem  = arItem.get(i);
+					myItem = arItem.get(i);
 					
 					values.clear();
 					
-					values.put("name", myItem.getEn());
-					values.put("mean", myItem.getKr());
 					values.put("xo", myItem.getCheck());
-					values.put("day_of_week", dayOfWeek);
-					db.insert("history", null, values);
+					values.put("isNew", myItem.getIsNew());
+					int effect = db.update("history", values, "name = '" + myItem.getEn() + "' AND day_of_week = " + dayOfWeek, null);
+					
+					if(effect <= 0){
+						values.put("name", myItem.getEn());
+						values.put("mean", myItem.getKr());
+						values.put("day_of_week", dayOfWeek);
+						values.put("isNew", myItem.getIsNew());
+						db.insert("history", null, values);
+					}
 				}
 				
 				dHelper.close();
+			}
+		}).start();
+		
+		new Thread(new Runnable(){
+			@Override
+			public void run(){
+				int time = cal.get(Calendar.HOUR_OF_DAY);
+				
+				Log.i("STEVEN", "time is " + time);
+				AnalysisDBHelper aHelper = new AnalysisDBHelper(StudyTestResult.this);
+				SQLiteDatabase db = aHelper.getWritableDatabase();
+				
+				EngKorOX myItem;
+				
+				for(int i = 0; i < arItem.size(); i++){
+					myItem = arItem.get(i);
+					
+					if(myItem.getCheck().equals("O")){
+						
+						
+						Log.i("STEVEN", myItem.getCheck());
+						db.execSQL("INSERT OR REPLACE INTO time_memorize (time, correct, total) " +
+										"VALUES (" + time + ", " +
+												"COALESCE((SELECT correct FROM time_memorize WHERE time = " + time + ") + 1, 1)," +
+												"COALESCE((SELECT total FROM time_memorize WHERE time = " + time +") + 1, 1)" + 
+												")");
+					}
+					else{
+						Log.i("STEVEN", "else "+myItem.getCheck());
+						db.execSQL("INSERT OR REPLACE INTO time_memorize (time, correct, total) " +
+								"VALUES (" + time + ", " +
+										"COALESCE((SELECT correct FROM time_memorize WHERE time = " + time + "), 0)," +
+										"COALESCE((SELECT total FROM time_memorize WHERE time = " + time +") + 1, 1)" + 
+										")");
+					}
+				}
+				db.close();
+				aHelper.close();
 			}
 		}).start();
 	}
@@ -407,11 +469,13 @@ public class StudyTestResult extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Test Result");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 }

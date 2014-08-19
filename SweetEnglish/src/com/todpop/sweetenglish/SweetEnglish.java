@@ -35,5 +35,5 @@ public class SweetEnglish extends Application {
 
         }
         return mTrackers.get(trackerId);
-      }
+    }
 }

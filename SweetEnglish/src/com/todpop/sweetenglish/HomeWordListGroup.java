@@ -27,6 +27,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -45,6 +46,8 @@ public class HomeWordListGroup extends TypefaceActivity {
 	private ImageView ivPopupNewGroupSave;
 	private boolean isEditMode;
 	private Button btnEditbarDel;
+	
+	private TrackUsageTime tTime;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class HomeWordListGroup extends TypefaceActivity {
 		initListeners();
 
 		popupNewGroup = new PopupWindow(vPopupNewGroup, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,true);
-
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -70,11 +73,13 @@ public class HomeWordListGroup extends TypefaceActivity {
 		super.onStart();
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home Word List Group");
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
+		tTime.stop();
 	}
 	private void initPopupView() {
 		vPopupNewGroup = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_wordlist_group_new, null);

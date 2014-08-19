@@ -19,7 +19,7 @@ public class DailyHistoryDBHelper extends SQLiteOpenHelper {
 
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL("CREATE TABLE history ( _id INTEGER PRIMARY KEY AUTOINCREMENT, "
-				+ "name TEXT NOT NULL, mean TEXT NOT NULL, xo TEXT NOT NULL, day_of_week INT NOT NULL);");
+				+ "name TEXT NOT NULL, mean TEXT NOT NULL, xo TEXT NOT NULL, isNew INT NOT NULL, day_of_week INT NOT NULL);");
 	}
 
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

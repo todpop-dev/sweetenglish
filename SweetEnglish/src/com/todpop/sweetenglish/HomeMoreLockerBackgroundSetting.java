@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 
 public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
@@ -26,7 +27,9 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
     private static final int PICK_FROM_ALBUM = 1;
     
 	Editor settingEditor;
-    
+
+	TrackUsageTime tTime;
+	
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -41,6 +44,8 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
 		getLastTakenPic();
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -49,12 +54,14 @@ public class HomeMoreLockerBackgroundSetting extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home More Locker Bg Setting");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {

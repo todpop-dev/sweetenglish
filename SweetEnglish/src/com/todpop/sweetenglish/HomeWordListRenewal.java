@@ -56,6 +56,7 @@ import android.widget.Toast;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -90,6 +91,8 @@ public class HomeWordListRenewal extends TypefaceActivity {
 	private ImageView ivPopupNewGroupCancel;
 	private ImageView ivPopupNewGroupSave;
 	private TextView tvTitle;
+	
+	private TrackUsageTime tTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -166,6 +169,7 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		tvTitle.setText(groupName);
 		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -174,12 +178,14 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home Word List Renewal");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private void initPopupView() {
 		vPopupNewGroup = LayoutInflater.from(getApplicationContext()).inflate(R.layout.popup_wordlist_group_new, null);

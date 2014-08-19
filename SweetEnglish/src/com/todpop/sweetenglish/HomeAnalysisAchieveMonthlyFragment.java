@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.todpop.sweetenglish.R;
+import com.todpop.sweetenglish.R.id;
+import com.todpop.sweetenglish.R.layout;
+import com.todpop.sweetenglish.R.string;
 import com.todpop.sweetenglish.db.AnalysisDBHelper;
 
 import android.database.Cursor;

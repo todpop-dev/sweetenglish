@@ -9,6 +9,7 @@ import java.util.Random;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.LoadingDialog;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.api.request.DownloadAndPlayPronounce;
 import com.todpop.api.request.GetInfiniteWord;
@@ -79,6 +80,8 @@ public class StudyTestInfinite extends TypefaceActivity{
 	
 	private LoadingDialog loadingDialog;
 	
+	private TrackUsageTime tTime;
+	
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
@@ -127,6 +130,7 @@ public class StudyTestInfinite extends TypefaceActivity{
 		initWords();
 		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -135,12 +139,14 @@ public class StudyTestInfinite extends TypefaceActivity{
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Test Infinite");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private void initAni(){
 		rotateAni = AnimationUtils.loadAnimation(this, R.anim.test_infinite_rotate);

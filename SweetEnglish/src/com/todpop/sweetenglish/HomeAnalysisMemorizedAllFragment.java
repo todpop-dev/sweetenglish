@@ -1,13 +1,11 @@
 package com.todpop.sweetenglish;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
-
 import com.todpop.api.MemorizedRateAllCanvas;
-import com.todpop.api.MemorizedRateAllCanvasTest;
+import com.todpop.sweetenglish.R;
+import com.todpop.sweetenglish.R.id;
+import com.todpop.sweetenglish.R.layout;
 import com.todpop.sweetenglish.db.AnalysisDBHelper;
+import com.todpop.sweetenglish.db.WordDBHelper;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -19,31 +17,36 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.RelativeLayout.LayoutParams;
 
 public class HomeAnalysisMemorizedAllFragment extends Fragment{
+	private static final int ANI_TIME = 2500;		//2.5sec
+	
 	private int total;
 	private int memorized;
 	private int percent;
 	
-	private AnalysisDBHelper aHelper;
-	private SQLiteDatabase mDB;
 	private MemorizedRateAllCanvas a;
 	private TextView percentTextView;
 	
-	static HomeAnalysisMemorizedAllFragment init(){
-		return new HomeAnalysisMemorizedAllFragment();
+	static HomeAnalysisMemorizedAllFragment init(int total, int memorized){
+		HomeAnalysisMemorizedAllFragment allFragment = new HomeAnalysisMemorizedAllFragment();
+		
+		Bundle args = new Bundle();
+		args.putInt("total", total);
+		args.putInt("memorized", memorized);
+		allFragment.setArguments(args);
+		return allFragment;
 	}
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
-		total = 16000;
-		memorized = 16000;
+		Bundle args = getArguments();
+		total = args.getInt("total");
+		memorized = args.getInt("memorized");
 		percent = memorized * 100 / total;
 	}
 	
@@ -65,17 +68,25 @@ public class HomeAnalysisMemorizedAllFragment extends Fragment{
 		super.onResume();
 		new Thread(new Runnable(){
 			public void run(){
+				long time = ANI_TIME / memorized;
 				for(int i = 0; i < memorized; i ++){
-					
+					try{
+						Thread.sleep(time);
+						countHandler.sendEmptyMessage(i + 1);
+					} catch (InterruptedException e) {		
+						e.printStackTrace();
+					}
 				}
 			}
 		}).start();
+		
 		new Thread(new Runnable(){
 			public void run(){
+				long time = ANI_TIME / percent;
 				for(int i = 0; i < percent; i++){
 					try {
-						Thread.sleep(15);
-						yearlyHandler.sendEmptyMessage(i + 1);
+						Thread.sleep(time);
+						percentHandler.sendEmptyMessage(i + 1);
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
@@ -84,12 +95,15 @@ public class HomeAnalysisMemorizedAllFragment extends Fragment{
 		}).start();
 	}
 	
-	
-	Handler yearlyHandler = new Handler(){
+
+	Handler countHandler = new Handler(){
 		public void handleMessage(Message msg){
 			a.setTotalAndCorrect(total, msg.what);
-			if(msg.what * 100 / total <= percent)
-				percentTextView.setText(String.valueOf(msg.what * 100 / total));
+		}
+	};
+	Handler percentHandler = new Handler(){
+		public void handleMessage(Message msg){
+			percentTextView.setText(String.valueOf(msg.what));
 		}
 	};
 }

@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
+import com.todpop.sweetenglish.R;
+import com.todpop.sweetenglish.R.id;
+import com.todpop.sweetenglish.R.layout;
+import com.todpop.sweetenglish.R.string;
 import com.todpop.sweetenglish.db.AnalysisDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -121,13 +125,13 @@ public class HomeAnalysisAchieveWeeklyFragment extends Fragment{
 			viewForWeek6.setVisibility(View.VISIBLE);
 			llForWeek6.setVisibility(View.VISIBLE);
 			periodList.get(5).setVisibility(View.VISIBLE);
-			periodList.get(5).setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+			periodList.get(5).setGravity(Gravity.BOTTOM | Gravity.RIGHT);
 		case 5:
 			viewForWeek5.setVisibility(View.VISIBLE);
 			llForWeek5.setVisibility(View.VISIBLE);
 			periodList.get(4).setVisibility(View.VISIBLE);
 			if(maxWeek != 6)
-				periodList.get(4).setGravity(Gravity.CENTER_VERTICAL | Gravity.RIGHT);
+				periodList.get(4).setGravity(Gravity.BOTTOM | Gravity.RIGHT);
 			break;
 		}
 			

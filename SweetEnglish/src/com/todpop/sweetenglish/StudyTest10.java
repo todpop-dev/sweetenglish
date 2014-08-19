@@ -8,6 +8,7 @@ import java.util.Random;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.api.request.DownloadAndPlayPronounce;
 import com.todpop.sweetenglish.db.WordDBHelper;
@@ -74,6 +75,8 @@ public class StudyTest10 extends TypefaceActivity{
 	
 	Editor userInfoEdit;
 	
+	private TrackUsageTime tTime;
+	
 	private class KorEngSet{
 		public KorEngSet(String kor, String ans, String wro, boolean his){
 			korean = kor;
@@ -136,7 +139,8 @@ public class StudyTest10 extends TypefaceActivity{
 			setQuiz();
 		}
 
-		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);		
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -145,12 +149,14 @@ public class StudyTest10 extends TypefaceActivity{
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Test 10");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private void initAni(){
 		rotateAni = AnimationUtils.loadAnimation(this, R.anim.test_10_rotate);

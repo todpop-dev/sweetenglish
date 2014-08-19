@@ -3,6 +3,10 @@ package com.todpop.sweetenglish;
 import java.util.ArrayList;
 
 import com.todpop.api.EngKorOX;
+import com.todpop.sweetenglish.R;
+import com.todpop.sweetenglish.R.drawable;
+import com.todpop.sweetenglish.R.id;
+import com.todpop.sweetenglish.R.layout;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -30,6 +34,7 @@ public class HomeDailyHistoryArrayAdapter extends ArrayAdapter<EngKorOX>{
 			viewHolder = new ViewHolder();
 			v = inflater.inflate(R.layout.list_home_history_word, null);
 			
+			viewHolder.newIv = (ImageView)v.findViewById(R.id.list_home_history_new);
 			viewHolder.eng = (TextView)v.findViewById(R.id.list_home_history_eng);
 			viewHolder.kor = (TextView)v.findViewById(R.id.list_home_history_kor);
 			viewHolder.ox = (ImageView)v.findViewById(R.id.list_home_history_ox);
@@ -39,7 +44,12 @@ public class HomeDailyHistoryArrayAdapter extends ArrayAdapter<EngKorOX>{
 		else{
 			viewHolder = (ViewHolder)v.getTag();
 		}
-
+		
+		if(getItem(position).getIsNew() == 1)
+			viewHolder.newIv.setVisibility(View.VISIBLE);
+		else
+			viewHolder.newIv.setVisibility(View.INVISIBLE);
+		
 		viewHolder.eng.setText(getItem(position).getEn());
 		viewHolder.kor.setText(getItem(position).getKr());
 		if(getItem(position).getCheck().equals("O"))
@@ -54,6 +64,7 @@ public class HomeDailyHistoryArrayAdapter extends ArrayAdapter<EngKorOX>{
 	}
 	
 	private class ViewHolder{
+		ImageView newIv;
 		TextView eng;
 		TextView kor;
 		ImageView ox;

@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <item android:id="@android:id/background">
+        <shape
+            android:innerRadiusRatio="3"
+            android:shape="ring"
+            android:thickness="3.5dp"
+            android:useLevel="false" >
+            <solid android:color="@color/sweet_black" />
+        </shape>
+    </item>
     <item android:id="@android:id/progress">
         <rotate
             android:fromDegrees="270"
@@ -8,9 +17,9 @@
             android:pivotY="50%"
             android:toDegrees="270" >
             <shape
-                android:innerRadiusRatio="3.5"
+                android:innerRadiusRatio="3.7"
                 android:shape="ring"
-                android:thickness="32dp" >
+                android:thickness="17dp" >
                 <solid android:color="@color/sweet_blue" />
             </shape>
         </rotate>

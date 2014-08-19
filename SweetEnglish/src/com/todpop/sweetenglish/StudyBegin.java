@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.LoadingDialog;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.api.request.DownloadAndPlayPronounce;
 import com.todpop.sweetenglish.db.PronounceDBHelper;
@@ -70,6 +71,8 @@ public class StudyBegin extends TypefaceFragmentActivity{
 	private LoadingDialog loadingDialog;
 	
 	private DownloadAndPlayPronounce player;
+	
+	private TrackUsageTime tTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
@@ -116,6 +119,7 @@ public class StudyBegin extends TypefaceFragmentActivity{
 		new GetWord().execute(getWordsUrl);
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 	
 	@Override
@@ -124,12 +128,14 @@ public class StudyBegin extends TypefaceFragmentActivity{
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Begin");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private class GetWord extends AsyncTask<String, Void, JSONObject>{
 		DefaultHttpClient httpClient ;

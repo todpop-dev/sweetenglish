@@ -9,12 +9,16 @@ import android.widget.EditText;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 
 public class SetNicknameActivity extends TypefaceActivity{
 	private EditText nickText;
 	
 	private Editor userInfoEdit;
+	
+	private TrackUsageTime tTime;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -26,6 +30,7 @@ public class SetNicknameActivity extends TypefaceActivity{
 		SharedPreferences userInfo = getSharedPreferences("userInfo", 0);
 		userInfoEdit = userInfo.edit();
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 
 	@Override
@@ -34,12 +39,14 @@ public class SetNicknameActivity extends TypefaceActivity{
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("SetNickNameActivity");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	public void goTutorial(View v){
 		userInfoEdit.putString("userNick", nickText.getText().toString());

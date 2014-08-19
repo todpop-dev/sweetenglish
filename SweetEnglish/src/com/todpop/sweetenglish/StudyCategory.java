@@ -10,12 +10,15 @@ import android.view.View;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 
 public class StudyCategory extends TypefaceActivity {
 	ViewPager categoryPager;
 	
 	SharedPreferences studyInfo;
+	
+	private TrackUsageTime tTime;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class StudyCategory extends TypefaceActivity {
 		
 		categoryPager.setCurrentItem(studyInfo.getInt("lastCategory", 1) - 1);
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		tTime = TrackUsageTime.getInstance(this);
 	}
 	@Override
 	protected void onStart(){
@@ -40,12 +44,14 @@ public class StudyCategory extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Study Category");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	public void onClickInfiniteTest(View v){
 		Intent intent = new Intent(getApplicationContext(), StudyTestInfinite.class);

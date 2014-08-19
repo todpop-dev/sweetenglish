@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
@@ -36,6 +37,8 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 	
 	SharedPreferences setting;
 	Editor settingEditor;
+
+	TrackUsageTime tTime;
 	
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +54,8 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 		
 		setList();
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		
+		tTime = TrackUsageTime.getInstance(this);
 	}
 	
 	private void setList(){
@@ -121,12 +126,14 @@ public class HomeMoreLockerWordSetting extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home More Locker Word Setting");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	class LockerWordSettingListAdapter extends BaseAdapter{
 

@@ -25,6 +25,7 @@ import android.widget.TextView;
 
 import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
+import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
 import com.todpop.api.VerticalSeekBar;
 
@@ -54,6 +55,8 @@ public class HomeMoreLockerSetting extends TypefaceActivity {
 	
 	Animation fadeOut;
 	Animation fadeIn;
+
+	TrackUsageTime tTime;
 	
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +100,8 @@ public class HomeMoreLockerSetting extends TypefaceActivity {
 		seeThru.getBackground().setAlpha(trans);
 
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
+		
+		tTime = TrackUsageTime.getInstance(this);
 	}
 	
 	@Override
@@ -156,12 +161,14 @@ public class HomeMoreLockerSetting extends TypefaceActivity {
 		FlurryAgent.onStartSession(this, "P8GD9NXJB3FQ5GSJGVSX");
 		FlurryAgent.logEvent("Home More Locker Setting");
 		GoogleAnalytics.getInstance(this).reportActivityStart(this);
+		tTime.start();
 	}
 	@Override
 	protected void onStop(){
 		super.onStop();
 		FlurryAgent.onEndSession(this);
 		GoogleAnalytics.getInstance(this).reportActivityStop(this);
+		tTime.stop();
 	}
 	private void setTime(){
 		Date currentDate = new Date();
