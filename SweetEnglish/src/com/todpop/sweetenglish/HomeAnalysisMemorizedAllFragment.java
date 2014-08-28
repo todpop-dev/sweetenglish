@@ -47,7 +47,11 @@ public class HomeAnalysisMemorizedAllFragment extends Fragment{
 		Bundle args = getArguments();
 		total = args.getInt("total");
 		memorized = args.getInt("memorized");
-		percent = memorized * 100 / total;
+		
+		if(total == 0)
+			percent = 0;
+		else
+			percent = memorized * 100 / total;
 	}
 	
 	@Override
@@ -68,7 +72,7 @@ public class HomeAnalysisMemorizedAllFragment extends Fragment{
 		super.onResume();
 		new Thread(new Runnable(){
 			public void run(){
-				long time = ANI_TIME / memorized;
+				long time = memorized == 0 ? 0 : (ANI_TIME / memorized);
 				for(int i = 0; i < memorized; i ++){
 					try{
 						Thread.sleep(time);
@@ -82,7 +86,7 @@ public class HomeAnalysisMemorizedAllFragment extends Fragment{
 		
 		new Thread(new Runnable(){
 			public void run(){
-				long time = ANI_TIME / percent;
+				long time = (percent == 0) ? 0 : (ANI_TIME / percent);
 				for(int i = 0; i < percent; i++){
 					try {
 						Thread.sleep(time);

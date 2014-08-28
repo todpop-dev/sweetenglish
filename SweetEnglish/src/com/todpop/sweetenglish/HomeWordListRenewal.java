@@ -1,9 +1,9 @@
 package com.todpop.sweetenglish;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Locale;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -16,18 +16,19 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -221,6 +222,13 @@ public class HomeWordListRenewal extends TypefaceActivity {
 			arrWords.clear();
 			String url = "http://todpop.co.kr/api/studies/search_word.json?word="+keyword;
 			new SerachWord().execute(url);
+
+			try {
+				String daum = "http://alldic.daum.net/search.do?q=" + URLEncoder.encode(keyword, "UTF-8") + "&dic=eng&search_first=Y";
+				new SearchFromInternet().execute(daum);
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
 		} else {
 			Toast.makeText(getApplicationContext(), "한글자 이상을 입력해주세요.", Toast.LENGTH_LONG).show();
 		}
@@ -614,7 +622,52 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		public CheckBox select = null;
 		public Button add = null;
 	}
-
+	private class SearchFromInternet extends AsyncTask<String, Void, Boolean>{
+		@Override
+		protected Boolean doInBackground(String... urls) {
+			boolean hasResult = false;
+			try {
+				Document doc = Jsoup.connect(urls[0]).get();
+				Elements result = doc.select("div");
+				
+				for(Element insideResult : result){
+					if(insideResult.className().equals("wrap_search")){
+						
+						Elements a = insideResult.select("a");
+						
+						String eng = null;
+						String kor = null;
+						
+						for(Element aElement : a){
+							if(aElement.className().equals("link_txt")){
+								eng = aElement.text();
+							}
+						}
+						
+						Elements div = insideResult.select("div");
+						for(Element divElement : div){
+							if(divElement.className().equals("txt_means_KUEK")){
+								kor = divElement.text();
+							}
+						}
+						if(eng != null && kor != null){
+							HomeWordViewItem item = new HomeWordViewItem(eng, kor);
+							arrWords.add(item);
+							hasResult = true;
+						}
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return hasResult;
+		}
+		@Override
+		protected void onPostExecute(Boolean result) {
+			if(result)
+				adapterWords.notifyDataSetChanged();
+		}
+	}
 	private class SerachWord extends AsyncTask<String, Void, JSONObject> {
 		DefaultHttpClient httpClient ;
 		@Override
@@ -644,12 +697,9 @@ public class HomeWordListRenewal extends TypefaceActivity {
 
 		@Override
 		protected void onPostExecute(JSONObject json) {
-			Log.e("Get Result JSON RESPONSE ---- ", json.toString());				        	
-
 			try {
 				if(json.getBoolean("status")==true) {
 					JSONArray resultArr = json.getJSONArray("words");
-					Log.e("ResultArr!!Words",resultArr.toString());
 					for (int i = 0; i < resultArr.length() ; i++) {
 						String name = resultArr.getJSONObject(i).get("name").toString();
 						String mean = resultArr.getJSONObject(i).get("mean").toString();
@@ -665,13 +715,6 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		}
 	};
 	
-	private String getDate(int minusDate){
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
-		Calendar cal = Calendar.getInstance();
-		if(minusDate > 0)
-			cal.add(Calendar.DATE, -minusDate);
-		return dateFormat.format(cal.getTime());
-	}
 	// on click
 	public void onClickBack(View v) {
 		finish();

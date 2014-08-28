@@ -292,8 +292,7 @@ public class HomeMoreSetting extends TypefaceActivity {
     	if(dialog != null && dialog.isShowing())
     		dialog.dismiss();
     }
-    private void doTakePhotoAction()
-    {
+    private void doTakePhotoAction(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         mImageCaptureUri = createSaveCropFile();
         intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, mImageCaptureUri);
@@ -307,6 +306,7 @@ public class HomeMoreSetting extends TypefaceActivity {
     }
     
     private Uri createSaveCropFile(){
+    	Log.i("STEVEN", "createSaveCropFile fm.getUserImgPath() : " + fm.getUserImgPath());
         Uri uri;
         String url = fm.getUserImgPath() + "tmp_" + String.valueOf(System.currentTimeMillis()) + ".jpg";
         uri = Uri.fromFile(new File(url));
@@ -315,6 +315,8 @@ public class HomeMoreSetting extends TypefaceActivity {
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
+		Log.i("STEVEN", "onActivityResult ///////  result code is " + resultCode);
+		Log.i("STEVEN", "onActivityResult ///////  request code is " + requestCode);
 		if(resultCode != RESULT_OK){
 			return;
 		}

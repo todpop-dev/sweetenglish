@@ -24,8 +24,10 @@
         android:id="@+id/lv_test_kr"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:ellipsize="end"
         android:layout_weight="160"
         android:gravity="center_vertical"
+        android:maxLines="2"
         android:textColor="@color/sweet_black"
         android:textSize="14dp" />
 

@@ -84,7 +84,7 @@ public class HomeAnalysisMemorizedCategoryFragment extends Fragment{
 					Cursor basicTotalCursor = wDB.rawQuery("SELECT count(*) FROM dic WHERE stage <= 150", null);
 					basicTotalCursor.moveToFirst();
 					int basicTotal = basicTotalCursor.getInt(0);
-					tempProgress = (int)Math.round(basicCorrect * 100.0 / basicTotal);
+					tempProgress = (basicTotal == 0) ? 0 : (int)Math.round(basicCorrect * 100.0 / basicTotal);
 					maxProgress = tempProgress;
 					categoryMemo.add(tempProgress);
 				}
@@ -103,7 +103,7 @@ public class HomeAnalysisMemorizedCategoryFragment extends Fragment{
 					Cursor middleTotalCursor = wDB.rawQuery("SELECT count(*) FROM dic WHERE stage > 150 AND stage <= 600", null);
 					middleTotalCursor.moveToFirst();
 					int middleTotal = middleTotalCursor.getInt(0);
-					tempProgress = (int)Math.round(middleCorrect * 100.0 / middleTotal);
+					tempProgress = (middleTotal == 0) ? 0 : (int)Math.round(middleCorrect * 100.0 / middleTotal);
 					if(maxProgress < tempProgress)
 						maxProgress = tempProgress;
 					categoryMemo.add(tempProgress);
@@ -123,7 +123,7 @@ public class HomeAnalysisMemorizedCategoryFragment extends Fragment{
 					Cursor highTotalCursor = wDB.rawQuery("SELECT count(*) FROM dic WHERE stage > 600 AND stage <= 1200", null);
 					highTotalCursor.moveToFirst();
 					int highTotal = highTotalCursor.getInt(0);
-					tempProgress = (int)Math.round(highCorrect * 100.0 / highTotal);
+					tempProgress = (highTotal == 0) ? 0 : (int)Math.round(highCorrect * 100.0 / highTotal);
 					if(maxProgress < tempProgress)
 						maxProgress = tempProgress;
 					categoryMemo.add(tempProgress);
@@ -143,7 +143,7 @@ public class HomeAnalysisMemorizedCategoryFragment extends Fragment{
 					Cursor toeicTotalCursor = wDB.rawQuery("SELECT count(*) FROM dic WHERE stage > 1200", null);
 					toeicTotalCursor.moveToFirst();
 					int toeicTotal = toeicTotalCursor.getInt(0);
-					tempProgress = (int)Math.round(toeicCorrect * 100.0 / toeicTotal);
+					tempProgress = (toeicTotal == 0) ? 0 : (int)Math.round(toeicCorrect * 100.0 / toeicTotal);
 					if(maxProgress < tempProgress)
 						maxProgress = tempProgress;
 					categoryMemo.add(tempProgress);

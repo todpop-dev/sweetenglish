@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingRight="20dp"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingRight="20dp" >
 
     <CheckBox
         android:id="@+id/home_word_list_id_check"
@@ -23,28 +23,34 @@
         <TextView
             android:id="@+id/home_word_list_id_word1"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:singleLine="false"
             android:textColor="#E6947F"
             android:textSize="17dp" />
 
         <TextView
             android:id="@+id/home_word_list_id_word2"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:ellipsize="end"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:singleLine="false"
             android:textColor="#000000"
-            android:textSize="17dp" />
-        <Button 
+            android:textSize="15dp" />
+
+        <Button
             android:id="@+id/home_word_list_id_add"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/wordlist_btn_add_word"
             android:layout_gravity="center"
-            android:visibility="gone"
-            />
+            android:background="@drawable/wordlist_btn_add_word"
+            android:visibility="gone" />
     </LinearLayout>
 
 </LinearLayout>

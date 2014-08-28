@@ -370,9 +370,11 @@ public class StudyTestResult extends TypefaceActivity {
 
 			TextView textEn = (TextView)convertView.findViewById(R.id.lv_test_english);
 			textEn.setText(arSrc.get(position).getEn());
+			textEn.setSelected(true);
 
 			TextView textKr = (TextView)convertView.findViewById(R.id.lv_test_kr);
 			textKr.setText(arSrc.get(position).getKr());
+			textKr.setSelected(true);
 
 			setFont(textEn);
 			setFont(textKr);

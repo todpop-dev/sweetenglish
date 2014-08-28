@@ -130,16 +130,8 @@ public class FileManager {
 			return false;
 	}
 	public Bitmap getUserImgFile(){
-		//FileInputStream in = null;
-
 		SharedPreferences userInfo = context.getSharedPreferences("userInfo", 0);
 		String userImgPath = userInfo.getString("userImgPath", null);
-		//in = new FileInputStream(userImgPath);
-		
-		/*BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inSampleSize = 4;
-		options.inPurgeable = true;
-		options.inDither = true;*/
 		
 		return BitmapFactory.decodeFile(userImgPath);
 	}
