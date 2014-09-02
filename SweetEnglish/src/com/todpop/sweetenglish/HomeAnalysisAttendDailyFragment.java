@@ -77,13 +77,15 @@ public class HomeAnalysisAttendDailyFragment extends Fragment{
 			
 			Cursor cursor = db.rawQuery("SELECT date, usage_time, attend FROM daily_usage WHERE date >= " + startDate + " AND date <= " + endDate, null);
 			int i = 0;
-			int currentDate = Integer.valueOf(startDate);
+			int currentDate;
 			while(cursor.moveToNext()){
+				currentDate = Integer.valueOf(dateForSearch.format(cal.getTime()));
 				while(currentDate != cursor.getInt(0)){
 					useTime[i] = 0;
 					attendTime[i] = 0;
 					i++;
-					currentDate++;
+					cal.add(Calendar.DATE, 1);
+					currentDate = Integer.valueOf(dateForSearch.format(cal.getTime()));
 				}
 				
 				useTime[i] = cursor.getInt(1) / 60;
@@ -93,7 +95,7 @@ public class HomeAnalysisAttendDailyFragment extends Fragment{
 					useMax = cursor.getInt(1) / 60;
 				}
 				i++;
-				currentDate++;
+				cal.add(Calendar.DATE, 1);
 			}
 			for(; i < 7; i++){
 				useTime[i] = 0;
@@ -106,13 +108,12 @@ public class HomeAnalysisAttendDailyFragment extends Fragment{
 		protected void onPostExecute(Void result){
 			super.onPostExecute(result);
 			SimpleDateFormat dateForDisplay = new SimpleDateFormat("M.dd", Locale.getDefault());
-			
+			cal.add(Calendar.DATE, -7);
 			
 			for(int i = 0; i < 7; i++){
 				LinearLayout.LayoutParams topParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
 				LinearLayout.LayoutParams bottomParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, 0);
 				int graphHeight = (int)((float)useTime[i] / (float)useMax * 167) ;
-				Log.i("STEVEN", "i = " + i + "   graphHeight = " + graphHeight);
 				bottomParams.weight = graphHeight;
 				topParams.weight = 42 + (167 - graphHeight);
 				
