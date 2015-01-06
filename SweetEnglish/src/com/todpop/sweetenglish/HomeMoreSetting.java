@@ -13,12 +13,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.DialogFragment;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -42,9 +44,10 @@ import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.FileManager;
 import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-public class HomeMoreSetting extends TypefaceActivity {
+public class HomeMoreSetting extends TypefaceFragmentActivity {
 	
     private static final int PICK_FROM_CAMERA = 0;
     private static final int PICK_FROM_ALBUM = 1;
@@ -52,14 +55,17 @@ public class HomeMoreSetting extends TypefaceActivity {
 
 	private Uri mImageCaptureUri;
 	
-	SharedPreferences setting;
-	SharedPreferences.Editor settingEdit;
+	private SharedPreferences setting;
+	private SharedPreferences.Editor settingEdit;
 
-	SharedPreferences userInfo;
-	SharedPreferences.Editor userInfoEdit;
+	private SharedPreferences userInfo;
+	private SharedPreferences.Editor userInfoEdit;
 	
-	SharedPreferences studyInfo;
-	SharedPreferences.Editor studyInfoEdit;
+	private SharedPreferences studyInfo;
+	private SharedPreferences.Editor studyInfoEdit;
+
+	private SharedPreferences missionInfo;
+	private Editor missionEditor;
 
 	private String nickname;
 	private boolean isPopupEnabled;
@@ -96,15 +102,17 @@ public class HomeMoreSetting extends TypefaceActivity {
 	private Bitmap bmpMyPicture;
 	private FileManager fm;
 	
-	NotificationManager notificationManager;
-	AlarmManager alarmManager;
+	private NotificationManager notificationManager;
+	private AlarmManager alarmManager;
 	
-	Animation fadeOut;
-	Animation fadeIn;
+	private Animation fadeOut;
+	private Animation fadeIn;
 	
-	PopupWindow popupWindow;
+	private PopupWindow popupWindow;
 	
-	TrackUsageTime tTime;
+	private TrackUsageTime tTime;
+	
+	private DialogFragment popupDialog;
 	
 	@Override 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +128,9 @@ public class HomeMoreSetting extends TypefaceActivity {
 		
 		studyInfo = getSharedPreferences("studyInfo", 0);
 		studyInfoEdit = studyInfo.edit();
+
+		missionInfo = getSharedPreferences("missionInfo", 0);
+		missionEditor = missionInfo.edit();
 
 		nickname = userInfo.getString("userNick", "No_Nickname");
 		isPopupEnabled = setting.getBoolean("isPopupEnabled", false);
@@ -161,13 +172,15 @@ public class HomeMoreSetting extends TypefaceActivity {
 					swPopupOnOff.startAnimation(fadeOut);
 					swPopupOnOff.setClickable(false);
 				}else{
+					checkAlarmMission();
+					
 					llSettingAlarm.startAnimation(fadeIn);
 					llSettingAlarm.setClickable(true);
 					swPopupOnOff.startAnimation(fadeIn);
 					swPopupOnOff.setClickable(true);
 				}
 				setAlarm(Integer.valueOf(tvFrontTime.getText().toString()), Integer.valueOf(tvBackTime.getText().toString()));
-
+				
 				settingEdit.putBoolean("isAlarmEnabled", isAlarmEnabled);
 				settingEdit.apply();
 			}
@@ -251,6 +264,17 @@ public class HomeMoreSetting extends TypefaceActivity {
 			else{
 				alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, when, AlarmManager.INTERVAL_DAY, pendingIntentReceiver);		
 			}
+		}
+	}
+	
+	private void checkAlarmMission(){
+		boolean hasHistory = missionInfo.getBoolean("alarm", false);
+		if(hasHistory == false){
+			missionEditor.putBoolean("alarm", true);
+			missionEditor.apply();
+			
+			popupDialog = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.ALARM);
+			popupDialog.show(getSupportFragmentManager(), "alarm");
 		}
 	}
 	

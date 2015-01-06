@@ -199,6 +199,7 @@ public class StudyTestInfinite extends TypefaceActivity{
 			db.close();
 			mHelper.close();
 			Intent intent = new Intent(this, WordListTestResult.class);
+			intent.putExtra("fromWhere", WordListTestResult.FROM_INFI);
 			startActivity(intent);
 			finish();
 		}

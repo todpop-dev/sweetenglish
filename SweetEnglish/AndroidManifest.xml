@@ -141,6 +141,16 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name="com.todpop.sweetenglish.HomeMoreMission"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.todpop.sweetenglish.HomeMoreMissionBox"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name="com.todpop.sweetenglish.HomeMoreLockerSetting"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >

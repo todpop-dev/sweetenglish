@@ -24,11 +24,13 @@ import org.jsoup.select.Elements;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -59,9 +61,10 @@ import com.flurry.android.FlurryAgent;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-public class HomeWordListRenewal extends TypefaceActivity {
+public class HomeWordListRenewal extends TypefaceFragmentActivity {
 	//Point displaySize;
 	private ImageView btnCardBlind;
 	private ImageView btnCardNotBlind;
@@ -92,6 +95,11 @@ public class HomeWordListRenewal extends TypefaceActivity {
 	private ImageView ivPopupNewGroupCancel;
 	private ImageView ivPopupNewGroupSave;
 	private TextView tvTitle;
+	
+	private SharedPreferences missionInfo;
+	private SharedPreferences.Editor missionEditor;
+	
+	private DialogFragment mission;
 	
 	private TrackUsageTime tTime;
 	
@@ -169,6 +177,9 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		
 		tvTitle.setText(groupName);
 		
+		missionInfo = getSharedPreferences("missionInfo", 0);
+		missionEditor = missionInfo.edit();
+		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 		tTime = TrackUsageTime.getInstance(this);
 	}
@@ -232,7 +243,6 @@ public class HomeWordListRenewal extends TypefaceActivity {
 		} else {
 			Toast.makeText(getApplicationContext(), "한글자 이상을 입력해주세요.", Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	private void initWords() {
@@ -256,6 +266,20 @@ public class HomeWordListRenewal extends TypefaceActivity {
 
 		adapterWords = new HomeWordViewAdapter(getApplicationContext(), R.layout.home_word_list_list_item_view, arrWords);
 		lvWordList.setAdapter(adapterWords);
+		
+		boolean flag = missionInfo.getBoolean("wordbook30", false);
+		if(flag == false){
+			Cursor cursor30 = db.rawQuery("SELECT COUNT(1) FROM mywords", null);
+			if(cursor30.moveToFirst()){
+				if(cursor30.getInt(0) >= 30){
+					missionEditor.putBoolean("wordbook30", true);
+					missionEditor.apply();
+					
+					mission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.WORDBOOK_30);
+					mission.show(getSupportFragmentManager(), "wordbook30");
+				}
+			}
+		}
 	}
 
 	public void addNewGroup(View v){
@@ -264,6 +288,16 @@ public class HomeWordListRenewal extends TypefaceActivity {
 
 	public void blindIt(View v) {
 		btnCardBlind.startAnimation(cardBlindAni);
+		
+		boolean celloHistory = missionInfo.getBoolean("wordbookCellophane", false);
+		
+		if(celloHistory == false){
+			missionEditor.putBoolean("wordbookCellophane", true);
+			missionEditor.apply();
+			
+			mission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.WORDBOOK_CELLOPHANE);
+			mission.show(getSupportFragmentManager(), "wordbookCellophane");
+		}
 	}
 	public void foldIt(View v) {
 		btnCardBlind.startAnimation(cardRemoveAni);

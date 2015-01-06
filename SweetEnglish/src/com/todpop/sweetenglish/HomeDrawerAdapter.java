@@ -29,7 +29,7 @@ public class HomeDrawerAdapter extends BaseAdapter{
 	
 	@Override
 	public int getCount() {
-		return 7;
+		return 8;
 	}
 
 	@Override
@@ -93,6 +93,9 @@ public class HomeDrawerAdapter extends BaseAdapter{
 			viewHolder.img.setImageResource(R.drawable.sidebar_img_setting);
 			break;
 		case 6: 
+			viewHolder.img.setImageResource(R.drawable.sidebar_img_mission);
+			break;
+		case 7: 
 			viewHolder.img.setImageResource(R.drawable.sidebar_img_contact);
 			break;
 		}

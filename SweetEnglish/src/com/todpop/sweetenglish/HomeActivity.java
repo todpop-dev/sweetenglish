@@ -21,14 +21,17 @@ import com.todpop.api.request.GetKakao;
 import com.todpop.api.request.GetNotice;
 import com.todpop.sweetenglish.SweetEnglish.TrackerName;
 import com.todpop.sweetenglish.db.AnalysisDBHelper;
+import com.todpop.sweetenglish.db.UsageTimeDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -93,12 +96,14 @@ public class HomeActivity extends TypefaceFragmentActivity{
 	
 	private SharedPreferences userInfo;
 	private SharedPreferences studyInfo;
+	private SharedPreferences missionInfo;
+	private Editor missionEditor;
 	
 	private PopupWindow exitPopup;
 	private static PopupWindow updatePopup;
 	private static boolean isMajor = false;
 	
-	private DialogFragment analysisDialog;
+	private DialogFragment dialogFragment;
 	
 	private TrackUsageTime tTime;
 	
@@ -113,6 +118,8 @@ public class HomeActivity extends TypefaceFragmentActivity{
 
 		userInfo = getSharedPreferences("userInfo", 0);
 		studyInfo = getSharedPreferences("studyInfo", 0);
+		missionInfo = getSharedPreferences("missionInfo", 0);
+		missionEditor = missionInfo.edit();
 		
 		drawerMenu.setOnItemClickListener(new HomeDrawerItemClickListener());
 		
@@ -149,6 +156,8 @@ public class HomeActivity extends TypefaceFragmentActivity{
 		new GetNotice(getApplicationContext(), new NoticeHandler()).execute();
 		new GetKakao(kakaoObj).execute();
 		
+		checkMissionOnCreate();
+		
 		((SweetEnglish)getApplication()).getTracker(SweetEnglish.TrackerName.APP_TRACKER);
 
         analysisViewPager.setAdapter(new HomeDailyFragmentPagerAdapter(getSupportFragmentManager()));
@@ -177,6 +186,8 @@ public class HomeActivity extends TypefaceFragmentActivity{
 
         analysisViewPager.getAdapter().notifyDataSetChanged();
         
+        checkMissionOnResume();
+        
 		db.close();
 		dbHelper.close();
 	}
@@ -200,7 +211,123 @@ public class HomeActivity extends TypefaceFragmentActivity{
 	protected void onPause(){
 		super.onPause();
 	}
-	
+	private void checkMissionOnCreate(){
+		boolean newComer = missionInfo.getBoolean("newComer", false);
+		if(!newComer){
+			missionEditor.putBoolean("newComer", true);
+			missionEditor.apply();
+			
+			dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.NEW_COMER);
+			dialogFragment.show(getSupportFragmentManager(), "newComer");
+		}
+		else{
+			int attend = studyInfo.getInt("continuousStudy", 0);
+			
+			if(attend >= 30){
+				boolean attend1Month = missionInfo.getBoolean("attend1Month", false);
+				if(!attend1Month){
+					missionEditor.putBoolean("attend1Month", true);
+					missionEditor.putBoolean("attend10", true);
+					missionEditor.putBoolean("attend7", true);
+					missionEditor.putBoolean("attend3", true);
+					missionEditor.apply();
+					
+					//show
+					dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.ATTEND_1MONTH);
+					dialogFragment.show(getSupportFragmentManager(), "attend1Month");
+				}
+			}
+			else if(attend >= 10){
+				boolean attend10 = missionInfo.getBoolean("attend10", false);
+				if(attend10){
+					missionEditor.putBoolean("attend10", true);
+					missionEditor.putBoolean("attend7", true);
+					missionEditor.putBoolean("attend3", true);
+					missionEditor.apply();
+					
+					//show
+					dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.ATTEND_10);
+					dialogFragment.show(getSupportFragmentManager(), "attend10");
+				}
+			}
+			else if(attend >= 7){
+				boolean attend7 = missionInfo.getBoolean("attend7", false);
+				if(attend7){
+					missionEditor.putBoolean("attend7", true);
+					missionEditor.putBoolean("attend3", true);
+					missionEditor.apply();
+					
+					//show
+					dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.ATTEND_7);
+					dialogFragment.show(getSupportFragmentManager(), "attend7");
+				}
+			}
+			else if(attend >= 3){
+				boolean attend3 = missionInfo.getBoolean("attend3", false);
+				if(attend3){
+					missionEditor.putBoolean("attend3", true);
+					missionEditor.apply();
+					
+					//show
+					dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.ATTEND_3);
+					dialogFragment.show(getSupportFragmentManager(), "attend3");
+				}
+			}
+		}
+	}
+	private void checkMissionOnResume(){
+		boolean hasGoalSetHistory = missionInfo.getBoolean("goalSetHistory", false);
+		int inviteHistory =  missionInfo.getInt("inviteHistory", 0);
+		boolean hasTime5History = missionInfo.getBoolean("time5", false);
+		boolean hasEarlyBirdHistory = missionInfo.getBoolean("timeEarlyBird", false);
+		boolean hasOwlHistory = missionInfo.getBoolean("timeOwl", false);
+		
+		if(hasGoalSetHistory){
+			boolean plan = missionInfo.getBoolean("plan", false);
+			if(plan == false){
+				missionEditor.putBoolean("plan", true);
+				missionEditor.apply();
+				
+				//show
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.PLAN);
+				dialogFragment.show(getSupportFragmentManager(), "plan");
+			}
+		}
+		else if(inviteHistory >= 10){
+			boolean invite = missionInfo.getBoolean("invite", false);
+			if(invite == false){
+				missionEditor.putBoolean("invite", true);
+				missionEditor.apply();
+				
+				//show
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.INVITE);
+				dialogFragment.show(getSupportFragmentManager(), "invite");
+			}
+		}
+		else if(hasTime5History == false){
+			new CheckUsageTime().execute();
+		}
+		else if(hasEarlyBirdHistory == false){
+			int attendTotal = studyInfo.getInt("attendHour6", 0) + studyInfo.getInt("attendHour7", 0) + studyInfo.getInt("attendHour8", 0);
+			if(attendTotal >= 30){
+				missionEditor.putBoolean("timeEarlyBird", true);
+				missionEditor.apply();
+				
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.TIME_EARLY);
+				dialogFragment.show(getSupportFragmentManager(), "timeEarlyBird");
+			}
+		}
+		else if(hasOwlHistory == false){
+			int attendTotal = studyInfo.getInt("attendHour22", 0) + studyInfo.getInt("attendHour23", 0) + studyInfo.getInt("attendHour0", 0);
+			if(attendTotal >= 30){
+				missionEditor.putBoolean("timeOwl", true);
+				missionEditor.apply();
+				
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.TIME_OWL);
+				dialogFragment.show(getSupportFragmentManager(), "timeOwl");
+			}
+		}
+	}
 	public void onClickDrawer(View v){
 		drawerLayout.openDrawer(drawerMenu);
 	}
@@ -228,16 +355,16 @@ public class HomeActivity extends TypefaceFragmentActivity{
 		 startActivity(intent);
 	}
     public void onClickAttendance(View v){
-    	analysisDialog = HomeAnalysisDialogFragment.newInstance(ANALYSIS_ATTEND, null, null);
-		analysisDialog.show(getSupportFragmentManager(), "attend");   
+    	dialogFragment = HomeAnalysisDialogFragment.newInstance(ANALYSIS_ATTEND, null, null);
+		dialogFragment.show(getSupportFragmentManager(), "attend");   
     }
     public void onClickMemorizeRate(View v){
-    	analysisDialog = HomeAnalysisDialogFragment.newInstance(ANALYSIS_MEMORIZE, totalStudied, memorized);
-		analysisDialog.show(getSupportFragmentManager(), "memorize");    	
+    	dialogFragment = HomeAnalysisDialogFragment.newInstance(ANALYSIS_MEMORIZE, totalStudied, memorized);
+		dialogFragment.show(getSupportFragmentManager(), "memorize");    	
     }
     public void onClickAchieveRate(View v){
-    	analysisDialog = HomeAnalysisDialogFragment.newInstance(ANALYSIS_ACHIEVE, null, null);
-		analysisDialog.show(getSupportFragmentManager(), "achieve");
+    	dialogFragment = HomeAnalysisDialogFragment.newInstance(ANALYSIS_ACHIEVE, null, null);
+		dialogFragment.show(getSupportFragmentManager(), "achieve");
     }
 	private void setContinuousStudyPercentage(){
 		int continuousStudy = studyInfo.getInt("continuousStudy", 0);
@@ -357,6 +484,10 @@ public class HomeActivity extends TypefaceFragmentActivity{
 				 startActivity(intent);
 				break;
 			case 6:
+				 intent = new Intent(getApplicationContext(), HomeMoreMission.class);
+				 startActivity(intent);
+				break;
+			case 7:
 				 intent = new Intent(getApplicationContext(), HomeMoreContact.class);
 				 startActivity(intent);
 				break;
@@ -382,6 +513,9 @@ public class HomeActivity extends TypefaceFragmentActivity{
 			}
 			
 			kakaoLink.sendMessage(linkContents, this);
+			int inviteHistory = missionInfo.getInt("inviteHistory", 0);
+			missionEditor.putInt("inviteHistory", inviteHistory + 1);
+			missionEditor.apply();
 		} catch (KakaoParameterException e) {
 			e.printStackTrace();
 		}
@@ -458,6 +592,52 @@ public class HomeActivity extends TypefaceFragmentActivity{
 			else{
 				indi2.setImageResource(R.drawable.tutorial_img_indicator_navy_off);
 				indi3.setImageResource(R.drawable.tutorial_img_indicator_white_on);
+			}
+		}
+	}
+	
+	private class CheckUsageTime extends AsyncTask<Void, Void, Integer>{
+		@Override
+		protected Integer doInBackground(Void... arg0) {
+			UsageTimeDBHelper uHelper = new UsageTimeDBHelper(HomeActivity.this);
+			SQLiteDatabase db = uHelper.getReadableDatabase();
+			
+			Cursor cursor = db.rawQuery("SELECT SUM(usage_time) FROM daily_usage", null);
+			
+			int sum = 0;
+			if(cursor.moveToFirst())
+				sum = cursor.getInt(0);
+			
+			
+			return sum;
+		}
+		@Override
+		protected void onPostExecute(Integer result){
+			super.onPostExecute(result);
+
+			boolean hasTime1History = missionInfo.getBoolean("time1", false);
+			boolean hasTime3History = missionInfo.getBoolean("time3", false);
+			
+			if(hasTime1History == false){
+				missionEditor.putBoolean("time1", true);
+				missionEditor.apply();
+				
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.TIME_1);
+				dialogFragment.show(getSupportFragmentManager(), "time1");
+			}
+			else if(hasTime3History == false){
+				missionEditor.putBoolean("time3", true);
+				missionEditor.apply();
+
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.TIME_3);
+				dialogFragment.show(getSupportFragmentManager(), "time3");
+			}
+			else{
+				missionEditor.putBoolean("time5", true);
+				missionEditor.apply();
+
+				dialogFragment = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.TIME_5);
+				dialogFragment.show(getSupportFragmentManager(), "time5");
 			}
 		}
 	}

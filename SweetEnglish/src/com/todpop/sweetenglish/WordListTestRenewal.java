@@ -401,8 +401,7 @@ public class WordListTestRenewal extends TypefaceActivity {
 	}
 	private void goNextActivity(){
 		Intent intent = new Intent(getApplicationContext(), WordListTestResult.class);
-
-		intent.putExtra("lastHigh", lastHigh);
+		intent.putExtra("fromWhere", WordListTestResult.FROM_WORD);
 		startActivity(intent);
 		finish();
 	}

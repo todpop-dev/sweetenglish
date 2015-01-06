@@ -12,7 +12,9 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -33,11 +35,12 @@ import com.todpop.api.EngKorOX;
 import com.todpop.api.LoadingDialog;
 import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.sweetenglish.db.AnalysisDBHelper;
 import com.todpop.sweetenglish.db.DailyHistoryDBHelper;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-public class StudyTestResult extends TypefaceActivity {	
+public class StudyTestResult extends TypefaceFragmentActivity {	
 	ArrayList<String> reviewList;
 	
 	ArrayList<EngKorOX> arItem;
@@ -54,11 +57,17 @@ public class StudyTestResult extends TypefaceActivity {
 	EngKorOX mi;
 
 	TextView scoreView;
+	
+	DialogFragment clearMission;
+	DialogFragment masterMission;
 
 	LoadingDialog loadingDialog;
 
 	SharedPreferences studyInfo;
 	SharedPreferences.Editor studyInfoEdit;
+	
+	SharedPreferences missionInfo;
+	SharedPreferences.Editor missionEditor;
 	
 	private TrackUsageTime tTime;
 
@@ -76,6 +85,9 @@ public class StudyTestResult extends TypefaceActivity {
 		studyInfo = getSharedPreferences("studyInfo",0);
 		studyInfoEdit = studyInfo.edit();
 
+		missionInfo = getSharedPreferences("missionInfo", 0);
+		missionEditor = missionInfo.edit();
+		
 		mHelper = new WordDBHelper(this);
 
 		arItem = new ArrayList<EngKorOX>();
@@ -92,12 +104,58 @@ public class StudyTestResult extends TypefaceActivity {
 		}
 
 
-		// Get Test result from database
 		tmpStageAccumulated = studyInfo.getInt("tmpStageAccumulated", 1);
+		boolean history;
+		
+		switch(tmpStageAccumulated){
+		case 150:
+			history = missionInfo.getBoolean("clearBasic", false);
+			if(history == false){
+				missionEditor.putBoolean("clearBasic", true);
+				missionEditor.apply();
+				
+				clearMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.CLEAR_BASIC);
+				clearMission.show(getSupportFragmentManager(), "clearBasic");
+			}
+			break;
+		case 600:
+			history = missionInfo.getBoolean("clearMiddle", false);
+			if(history == false){
+				missionEditor.putBoolean("clearMiddle", true);
+				missionEditor.apply();
+				
+				clearMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.CLEAR_MIDDLE);
+				clearMission.show(getSupportFragmentManager(), "clearMiddle");
+			}
+			break;
+		case 1200:
+			history = missionInfo.getBoolean("clearHigh", false);
+			if(history == false){
+				missionEditor.putBoolean("clearHigh", true);
+				missionEditor.apply();
+				
+				clearMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.CLEAR_HIGH);
+				clearMission.show(getSupportFragmentManager(), "clearHigh");
+			}
+			break;
+		case 1800:
+			history = missionInfo.getBoolean("clearToeic", false);
+			if(history == false){
+				missionEditor.putBoolean("clearToeic", true);
+				missionEditor.apply();
+				
+				clearMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.CLEAR_TOEIC);
+				clearMission.show(getSupportFragmentManager(), "clearToeic");
+			}
+			break;
+		}
+		
+		// Get Test result from database
 		SimpleDateFormat dateForamt = new SimpleDateFormat("yyyyMMdd", Locale.getDefault());
 		today = Integer.valueOf(dateForamt.format(cal.getTime()));
 		getTestWords();
 
+		new CheckMaster().execute();
 		// ----------- Request Result -------------
 		//SharedPreferences pref = getSharedPreferences("rgInfo",0);
 		// levelCount could be 1, 16, 61, 121 etc... 
@@ -441,6 +499,107 @@ public class StudyTestResult extends TypefaceActivity {
 		}
 
 
+	}
+	
+	private class CheckMaster extends AsyncTask<Void, Void, Boolean>{
+		@Override
+		protected Boolean doInBackground(Void... params) {
+			boolean flag = true;
+			if(tmpStageAccumulated <= 150){	//basic
+				for(int i = 1; i <= 15 && flag; i++){
+					StringBuffer stageInfo = new StringBuffer(studyInfo.getString("level" + i, "xxxxxxxxxx"));
+					for(int k = 0; k < 10 && flag; k++){
+						char medal = stageInfo.charAt(k);
+						if(medal != '2'){
+							flag = false;
+						}
+					}
+				}
+			}
+			else if(tmpStageAccumulated <= 600){ //middle
+				for(int i = 16; i <= 60 && flag; i++){
+					StringBuffer stageInfo = new StringBuffer(studyInfo.getString("level" + i, "xxxxxxxxxx"));
+					for(int k = 0; k < 10 && flag; k++){
+						char medal = stageInfo.charAt(k);
+						if(medal != '2'){
+							flag = false;
+						}
+					}
+				}				
+			}
+			else if(tmpStageAccumulated <= 1200){ //high
+				for(int i = 61; i <= 120 && flag; i++){
+					StringBuffer stageInfo = new StringBuffer(studyInfo.getString("level" + i, "xxxxxxxxxx"));
+					for(int k = 0; k < 10 && flag; k++){
+						char medal = stageInfo.charAt(k);
+						if(medal != '2'){
+							flag = false;
+						}
+					}
+				}
+			}
+			else{  //toeic
+				for(int i = 121; i <= 180 && flag; i++){
+					StringBuffer stageInfo = new StringBuffer(studyInfo.getString("level" + i, "xxxxxxxxxx"));
+					for(int k = 0; k < 10 && flag; k++){
+						char medal = stageInfo.charAt(k);
+						if(medal != '2'){
+							flag = false;
+						}
+					}
+				}
+			}
+
+			return flag;
+		}
+		
+		@Override
+		protected void onPostExecute(Boolean result){
+			super.onPostExecute(result);
+			
+			if(result){
+				if(tmpStageAccumulated <= 150){	//basic
+					boolean history = missionInfo.getBoolean("masterBasic", false);
+					if(history == false){
+						missionEditor.putBoolean("masterBasic", true);
+						missionEditor.apply();
+						
+						masterMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.MASTER_BASIC);
+						masterMission.show(getSupportFragmentManager(), "masterBasic");
+					}
+				}
+				else if(tmpStageAccumulated <= 600){ //middle
+					boolean history = missionInfo.getBoolean("masterMiddle", false);
+					if(history == false){
+						missionEditor.putBoolean("masterMiddle", true);
+						missionEditor.apply();
+						
+						masterMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.MASTER_MIDDLE);
+						masterMission.show(getSupportFragmentManager(), "masterMiddle");
+					}
+				}
+				else if(tmpStageAccumulated <= 1200){ //high
+					boolean history = missionInfo.getBoolean("masterHigh", false);
+					if(history == false){
+						missionEditor.putBoolean("masterHigh", true);
+						missionEditor.apply();
+						
+						masterMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.MASTER_HIGH);
+						masterMission.show(getSupportFragmentManager(), "masterHigh");
+					}
+				}
+				else{ //toeic
+					boolean history = missionInfo.getBoolean("masterToeic", false);
+					if(history == false){
+						missionEditor.putBoolean("masterToeic", true);
+						missionEditor.apply();
+						
+						masterMission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.MASTER_TOEIC);
+						masterMission.show(getSupportFragmentManager(), "masterToeic");
+					}
+				}
+			}
+		}
 	}
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) 

@@ -1,0 +1,1552 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home_more_mission"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F9ED"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="112"
+        android:background="@drawable/faq_bg_navybar" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:onClick="onClickBack"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/common_btn_back"
+                android:duplicateParentState="true"
+                android:onClick="onClickBack" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:src="@drawable/mission_text_missiontitle" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:onClick="onClickBox"
+            android:paddingLeft="17dp"
+            android:paddingRight="17dp" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/mission_btn_storage"
+                android:duplicateParentState="true"
+                android:onClick="onClickBox" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1168" >
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp" >
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mission_text_basic" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_newcomer"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_newcomer" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="신입생환영"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="신입생에게 환영의 의미로 주는 뱃지.\n환영합니다!"
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_plan"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_plan" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="학습목표설정"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="학습목표 개수를 설정하는 학생에게 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_invite"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_invite" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="친구초대"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="친구를 10명 초대하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_alarm"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_alarm" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="학습알람설정"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="학습알람기능을 사용하는 학생에게 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_attend_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_attend_3" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="3일 연속출석"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="3일  동안 꾸준히 공부하는 학생에게 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_attend_7"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_attend_7" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="7일 연속출석"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="7일 동안 꾸준히 공부하는 학생에게 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_attend_10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_attend_10" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="10일 연속출석"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="10일 동안 꾸준히 공부하는 학생에게 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_attend_1month"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_attend_1month" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="1달 연속출석"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="1달 동안 꾸준히 공부하는 학생에게 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mission_text_study" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear_basic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear_basic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="기초단어클리어"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="기초 카테고리 단어를 다 공부하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear_middle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear_middle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="중학단어클리어"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="중학 카테고리 단어를 다 공부하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear_high"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear_high" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="수능단어클리어"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="수능 카테고리 단어를 다 공부하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear_toeic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear_toeic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="토익단어클리어"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="토익 카테고리 단어를 다 공부하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear2_basic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear2_basic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="기초단어마스터"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="기초 카테고리의 모든 스테이지를 별 2개 받으면 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear2_middle"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear2_middle" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="중학단어마스터"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="중학 카테고리의 모든 스테이지를 별 2개 받으면 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear2_high"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear2_high" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="수능단어마스터"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="수능 카테고리의 모든 스테이지를 별 2개 받으면 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_clear2_toeic"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_clear2_toeic" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="토익단어마스터"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="토익 카테고리의 모든 스테이지를 별 2개 받으면 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_infi_80"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_infinity_80" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="무한도전80개"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="무한도전 문제 중 80개 이상을 맞추면 축하의 의미로 주어지는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_infi_100"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_infinity_100" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="무한도전100점"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="무한도전 100문제를 모두 맞추면 축하의 의미로 주어지는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:orientation="vertical"
+                    android:visibility="invisible" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:orientation="vertical"
+                    android:visibility="invisible" >
+                </LinearLayout>
+            </TableRow>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mission_text_goal" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_goal_10"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_studygoal_10" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="주간목표\n10개도달"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="10개 이상의 학습목표량을 1주일간 외우면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_goal_30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_studygoal_30" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="30개도달"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="30개 이상의 학습목표량을 1주일간 외우면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_goal_50"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_studygoal_50" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="주간목표\n50개도달"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="50개 이상의 학습목표량을 1주일간 외우면 받을 수 있는 뱃지"
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_goal_1month"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_studygoal_1month" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="주간목표\n1달연속도달"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="자신의 학습목표량을 1달간 100% 도달하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mission_text_studytime" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_time_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_time_1" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="1시간이상\n학습"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="총 누적 학습시간이 1시간이 넘었을 때 받는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_time_3"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_time_3" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="3시간이상\n학습"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="총 누적 학습시간이 3시간이 넘었을 때 받는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_time_5"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_time_5" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="5시간이상\n학습"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="총 누적 학습시간이 5시간이 넘었을 때 받는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_time_earlybird"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_time_earlybird" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="얼리버드"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="아침 6시-8시 사이에 30회 이상 학습할 때 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_time_owl"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_time_owl" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="올빼미족"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="저녁 10시-12시 사이에 30회 이상 학습할 때 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="invisible" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="invisible" >
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="invisible" >
+                </LinearLayout>
+            </TableRow>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mission_text_wordbook" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_wordbook_3group"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_wordbook_3group" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="그룹만들기"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="내단어장에서 그룹을 3개 이상 만들면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_wordbook_30"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_wordbook_30" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="단어추가하기"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="내단어장에 단어를 30개 이상 추가했을 때 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_wordbook_cellophane"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_wordbook_cellophane" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="셀로판지 사용"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="내단어장에서 단어나 뜻을 가려주는 셀로판지를 이용하면 주는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_wordbook_test"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_wordbook_test" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="단어장 테스트"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="내단어장에 모아놓은 단어들로 테스트를 보면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+            </TableRow>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/mission_text_screenlock" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="9dp"
+                android:layout_weight="1" >
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_screenlock_bgchange"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_screenlock_bgchange" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="배경설정"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="잠금화면의 배경을 설정하면 받을 수 있는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_screenlock_category"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_screenlock_category" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="카테고리설정"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="잠금화면에 노출되는 단어를 카테고리의 단어로 설정하면 받는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/mission_linearlayout_screenlock_word"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/mission_img_cardbox"
+                    android:onClick="showDetail"
+                    android:orientation="vertical" >
+
+                    <com.todpop.api.SquareImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/mission_img_badge_screenlock_word" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="0.5dp"
+                        android:background="@color/sweet_black"
+                        android:gravity="center"
+                        android:paddingBottom="3.5dp"
+                        android:paddingTop="3.5dp"
+                        android:text="단어설정"
+                        android:textColor="@color/sweet_yellow"
+                        android:textSize="10.5dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:padding="3.5dp"
+                        android:text="잠금화면에 노출되는 단어를 내단어장의 단어로 설정하면 받는 뱃지."
+                        android:textColor="@color/sweet_black"
+                        android:textSize="8dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="9dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:visibility="invisible" >
+                </LinearLayout>
+            </TableRow>
+        </TableLayout>
+    </ScrollView>
+
+</LinearLayout>

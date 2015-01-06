@@ -51,10 +51,15 @@ public class LineGraphCanvas extends View{
 	private float yAxisXcoordinate;
 	private float graphHeight;
 	
-	private static final float Y_DIVIDE_LINE_WIDTH = 1; 
+	private Typeface mTypeface;
 	
-	Typeface mTypeface;
-	
+    /**
+     * @param c 			context
+     * @param maxY 			max value of Y-axis
+     * @param yDivideTimes 	value for draw Y-axis dividing lines
+     * @param xAsixString	values for x-axis values
+     * @param values		y values for each dot
+     */
 	public LineGraphCanvas(Context c, int maxY, int yDivideTimes, ArrayList<String> xAxisString, ArrayList<Integer> values){
 		super(c);
 		
@@ -95,6 +100,24 @@ public class LineGraphCanvas extends View{
 		
 		mTypeface = Typeface.createFromAsset(c.getAssets(), "fonts/roboto_regular_nanum_bold.ttf.mp3");
 	}
+	
+    /**
+     * @param c						context
+     * @param drawYAxis				whether you want to draw y-axis or not
+     * @param drawValuesText		whether you want to draw text of value above each dot
+     * @param maxY	 				max value of Y-axis
+     * @param yDivideTimes 			value for draw Y-axis dividing lines
+     * @param xAsixString			values for x-axis values
+     * @param values				y values for each dot
+     * @param axisColor 			both x and y-axis lines color
+     * @param yDividerColor 		y dividing line color
+     * @param axisTextColor			x and y-axis text color
+     * @param valueTextColor 		color of text that shows value above each dot
+     * @param valuePointFillColor	each dot fill color
+     * @param valuePointStrokeColor each dot stroke color
+     * @param valueLineColor		color of line that connects two dots
+     * @param valueDotStyle			each dot style (stroke of fill)
+     */
 	public LineGraphCanvas(Context c, boolean drawYAxis, boolean drawValuesText, int maxY, int yDivideTimes, ArrayList<String> xAxisString, ArrayList<Integer> values,
 								int axisColor, int yDividerColor, int axisTextColor, int valueTextColor, int valuePointFillColor, int valuePointStrokeColor, int valueLineColor,
 								Paint.Style valueDotStyle){
@@ -227,10 +250,8 @@ public class LineGraphCanvas extends View{
 		float lastDot = (yAxisTextSize / 2) + ((100 - values.get(values.size() - 1)) * yAxisDivide);
 		float firstDot = (yAxisTextSize / 2) + ((100 - values.get(0)) * yAxisDivide);
 		
-		if(firstDot > lastDot)
-			path.moveTo(yAxisXcoordinate, firstDot + ((firstDot - lastDot) / 2));
-		else
-			path.moveTo(yAxisXcoordinate, firstDot + ((lastDot - firstDot) / 2));
+		//set values line start point
+		path.moveTo(yAxisXcoordinate, firstDot + ((lastDot - firstDot) / 2));
 		
 		for(int i = 0; i < xAxisString.size(); i++){
 			float x = yAxisXcoordinate + (xAxisDivide * i) + xAxisDivideCenter;
@@ -256,10 +277,8 @@ public class LineGraphCanvas extends View{
 		paint.setColor(valueLine);
         paint.setStyle(Paint.Style.STROKE);
         
-        if(firstDot > lastDot)
-        	path.lineTo(width, lastDot + ((lastDot - firstDot) / 2));
-        else
-        	path.lineTo(width, lastDot + ((firstDot - lastDot) / 2));
+        //set values line end point
+        path.lineTo(width, lastDot + ((firstDot - lastDot) / 2));
 		
 		path.close();
 		

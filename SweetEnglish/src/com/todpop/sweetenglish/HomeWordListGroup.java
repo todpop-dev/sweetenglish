@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,9 +31,10 @@ import android.widget.TextView;
 import com.flurry.android.FlurryAgent;
 import com.todpop.api.TrackUsageTime;
 import com.todpop.api.TypefaceActivity;
+import com.todpop.api.TypefaceFragmentActivity;
 import com.todpop.sweetenglish.db.WordDBHelper;
 
-public class HomeWordListGroup extends TypefaceActivity {
+public class HomeWordListGroup extends TypefaceFragmentActivity {
 
 
 	private ListView lvGroups;
@@ -46,6 +49,11 @@ public class HomeWordListGroup extends TypefaceActivity {
 	private ImageView ivPopupNewGroupSave;
 	private boolean isEditMode;
 	private Button btnEditbarDel;
+	
+	private SharedPreferences missionInfo;
+	private SharedPreferences.Editor missionEditor;
+	
+	private DialogFragment mission;
 	
 	private TrackUsageTime tTime;
 
@@ -63,6 +71,10 @@ public class HomeWordListGroup extends TypefaceActivity {
 
 		initPopupView();
 		initListeners();
+		
+		missionInfo = getSharedPreferences("missionInfo", 0);
+		missionEditor = missionInfo.edit();
+		
 
 		popupNewGroup = new PopupWindow(vPopupNewGroup, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,true);
 		tTime = TrackUsageTime.getInstance(this);
@@ -141,6 +153,17 @@ public class HomeWordListGroup extends TypefaceActivity {
 
 		adapter = new WordGroupAdapter(arrGroups);
 		lvGroups.setAdapter(adapter);
+		
+		if(arrGroups.size() >= 4){
+			boolean groupHistory = missionInfo.getBoolean("wordbook3Group", false);
+			if(groupHistory == false){
+				missionEditor.putBoolean("wordbook3Group", true);
+				missionEditor.apply();
+				
+				mission = MissionGetDialogFragment.newInstance(MissionGetDialogFragment.WORDBOOK_3GROUP);
+				mission.show(getSupportFragmentManager(), "wordbook3Group");
+			}
+		}
 	}
 
 	public void addNewGroup(View v){

@@ -25,6 +25,8 @@ public class HomeMoreGoal extends TypefaceActivity {
 	private ImageButton ibBackNum;
 	private int goalDailyWords;
 	private SharedPreferences sp;
+	
+	private SharedPreferences missionInfo;
 
 	TrackUsageTime tTime;
 	
@@ -35,6 +37,8 @@ public class HomeMoreGoal extends TypefaceActivity {
 
 		sp = getSharedPreferences("userInfo", 0);
 		goalDailyWords= sp.getInt("userGoal", 30);
+		
+		missionInfo = getSharedPreferences("missionInfo", 0);
 
 		ibFrontNum = (ImageButton)findViewById(R.id.ib_goal_front_num);
 		ibBackNum= (ImageButton)findViewById(R.id.ib_goal_back_num);
@@ -107,6 +111,13 @@ public class HomeMoreGoal extends TypefaceActivity {
 		Editor editor = sp.edit();
 		editor.putInt("userGoal", getGoalNum());
 		editor.apply();
+		
+		boolean hasGoalSetHistory = missionInfo.getBoolean("goalSetHistory", false);
+		if(hasGoalSetHistory == false){
+			Editor missionEditor = missionInfo.edit();
+			missionEditor.putBoolean("goalSetHistory", true);
+			missionEditor.apply();
+		}
 		finish();
 	}
 

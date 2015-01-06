@@ -27,10 +27,15 @@ public class MemorizedRateAllCanvas extends View{
 	private int centerWidth;
 	private int centerHeight;
 	
-	RectF progress;
+	private RectF progress;
 	
-	Typeface mTypeface;
-	
+	private Typeface mTypeface;
+
+    /**
+     * @param c 		context
+     * @param inTotal 	max value
+     * @param inCorrect current value
+     */
 	public MemorizedRateAllCanvas(Context c, int inTotal, int inCorrect){
 		super(c);
 
@@ -112,17 +117,8 @@ public class MemorizedRateAllCanvas extends View{
 		if(memorizedLineDegree == 90){
 			memorizedLineX = centerWidth + progressRadius;
 			memorizedLineY = centerHeight;
-			toX = centerWidth + extra;// + progressRadius
+			toX = centerWidth + extra;
 			toY = centerHeight;
-		}
-		else if(memorizedLineDegree < 90){
-			double cos = Math.cos(Math.toRadians(memorizedLineDegree));
-			double sin = Math.sin(Math.toRadians(memorizedLineDegree));
-			
-			memorizedLineX = (float)(centerWidth + progressRadius * sin);
-			memorizedLineY = (float)(centerHeight - progressRadius * cos);
-			toX = (float)(centerWidth + extra * sin);
-			toY = (float)(centerHeight - extra * cos);
 		}
 		else{
 			double cos = Math.cos(Math.toRadians(memorizedLineDegree));
